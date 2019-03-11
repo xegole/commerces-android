@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/test_bg"
+    tools:context=".activities.CityScreenActivity">
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinnerCities"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_xx_large"
+        android:layout_marginLeft="@dimen/margin_xx_large"
+        android:layout_marginTop="@dimen/margin_xx_large"
+        android:layout_marginEnd="@dimen/margin_xx_large"
+        android:layout_marginRight="@dimen/margin_xx_large"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_xx_large"
+        android:layout_marginLeft="@dimen/margin_xx_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/label_check_remember_city"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCities" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_xx_large"
+        android:layout_marginLeft="@dimen/margin_xx_large"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:text="@string/label_select_city"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerCities"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xx_large"
+
+        android:onClick="onClick"
+        android:text="@string/button_text_done"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+</android.support.constraint.ConstraintLayout>
