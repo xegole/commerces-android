@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
-import com.webster.commerces.entity.Banner
 import com.webster.commerces.utils.ConstantsArray
 import kotlinx.android.synthetic.main.pager_item.view.*
 
 
-class BannerPagerAdapter(context: Context, private val imagesBanner: List<Banner>) : PagerAdapter() {
+class ImagePagerAdapter(context: Context, private val imagesBanner: List<String>) : PagerAdapter() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -27,9 +26,7 @@ class BannerPagerAdapter(context: Context, private val imagesBanner: List<Banner
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val itemView = inflater.inflate(R.layout.pager_item, container, false)
-
-        val urlImage = imagesBanner[position].bannerImage
-        Picasso.get().load(urlImage).into(itemView.imageBanner)
+        Picasso.get().load(imagesBanner[position]).into(itemView.imageBanner)
         container.addView(itemView, ConstantsArray.FIRST)
         return itemView
     }

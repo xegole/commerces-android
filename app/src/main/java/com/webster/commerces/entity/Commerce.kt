@@ -1,6 +1,7 @@
 package com.webster.commerces.entity
 
-import com.webster.commerces.services.RetrofitServices.BASE_URL
+import com.webster.commerces.BuildConfig
+import com.webster.commerces.utils.Constants
 import java.io.Serializable
 
 data class Commerce(
@@ -9,8 +10,23 @@ data class Commerce(
     val phone: Int,
     val cityId: String,
     val commerceImage: String,
-    val address: String
+    val address: String,
+    val categoryId: String,
+    val description: String,
+    val images: List<String>
 ) : Serializable {
 
-    fun urlImage(): String = BASE_URL + commerceImage
+    constructor() : this(
+        Constants.EMPTY_STRING,
+        Constants.EMPTY_STRING,
+        Constants.INT_ZERO,
+        Constants.EMPTY_STRING,
+        Constants.EMPTY_STRING,
+        Constants.EMPTY_STRING,
+        Constants.EMPTY_STRING,
+        Constants.EMPTY_STRING,
+        emptyList()
+    )
+
+    fun urlImage(): String = BuildConfig.BASE_URL + commerceImage
 }

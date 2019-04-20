@@ -1,6 +1,8 @@
 package com.webster.commerces.entity
 
+import com.webster.commerces.BuildConfig
 import com.webster.commerces.services.RetrofitServices
+import com.webster.commerces.utils.Constants
 import java.io.Serializable
 
 data class Category(
@@ -10,5 +12,7 @@ data class Category(
     val description: String
 ) : Serializable {
 
-    fun urlImage(): String = RetrofitServices.BASE_URL + categoryImage
+    constructor() : this(Constants.EMPTY_STRING, Constants.EMPTY_STRING, Constants.EMPTY_STRING, Constants.EMPTY_STRING)
+
+    fun urlImage(): String = BuildConfig.BASE_URL + categoryImage
 }

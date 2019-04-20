@@ -3,11 +3,10 @@ package com.webster.commerces.fragments
 
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.Snackbar
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.activities.DetailCommerceActivity
 import com.webster.commerces.activities.DetailCommerceActivity.Companion.EXTRA_COMMERCE_DATA
@@ -15,27 +14,20 @@ import com.webster.commerces.adapter.BannerPagerAdapter
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.entity.Banner
 import com.webster.commerces.entity.Commerce
+import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.openActivityWithBundleOptions
 import com.webster.commerces.fragments.base.BaseFragment
-import com.webster.commerces.services.RetrofitServices
 import com.webster.commerces.utils.Constants
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.fragment_commerces.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CommercesFragment : BaseFragment() {
 
-    companion object {
-        private var currentPage = Constants.INT_ZERO
-
-        @JvmStatic
-        fun newInstance() = CommercesFragment().apply {}
-    }
-
-    private val commercesServices by lazy {
-        RetrofitServices.create()
-    }
+    private val database = FirebaseDatabase.getInstance()
+    private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
+    private val bannerReference = database.getReference(FirebaseReferences.BANNERS)
 
     private lateinit var commercesAdapter: CommercesAdapter
 
@@ -45,27 +37,43 @@ class CommercesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showLoading()
         commercesAdapter = CommercesAdapter(ArrayList()) { commerce, v -> commerceItemClicked(commerce, v) }
         recyclerCommerces.adapter = commercesAdapter
+        initObservers()
+    }
 
-        commercesServices.getCommerces()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { commercesAdapter.addItemList(it.commerces) },
-                { error ->
-                    dismissLoading()
-                    Snackbar.make(viewGroup, error.localizedMessage, Snackbar.LENGTH_LONG).show()
-                    Log.d(Constants.TAG_SERVICES, error.localizedMessage)
-                },
-                { dismissLoading() }
-            )
+    private fun initObservers() {
+        showLoading()
+        commercesReference.addListDataListener<Commerce> { list, success ->
+            if (success) {
+                commercesAdapter.addItemList(list)
+            }
+            dismissLoading()
+        }
 
-        commercesServices.getBanners()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { setViewPagerWithBanners(it.banners) }
+        bannerReference.addListDataListener<Banner> { list, success ->
+            if (success) {
+                setViewPagerWithBanners(list)
+            }
+        }
+
+        val listImages = ArrayList<String>()
+        listImages.add("https://10619-2.s.cdn12.com/rests/small/w320/h220/107_330419770.jpg")
+        listImages.add("https://lh3.googleusercontent.com/p/AF1QipPO4RazUommX-_m-wguI24wjLEKGSCiL03GzYX9=s1600-h380")
+
+        val commerce = Commerce(
+            "Comercio Test 1",
+            "1",
+            1234567890,
+            "1",
+            "commerces%2F1%2Fmaxresdefault.jpg?alt=media&token=d260bcbc-a595-4262-865c-95727cdf40cb",
+            "Carrera 1 #23-45",
+            "1",
+            "this a test description",
+            listImages
+        )
+
+        commercesReference.child("1").setValue(commerce)
     }
 
     private val handler = Handler()
@@ -99,5 +107,11 @@ class CommercesFragment : BaseFragment() {
         val bundle = Bundle()
         bundle.putSerializable(EXTRA_COMMERCE_DATA, commerce)
         openActivityWithBundleOptions(view, bundle, DetailCommerceActivity::class.java)
+    }
+
+    companion object {
+        private var currentPage = Constants.INT_ZERO
+
+        fun newInstance() = CommercesFragment()
     }
 }

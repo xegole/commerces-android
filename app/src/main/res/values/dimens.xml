@@ -19,7 +19,7 @@
     <dimen name="text_size_x_large">30sp</dimen>
     <dimen name="text_size_xx_large">40sp</dimen>
 
-    <dimen name="app_bar_height">250dp</dimen>
+    <dimen name="app_bar_height">230dp</dimen>
     <dimen name="material_padding">16dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->

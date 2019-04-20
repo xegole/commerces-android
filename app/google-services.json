@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "864846404790",
+    "firebase_url": "https://commerces-d756f.firebaseio.com",
+    "project_id": "commerces-d756f",
+    "storage_bucket": "commerces-d756f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864846404790:android:af39b6bc90a33266",
+        "android_client_info": {
+          "package_name": "com.webster.commerces"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864846404790-qo32fq6loev8ls3af0ors4kutj8aetek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE91-XpPLEKqZcVyas40hUEVUpRGTxWnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864846404790-qo32fq6loev8ls3af0ors4kutj8aetek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
