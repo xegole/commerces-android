@@ -13,6 +13,7 @@ import com.webster.commerces.activities.DetailCommerceActivity.Companion.EXTRA_C
 import com.webster.commerces.adapter.BannerPagerAdapter
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.entity.Banner
+import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.openActivityWithBundleOptions
@@ -28,6 +29,7 @@ class CommercesFragment : BaseFragment() {
     private val database = FirebaseDatabase.getInstance()
     private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
     private val bannerReference = database.getReference(FirebaseReferences.BANNERS)
+    private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
 
     private lateinit var commercesAdapter: CommercesAdapter
 
@@ -57,23 +59,39 @@ class CommercesFragment : BaseFragment() {
             }
         }
 
+        //commerceMock()
+        // categoryMock()
+    }
+
+    private fun commerceMock() {
         val listImages = ArrayList<String>()
-        listImages.add("https://10619-2.s.cdn12.com/rests/small/w320/h220/107_330419770.jpg")
-        listImages.add("https://lh3.googleusercontent.com/p/AF1QipPO4RazUommX-_m-wguI24wjLEKGSCiL03GzYX9=s1600-h380")
+        listImages.add("http://plazadejuan.com/wp-content/uploads/2016/06/carniceria-en-plaza-de-juan-carne-supermercados-en-murcia-1.jpg")
+        listImages.add("https://media-cdn.tripadvisor.com/media/photo-s/0c/d9/13/4a/carniceria-bom-para-conhecer.jpg")
 
         val commerce = Commerce(
-            "Comercio Test 1",
+            "Espiga Dorada",
             "1",
-            1234567890,
+            3007661223,
             "1",
-            "commerces%2F1%2Fmaxresdefault.jpg?alt=media&token=d260bcbc-a595-4262-865c-95727cdf40cb",
-            "Carrera 1 #23-45",
-            "1",
-            "this a test description",
+            "commerces%2Fepiga%20dorada%2Fbanner.jpg?alt=media&token=d1dd89d4-95c2-4763-923c-b58c8380cc6c",
+            "Carrera 6 #3-45",
+            "2",
+            "El mejor pan de la region",
             listImages
         )
+        commercesReference.push().setValue(commerce)
+    }
 
-        commercesReference.child("1").setValue(commerce)
+    private fun categoryMock() {
+        val category = Category(
+            "1",
+            "Panaderia",
+            "category_images%2Fpanaderia.jpeg?alt=media&token=14e11c93-534d-47b7-85f5-095c1f8be043",
+            "test"
+        )
+        //categoriesReference.child(category.categoryId).setValue(category)
+        categoriesReference.push().setValue(category)
+
     }
 
     private val handler = Handler()

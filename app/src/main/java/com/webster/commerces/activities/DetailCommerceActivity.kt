@@ -1,14 +1,17 @@
 package com.webster.commerces.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.adapter.ImagePagerAdapter
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.loadUrl
+import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.activity_detail_commerce.*
 
 
@@ -18,6 +21,7 @@ class DetailCommerceActivity : AppCompatActivity() {
         const val EXTRA_COMMERCE_DATA = "extra_commerce_data"
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_commerce)
@@ -30,6 +34,9 @@ class DetailCommerceActivity : AppCompatActivity() {
         intent.extras?.let {
             val commerce = it.getSerializable(EXTRA_COMMERCE_DATA) as Commerce
             supportActionBar?.title = commerce.name
+
+            fabFacebook.visibility = if (commerce.facebook.isNotEmpty()) View.VISIBLE else View.GONE
+            fabWhatsapp.visibility = if (commerce.whatsapp.isNotEmpty()) View.VISIBLE else View.GONE
 
             imageCommerce.loadUrl(commerce.urlImage()) {
                 onSuccess {

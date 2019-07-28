@@ -1,31 +1,27 @@
 package com.webster.commerces.activities
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.util.Log
 import android.view.View
+import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.Commerce
+import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.openActivityWithBundleOptions
-import com.webster.commerces.services.RetrofitServices
-import com.webster.commerces.utils.Constants
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.activity_detail_commerce.*
 import kotlinx.android.synthetic.main.fragment_commerces.*
 import java.util.*
 
 class CategoryDetailActivity : BaseActivity() {
 
+    private val database = FirebaseDatabase.getInstance()
+    private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
+
     companion object {
         const val EXTRA_CATEGORY_DATA = "extra_category_data"
-    }
-
-    private val commercesServices by lazy {
-        RetrofitServices.create()
     }
 
     private lateinit var commercesAdapter: CommercesAdapter
@@ -45,18 +41,14 @@ class CategoryDetailActivity : BaseActivity() {
             commercesAdapter = CommercesAdapter(ArrayList()) { commerce, v -> commerceItemClicked(commerce, v) }
             recyclerCommerces.adapter = commercesAdapter
 
-            commercesServices.getCommercesByCategory(category.categoryId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { commercesAdapter.addItemList(it.commerces) },
-                    { error ->
-                        dismissLoading()
-                        Snackbar.make(viewGroup, error.localizedMessage, Snackbar.LENGTH_LONG).show()
-                        Log.d(Constants.TAG_SERVICES, error.localizedMessage)
-                    },
-                    { dismissLoading() }
-                )
+            showLoading()
+            commercesReference.orderByChild("categoryId").equalTo(category.categoryId)
+                .addListDataListener<Commerce> { list, success ->
+                    if (success) {
+                        commercesAdapter.addItemList(list)
+                    }
+                    dismissLoading()
+                }
         }
     }
 
