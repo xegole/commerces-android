@@ -9,6 +9,11 @@
     <string name="label_select_city">Select your favorite city</string>
     <string name="button_text_done">Done</string>
 
+    <string name="hint_input_name">Input name</string>
+    <string name="hint_input_description">Input description</string>
+
+    <string name="label_create_category">Create category</string>
+
     <!-- Home Screen Strings -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

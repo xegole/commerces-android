@@ -4,14 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
-import com.google.firebase.database.FirebaseDatabase
+import androidx.appcompat.app.AppCompatActivity
 import com.webster.commerces.R
 import com.webster.commerces.adapter.ImagePagerAdapter
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.loadUrl
-import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.activity_detail_commerce.*
 
 

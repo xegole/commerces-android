@@ -1,11 +1,11 @@
 package com.webster.commerces.adapter
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
-import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.viewpager.widget.PagerAdapter
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
 import com.webster.commerces.entity.Banner

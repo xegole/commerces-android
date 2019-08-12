@@ -1,8 +1,8 @@
 package com.webster.commerces.adapter
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.webster.commerces.R
 import com.webster.commerces.adapter.viewholder.CategoryVH
 import com.webster.commerces.entity.Category

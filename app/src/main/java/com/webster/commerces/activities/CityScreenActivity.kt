@@ -37,6 +37,10 @@ class CityScreenActivity : BaseActivity(), AdapterView.OnItemSelectedListener, V
             }
             dismissLoading()
         }
+
+        imageCreateCategory.setOnClickListener {
+            goToActivity(CreateCategoryActivity::class.java, false)
+        }
     }
 
     private fun setSpinnerWithCities(listCities: List<City>) {

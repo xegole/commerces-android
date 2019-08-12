@@ -1,9 +1,9 @@
 package com.webster.commerces.base
 
 import android.annotation.SuppressLint
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.webster.commerces.R
 
 
