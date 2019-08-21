@@ -82,18 +82,6 @@ class CommercesFragment : BaseFragment() {
         commercesReference.push().setValue(commerce)
     }
 
-    private fun categoryMock() {
-        val category = Category(
-            "1",
-            "Panaderia",
-            "category_images%2Fpanaderia.jpeg?alt=media&token=14e11c93-534d-47b7-85f5-095c1f8be043",
-            "test"
-        )
-        //categoriesReference.child(category.categoryId).setValue(category)
-        categoriesReference.push().setValue(category)
-
-    }
-
     private val handler = Handler()
     private lateinit var update: Runnable
 

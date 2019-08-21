@@ -49,20 +49,23 @@ class CreateCategoryActivity : AppCompatActivity() {
         val categoryName = textName.content()
         if (categoryName.isNotEmpty() && imageFile != null) {
             val id = categoriesReference.push().key ?: Constants.EMPTY_STRING
-            val category = Category()
-            category.categoryId = id
-            category.name = categoryName
-            category.description = textDescription.content()
 
             if (id.isNotEmpty()) {
                 imageFile?.run {
-                    uploadImageCategory(this, id)
-                }
-
-                categoriesReference.child(id).setValue(category).addOnSuccessListener {
-                    textName.clear()
+                    uploadImageCategory(this, id, categoryName)
                 }
             }
+        }
+    }
+
+    private fun saveCategoryToFirebase(id: String, categoryName: String, categoryImage: String?) {
+        val category = Category()
+        category.categoryId = id
+        category.name = categoryName
+        category.description = textDescription.content()
+        category.categoryImage = categoryImage ?: Constants.EMPTY_STRING
+        categoriesReference.child(id).setValue(category).addOnSuccessListener {
+            textName.clear()
         }
     }
 
@@ -73,12 +76,15 @@ class CreateCategoryActivity : AppCompatActivity() {
         startActivityForResult(Intent.createChooser(intent, "Select image"), RESULT_CODE_GALLERY)
     }
 
-    private fun uploadImageCategory(file: Uri, uidCategory: String) {
+    private fun uploadImageCategory(file: Uri, uidCategory: String, categoryName: String) {
         val routeFireStorage = "category/$uidCategory.jpg"
         val storageReference = firebaseStorage.reference.child(routeFireStorage)
         val uploadTask = storageReference.putFile(file)
         uploadTask
             .addOnSuccessListener {
+                storageReference.downloadUrl.addOnSuccessListener {
+                    saveCategoryToFirebase(uidCategory, categoryName, it.toString())
+                }
             }
             .addOnProgressListener {
             }
@@ -102,7 +108,6 @@ class CreateCategoryActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
         }
     }
 }

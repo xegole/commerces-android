@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.CreateCommerceActivity"></activity>
         <activity
             android:name=".activities.CategoryDetailActivity"
             android:label="@string/title_activity_category_detail"
@@ -37,4 +38,5 @@
             android:name="io.fabric.ApiKey"
             android:value="9df5c7a3f0b5991ac166b9a2596cd2af6da3303a" />
     </application>
+
 </manifest>

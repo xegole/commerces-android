@@ -14,7 +14,6 @@ import com.webster.commerces.utils.FirebaseReferences
 import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.activity_city_screen.*
 
-
 class CityScreenActivity : BaseActivity(), AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private val prefs by lazy {
@@ -40,6 +39,10 @@ class CityScreenActivity : BaseActivity(), AdapterView.OnItemSelectedListener, V
 
         imageCreateCategory.setOnClickListener {
             goToActivity(CreateCategoryActivity::class.java, false)
+        }
+
+        imageCreateCommerce.setOnClickListener{
+            goToActivity(CreateCommerceActivity::class.java,false)
         }
     }
 

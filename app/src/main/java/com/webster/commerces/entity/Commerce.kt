@@ -1,18 +1,17 @@
 package com.webster.commerces.entity
 
-import com.webster.commerces.BuildConfig
 import com.webster.commerces.utils.Constants
 import java.io.Serializable
 
 data class Commerce(
-    val name: String,
-    val commerceId: String,
-    val phone: Long,
+    var name: String,
+    var commerceId: String,
+    var phone: Long,
     val cityId: String,
-    val commerceImage: String,
-    val address: String,
+    var commerceImage: String,
+    var address: String,
     val categoryId: String,
-    val description: String,
+    var description: String,
     val images: List<String>,
     val whatsapp: String = Constants.EMPTY_STRING,
     val facebook: String = Constants.EMPTY_STRING
@@ -30,5 +29,5 @@ data class Commerce(
         emptyList()
     )
 
-    fun urlImage(): String = BuildConfig.BASE_URL + commerceImage
+    fun urlImage(): String = commerceImage
 }
