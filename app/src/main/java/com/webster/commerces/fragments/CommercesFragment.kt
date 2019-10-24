@@ -13,7 +13,6 @@ import com.webster.commerces.activities.DetailCommerceActivity.Companion.EXTRA_C
 import com.webster.commerces.adapter.BannerPagerAdapter
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.entity.Banner
-import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.openActivityWithBundleOptions
@@ -80,18 +79,6 @@ class CommercesFragment : BaseFragment() {
             listImages
         )
         commercesReference.push().setValue(commerce)
-    }
-
-    private fun categoryMock() {
-        val category = Category(
-            "1",
-            "Panaderia",
-            "category_images%2Fpanaderia.jpeg?alt=media&token=14e11c93-534d-47b7-85f5-095c1f8be043",
-            "test"
-        )
-        //categoriesReference.child(category.categoryId).setValue(category)
-        categoriesReference.push().setValue(category)
-
     }
 
     private val handler = Handler()
