@@ -22,21 +22,22 @@
     <!-- Home Screen Strings -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Lo buscas? Lo encuentras!</string>
+    <string name="nav_header_subtitle">El directorio comercial y de servicios 2019</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <!-- Side Menu Strings-->
-    <string name="side_menu_item_commerces">Commerces</string>
-    <string name="side_menu_item_category">Category</string>
+    <string name="side_menu_item_commerces">Comercios</string>
+    <string name="side_menu_item_category">Categorias</string>
+    <string name="side_menu_item_about">Acerca</string>
+    <string name="side_menu_item_contact_us">Contactanos</string>
     <string name="side_menu_item_communicate">Communicate</string>
     <string name="side_menu_item_share">Share</string>
 
     <!-- Commerces Fragment String -->
     <string name="transition_name_commerce">transition_commerce</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_category_detail">CategoryDetailActivity</string>
+    <string name="message_about">Lo buscas? Lo encuentras! El directorio comercial y de servicios Merka, es una aplicación que te ayuda a encontrar información de los establecimientos registrados en puerto salgar – Cundinamarca y la región. Diferentes tipos de categorías donde podrás encontrar cada uno de los comercios registrados. (Panaderías, hoteles, ferreterías, bares y discotecas, medios de comunicación, etc)\n\nDeseas registrar tu empresa y/o servicio?</string>
+    <string name="messahe_about_contact">ESCRIBENOS\nWEBSTER – INC Desarrolladores Tecnológicos\nCarrera 11 # 10-26 B/centro\nPuerto Salgar, Cundinamarca 2019
+</string>
 </resources>

@@ -9,6 +9,7 @@ import com.google.android.material.navigation.NavigationView
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.addFragment
+import com.webster.commerces.fragments.AboutFragment
 import com.webster.commerces.fragments.CategoryFragment
 import com.webster.commerces.fragments.CommercesFragment
 import com.webster.commerces.utils.ConstantsArray
@@ -46,14 +47,9 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         toolbar.title = item.title
         when (item.itemId) {
-            R.id.nav_commerces -> {
-                val currentFragment = CommercesFragment.newInstance()
-                validateCurrentFragment(item.itemId, currentFragment)
-            }
-            R.id.nav_category -> {
-                val currentFragment = CategoryFragment.newInstance()
-                validateCurrentFragment(item.itemId, currentFragment)
-            }
+            R.id.nav_commerces -> validateCurrentFragment(item.itemId, CommercesFragment.instance())
+            R.id.nav_category ->  validateCurrentFragment(item.itemId, CategoryFragment.instance())
+            R.id.nav_about -> validateCurrentFragment(item.itemId, AboutFragment.instance())
             R.id.nav_share -> {
 
             }

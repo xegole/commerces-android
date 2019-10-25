@@ -3,20 +3,18 @@ package com.webster.commerces.fragments
 
 import android.os.Bundle
 import android.os.Handler
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.activities.DetailCommerceActivity
 import com.webster.commerces.activities.DetailCommerceActivity.Companion.EXTRA_COMMERCE_DATA
 import com.webster.commerces.adapter.BannerPagerAdapter
 import com.webster.commerces.adapter.CommercesAdapter
+import com.webster.commerces.base.BaseFragment
 import com.webster.commerces.entity.Banner
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.openActivityWithBundleOptions
-import com.webster.commerces.fragments.base.BaseFragment
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.fragment_commerces.*
@@ -32,9 +30,7 @@ class CommercesFragment : BaseFragment() {
 
     private lateinit var commercesAdapter: CommercesAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_commerces, container, false)
-    }
+    override fun resourceLayout() = R.layout.fragment_commerces
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,28 +53,6 @@ class CommercesFragment : BaseFragment() {
                 setViewPagerWithBanners(list)
             }
         }
-
-        //commerceMock()
-        // categoryMock()
-    }
-
-    private fun commerceMock() {
-        val listImages = ArrayList<String>()
-        listImages.add("http://plazadejuan.com/wp-content/uploads/2016/06/carniceria-en-plaza-de-juan-carne-supermercados-en-murcia-1.jpg")
-        listImages.add("https://media-cdn.tripadvisor.com/media/photo-s/0c/d9/13/4a/carniceria-bom-para-conhecer.jpg")
-
-        val commerce = Commerce(
-            "Espiga Dorada",
-            "1",
-            3007661223,
-            "1",
-            "commerces%2Fepiga%20dorada%2Fbanner.jpg?alt=media&token=d1dd89d4-95c2-4763-923c-b58c8380cc6c",
-            "Carrera 6 #3-45",
-            "2",
-            "El mejor pan de la region",
-            listImages
-        )
-        commercesReference.push().setValue(commerce)
     }
 
     private val handler = Handler()
@@ -116,7 +90,6 @@ class CommercesFragment : BaseFragment() {
 
     companion object {
         private var currentPage = Constants.INT_ZERO
-
-        fun newInstance() = CommercesFragment()
+        fun instance() = CommercesFragment()
     }
 }

@@ -15,10 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.CreateCommerceActivity"></activity>
+        <activity android:name=".activities.CreateCommerceActivity"/>
         <activity
             android:name=".activities.CategoryDetailActivity"
-            android:label="@string/title_activity_category_detail"
             android:theme="@style/AppTheme" />
         <activity android:name=".activities.DetailCommerceActivity" />
         <activity android:name=".activities.SplashScreenActivity">

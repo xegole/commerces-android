@@ -1,14 +1,22 @@
-package com.webster.commerces.fragments.base
+package com.webster.commerces.base
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.webster.commerces.R
 
-open class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
 
-    val viewGroup by lazy {
+    private val viewGroup by lazy {
         view as ViewGroup
+    }
+
+    abstract fun resourceLayout(): Int
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(resourceLayout(), container, false)
     }
 
     private val loadingView by lazy {

@@ -10,7 +10,7 @@ import com.webster.commerces.R
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {
 
-    val viewGroup by lazy {
+    private val viewGroup by lazy {
         findViewById<View>(android.R.id.content) as ViewGroup
     }
 
