@@ -12,6 +12,7 @@ import com.webster.commerces.extensions.addFragment
 import com.webster.commerces.fragments.AboutFragment
 import com.webster.commerces.fragments.CategoryFragment
 import com.webster.commerces.fragments.CommercesFragment
+import com.webster.commerces.fragments.ContactUsFragment
 import com.webster.commerces.utils.ConstantsArray
 import kotlinx.android.synthetic.main.activity_home_screen.*
 import kotlinx.android.synthetic.main.content_toolbar.*
@@ -48,8 +49,9 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         toolbar.title = item.title
         when (item.itemId) {
             R.id.nav_commerces -> validateCurrentFragment(item.itemId, CommercesFragment.instance())
-            R.id.nav_category ->  validateCurrentFragment(item.itemId, CategoryFragment.instance())
+            R.id.nav_category -> validateCurrentFragment(item.itemId, CategoryFragment.instance())
             R.id.nav_about -> validateCurrentFragment(item.itemId, AboutFragment.instance())
+            R.id.nav_contact_us -> validateCurrentFragment(item.itemId, ContactUsFragment.instance())
             R.id.nav_share -> {
 
             }

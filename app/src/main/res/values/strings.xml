@@ -35,6 +35,14 @@
     <string name="side_menu_item_communicate">Communicate</string>
     <string name="side_menu_item_share">Share</string>
 
+    <string name="label_hint_name_last_name">Nombre y Apellidos</string>
+    <string name="label_hint_company">Empresa</string>
+    <string name="label_hint_phone">Telefono</string>
+    <string name="label_hint_email">Correo electronico</string>
+    <string name="label_hint_comments">Comentarios</string>
+
+    <string name="label_send">Enviar</string>
+
     <!-- Commerces Fragment String -->
     <string name="transition_name_commerce">transition_commerce</string>
     <string name="message_about">Lo buscas? Lo encuentras! El directorio comercial y de servicios Merka, es una aplicación que te ayuda a encontrar información de los establecimientos registrados en puerto salgar – Cundinamarca y la región. Diferentes tipos de categorías donde podrás encontrar cada uno de los comercios registrados. (Panaderías, hoteles, ferreterías, bares y discotecas, medios de comunicación, etc)\n\nDeseas registrar tu empresa y/o servicio?</string>

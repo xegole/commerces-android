@@ -14,4 +14,12 @@
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">15sp</item>
     </style>
+
+    <style name="EditTextPurple" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/material_black</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/purple_accent</item>
+        <item name="android:textColorHighlight">@color/purple_accent_50</item>
+    </style>
 </resources>
