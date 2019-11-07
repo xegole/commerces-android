@@ -14,10 +14,10 @@
     <string name="hint_input_address">Input address</string>
     <string name="hint_input_number">Input number phone</string>
 
-    <string name="label_create_category">Create Category</string>
-
-    <!-- Create Commerce Strings -->
-    <string name="label_create_commerce">Create Commerce</string>
+    <string name="label_create_category">Crear categoria</string>
+    <string name="label_create_commerce">Crear comercio</string>
+    <string name="label_edit_commerce">Editar comercio</string>
+    <string name="label_edit_category">Editar categoria</string>
 
     <!-- Home Screen Strings -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -40,6 +40,7 @@
     <string name="label_hint_phone">Telefono</string>
     <string name="label_hint_email">Correo electronico</string>
     <string name="label_hint_comments">Comentarios</string>
+    <string name="label_admin_screen">Opciones Admin</string>
 
     <string name="label_send">Enviar</string>
 

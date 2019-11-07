@@ -14,8 +14,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.CreateCommerceActivity"/>
+        tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+
+        <activity android:name=".activities.CreateCommerceActivity" />
         <activity
             android:name=".activities.CategoryDetailActivity"
             android:theme="@style/AppTheme" />
@@ -27,15 +28,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CityScreenActivity" />
+        <activity android:name=".ui.cityselector.CitySelectorActivity" />
         <activity android:name=".activities.HomeScreenActivity" />
         <activity
             android:name=".activities.CreateCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.admin.AdminActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.commerces.view.ListCommercesActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9df5c7a3f0b5991ac166b9a2596cd2af6da3303a" />
     </application>
-
 </manifest>

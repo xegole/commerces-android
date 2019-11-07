@@ -27,4 +27,14 @@ open class BaseActivity : AppCompatActivity() {
     fun dismissLoading() {
         viewGroup.removeView(loadingView)
     }
+
+    fun homeAsUpEnable(){
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        supportFinishAfterTransition()
+        return true
+    }
 }

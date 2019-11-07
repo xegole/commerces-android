@@ -8,10 +8,8 @@ import com.webster.commerces.R
 import com.webster.commerces.adapter.viewholder.CommerceVH
 import com.webster.commerces.entity.Commerce
 
-class CommercesAdapter(
-    private val items: ArrayList<Commerce>,
-    private val clickListener: (Commerce, View) -> Unit
-) : RecyclerView.Adapter<CommerceVH>() {
+class CommercesAdapter(private val items: ArrayList<Commerce>, private val clickListener: (Commerce, View) -> Unit) :
+    RecyclerView.Adapter<CommerceVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): CommerceVH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.commerce_item_adapter, parent, false)

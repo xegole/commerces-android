@@ -5,6 +5,7 @@ import android.os.Handler
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.goToActivity
+import com.webster.commerces.ui.cityselector.CitySelectorActivity
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.Prefs
 
@@ -17,7 +18,7 @@ class SplashScreenActivity : BaseActivity() {
     private val handler = Handler()
     private val runnable = Runnable {
         if (prefs.cityId.isEmpty()) {
-            goToActivity(CityScreenActivity::class.java)
+            goToActivity(CitySelectorActivity::class.java)
         } else {
             goToActivity(HomeScreenActivity::class.java)
         }

@@ -28,14 +28,15 @@ class CommercesFragment : BaseFragment() {
     private val bannerReference = database.getReference(FirebaseReferences.BANNERS)
     private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
 
-    private lateinit var commercesAdapter: CommercesAdapter
+    private val adapter by lazy {
+        CommercesAdapter(ArrayList()) { commerce, v -> commerceItemClicked(commerce, v) }
+    }
 
     override fun resourceLayout() = R.layout.fragment_commerces
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        commercesAdapter = CommercesAdapter(ArrayList()) { commerce, v -> commerceItemClicked(commerce, v) }
-        recyclerCommerces.adapter = commercesAdapter
+        recyclerCommerces.adapter = adapter
         initObservers()
     }
 
@@ -43,7 +44,7 @@ class CommercesFragment : BaseFragment() {
         showLoading()
         commercesReference.addListDataListener<Commerce> { list, success ->
             if (success) {
-                commercesAdapter.addItemList(list)
+                adapter.addItemList(list)
             }
             dismissLoading()
         }
