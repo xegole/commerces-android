@@ -1,5 +1,6 @@
 package com.webster.commerces.activities
 
+import android.app.Service
 import android.os.Bundle
 import android.view.View
 import com.google.firebase.database.FirebaseDatabase
@@ -10,9 +11,13 @@ import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.openActivityWithBundleOptions
+import com.webster.commerces.services.api.CommercesApi
 import com.webster.commerces.utils.FirebaseReferences
+import kotlinx.android.synthetic.main.activity_category_detail.*
 import kotlinx.android.synthetic.main.activity_detail_commerce.*
 import kotlinx.android.synthetic.main.fragment_commerces.*
+import kotlinx.android.synthetic.main.fragment_commerces.recyclerCommerces
+import okhttp3.ResponseBody
 import java.util.*
 
 class CategoryDetailActivity : BaseActivity() {

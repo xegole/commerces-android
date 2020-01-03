@@ -5,8 +5,13 @@ import com.webster.commerces.responses.GetCategoriesResponse
 import com.webster.commerces.responses.GetCitiesResponse
 import com.webster.commerces.responses.GetCommercesResponse
 import io.reactivex.Observable
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
+
 
 interface CommercesApi {
 
@@ -18,6 +23,9 @@ interface CommercesApi {
 
     @GET("commerces/byCategory")
     fun getCommercesByCategory(@Query("categoryId") categoryId: String): Observable<GetCommercesResponse>
+
+    @DELETE("commerces/byCategory")
+    fun deleteCommerces(@Path("categoryId") categoryId: String)
 
     @GET("banners")
     fun getBanners(): Observable<GetBannersResponse>

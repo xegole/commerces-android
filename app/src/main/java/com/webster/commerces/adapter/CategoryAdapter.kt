@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.webster.commerces.R
 import com.webster.commerces.adapter.viewholder.CategoryVH
 import com.webster.commerces.entity.Category
+import kotlinx.android.synthetic.main.category_item_adapter.view.*
 
 
 class CategoryAdapter(
     private val items: ArrayList<Category>,
-    private val clickListener: (Category) -> Unit
-) : RecyclerView.Adapter<CategoryVH>() {
+    private val clickListener: (Category) -> Unit) : RecyclerView.Adapter<CategoryVH>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): CategoryVH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.category_item_adapter, parent, false)
@@ -31,4 +31,6 @@ class CategoryAdapter(
         items.addAll(list)
         notifyDataSetChanged()
     }
+
+
 }

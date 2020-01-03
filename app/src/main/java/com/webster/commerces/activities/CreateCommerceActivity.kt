@@ -42,9 +42,11 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_commerce)
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+
         buttonCreate.setOnClickListener {
             saveCommerce()
         }

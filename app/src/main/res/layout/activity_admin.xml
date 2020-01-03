@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -53,5 +54,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/buttonCreateCategory" />
+
+        <Button
+            android:id="@+id/buttonEditCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonEditCommerce"
+            android:onClick="@{viewModel.onClickEditCategories()}"
+            android:text="@string/label_edit_category"
+            tools:layout_editor_absoluteX="162dp"
+            tools:layout_editor_absoluteY="506dp" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

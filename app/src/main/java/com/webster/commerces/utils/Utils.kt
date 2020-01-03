@@ -23,7 +23,6 @@ object Utils {
         return result ?: Constants.EMPTY_STRING
     }
 
-
     fun getPathFromURI(contentUri: Uri, context: Context): String {
         var res: String? = null
         val projection = arrayOf(MediaStore.Images.Media.DATA)

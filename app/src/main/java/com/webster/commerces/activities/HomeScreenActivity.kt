@@ -1,5 +1,7 @@
 package com.webster.commerces.activities
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -9,11 +11,14 @@ import com.google.android.material.navigation.NavigationView
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.addFragment
+import com.webster.commerces.extensions.goToActivity
 import com.webster.commerces.fragments.AboutFragment
 import com.webster.commerces.fragments.CategoryFragment
 import com.webster.commerces.fragments.CommercesFragment
 import com.webster.commerces.fragments.ContactUsFragment
+import com.webster.commerces.ui.cityselector.CitySelectorActivity
 import com.webster.commerces.utils.ConstantsArray
+import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.activity_home_screen.*
 import kotlinx.android.synthetic.main.content_toolbar.*
 
@@ -27,7 +32,9 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
@@ -35,6 +42,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         navView.setNavigationItemSelectedListener(this)
         navView.menu.getItem(ConstantsArray.FIRST).isChecked = true
         onNavigationItemSelected(navView.menu.getItem(ConstantsArray.FIRST))
+
     }
 
     override fun onBackPressed() {
@@ -51,9 +59,9 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             R.id.nav_commerces -> validateCurrentFragment(item.itemId, CommercesFragment.instance())
             R.id.nav_category -> validateCurrentFragment(item.itemId, CategoryFragment.instance())
             R.id.nav_about -> validateCurrentFragment(item.itemId, AboutFragment.instance())
-            R.id.nav_contact_us -> validateCurrentFragment(item.itemId, ContactUsFragment.instance())
+            R.id.nav_contact_us -> validateCurrentFragment(item.itemId,ContactUsFragment.instance())
+            R.id.nav_exit -> consume { goToActivity(CitySelectorActivity::class.java)}
             R.id.nav_share -> {
-
             }
         }
 
@@ -67,4 +75,15 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             this.currentFragment = currentId
         }
     }
+
+    private inline fun consume(f: () -> Unit): Boolean {
+        val mSharedPreferences: SharedPreferences = getSharedPreferences(Prefs.Values.PREFS_FILENAME, Context.MODE_PRIVATE)
+        val mEditor: SharedPreferences.Editor = mSharedPreferences.edit()
+        mEditor.clear()
+        mEditor.apply()
+        finish()
+        f()
+        return true
+    }
 }
+

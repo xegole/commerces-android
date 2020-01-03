@@ -20,6 +20,11 @@
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_menu_about"
             android:title="@string/side_menu_item_about" />
+
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/abc_vector_test"
+            android:title="@string/side_menu_item_exit"/>
     </group>
 
     <item android:title="@string/side_menu_item_communicate">
@@ -30,4 +35,5 @@
                 android:title="@string/side_menu_item_share" />
         </menu>
     </item>
+
 </menu>
