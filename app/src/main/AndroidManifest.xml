@@ -16,7 +16,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
 
-        <activity android:name=".activities.CreateCommerceActivity" />
+        <activity
+            android:name=".activities.CreateCommerceActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.CategoryDetailActivity"
             android:theme="@style/AppTheme" />
@@ -41,11 +43,13 @@
             android:name=".ui.commerces.view.ListCommercesActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.categories.view.ListCategoriesActivity"
+        <activity
+            android:name=".ui.categories.view.ListCategoriesActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9df5c7a3f0b5991ac166b9a2596cd2af6da3303a" />
+
     </application>
 </manifest>

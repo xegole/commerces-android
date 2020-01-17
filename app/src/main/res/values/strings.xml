@@ -13,6 +13,8 @@
     <string name="hint_input_description">Input description</string>
     <string name="hint_input_address">Input address</string>
     <string name="hint_input_number">Input number phone</string>
+    <string name="hint_input_whatsapp">Input number whatsapp </string>
+    <string name="hint_input_facebook">Input facebook</string>
 
     <string name="label_create_category">Crear categoria</string>
     <string name="label_create_commerce">Crear comercio</string>

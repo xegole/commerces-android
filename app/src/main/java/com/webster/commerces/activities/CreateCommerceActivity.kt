@@ -42,8 +42,9 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_commerce)
+        selected_country.registerPhoneNumberTextView(textWhatsapp)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar2)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -100,6 +101,8 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         commerce.description = textDescription.content()
         commerce.address = textAddress.content()
         commerce.phone = textNumber.content().toLong()
+        commerce.whatsapp = textWhatsapp.content()
+        commerce.facebook = textFacebook.content()
         commerce.commerceImage = commerceImage ?: Constants.EMPTY_STRING
         commercesReference.child(id).setValue(commerce).addOnSuccessListener {
             textName.clear()

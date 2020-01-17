@@ -13,8 +13,8 @@ data class Commerce(
     val categoryId: String,
     var description: String,
     val images: List<String>,
-    val whatsapp: String = Constants.EMPTY_STRING,
-    val facebook: String = Constants.EMPTY_STRING
+    var whatsapp: String = Constants.EMPTY_STRING,
+    var facebook: String = Constants.EMPTY_STRING
 ) : Serializable {
 
     constructor() : this(

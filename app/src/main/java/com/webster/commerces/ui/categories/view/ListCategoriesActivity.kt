@@ -12,10 +12,8 @@ import com.webster.commerces.adapter.CategoryAdapter
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityListCategoriesBinding
 import com.webster.commerces.entity.Category
-import com.webster.commerces.extensions.clear
 import com.webster.commerces.ui.categories.ListCategoriesViewModel
 import com.webster.commerces.utils.FirebaseReferences
-import kotlinx.android.synthetic.main.activity_create_category.*
 import kotlinx.android.synthetic.main.activity_list_categories.*
 
 class ListCategoriesActivity : BaseActivity() {
@@ -68,5 +66,4 @@ class ListCategoriesActivity : BaseActivity() {
         category.categoryId = id
         categoriesReference.child(id).removeValue()
     }
-
 }
