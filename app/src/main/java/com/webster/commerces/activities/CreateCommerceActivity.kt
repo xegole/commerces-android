@@ -42,6 +42,7 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_commerce)
+        selected_country.enableHint(false)
         selected_country.registerPhoneNumberTextView(textWhatsapp)
 
         setSupportActionBar(toolbar2)
