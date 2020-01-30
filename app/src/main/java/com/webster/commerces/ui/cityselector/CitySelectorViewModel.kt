@@ -33,9 +33,7 @@ class CitySelectorViewModel(application: Application) : AndroidViewModel(applica
 
     fun loadCitiesByFirebase() {
         firebaseReference.addListDataListener<City> { list, success ->
-            if (success) {
-                citiesData.value = list
-            }
+            citiesData.value = if (success) list else emptyList()
         }
     }
 }
