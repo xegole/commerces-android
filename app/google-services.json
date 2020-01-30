@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "864846404790",
-    "firebase_url": "https://commerces-d756f.firebaseio.com",
-    "project_id": "commerces-d756f",
-    "storage_bucket": "commerces-d756f.appspot.com"
+    "project_number": "14527368633",
+    "firebase_url": "https://merkaapp-4abdc.firebaseio.com",
+    "project_id": "merkaapp-4abdc",
+    "storage_bucket": "merkaapp-4abdc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:864846404790:android:af39b6bc90a33266",
+        "mobilesdk_app_id": "1:14527368633:android:03921c3d4e738f5ed67a68",
         "android_client_info": {
           "package_name": "com.webster.commerces"
         }
       },
       "oauth_client": [
         {
-          "client_id": "864846404790-qo32fq6loev8ls3af0ors4kutj8aetek.apps.googleusercontent.com",
+          "client_id": "14527368633-q5eqnvc51tbvljn2e6ovc8gfdmvcsao3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBE91-XpPLEKqZcVyas40hUEVUpRGTxWnU"
+          "current_key": "AIzaSyDr2tx7SFAaMBKt2VpfHWxyRGSTVktUmO8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "864846404790-qo32fq6loev8ls3af0ors4kutj8aetek.apps.googleusercontent.com",
+              "client_id": "14527368633-q5eqnvc51tbvljn2e6ovc8gfdmvcsao3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
