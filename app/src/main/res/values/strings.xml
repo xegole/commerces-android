@@ -52,4 +52,9 @@
     <string name="messahe_about_contact">ESCRIBENOS\nWEBSTER – INC Desarrolladores Tecnológicos\nCarrera 11 # 10-26 B/centro\nPuerto Salgar, Cundinamarca 2019
 </string>
     <string name="side_menu_item_exit">Salir</string>
+    <string name="default_notification_channel_id" translatable="false"> default_cahnel </string>
+    <string name="send_notification">Send Notification</string>
+    <string name="title">Title</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="label_update_commerce">UPDATE COMMERCE</string>
 </resources>

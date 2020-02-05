@@ -80,8 +80,6 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         //Do nothing
     }
 
-
-
     private fun saveCommerce() {
         val commerceName = textName.content()
         if (commerceName.isNotEmpty() && imageFile != null) {

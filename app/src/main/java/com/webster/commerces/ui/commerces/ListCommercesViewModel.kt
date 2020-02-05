@@ -17,9 +17,7 @@ class ListCommercesViewModel(application: Application) : AndroidViewModel(applic
 
     fun loadListCommerces() {
         commercesReference.addListDataListener<Commerce> { list, success ->
-            if (success) {
-                commercesData.value = list
-            }
+            commercesData.value = if (success) list else emptyList()
         }
     }
 }

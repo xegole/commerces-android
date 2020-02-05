@@ -1,6 +1,9 @@
 package com.webster.commerces.ui.commerces.view
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
@@ -8,10 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
+import com.webster.commerces.activities.UpdateCommerceActivity
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityListCommercesBinding
 import com.webster.commerces.entity.Commerce
+import com.webster.commerces.extensions.goToActivity
 import com.webster.commerces.ui.commerces.ListCommercesViewModel
 import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.activity_list_commerces.*
@@ -28,12 +33,12 @@ class ListCommercesActivity : BaseActivity() {
     private val adapter by lazy {
         CommercesAdapter(ArrayList()) { commerce, v ->
             val alertDialog = AlertDialog.Builder(this)
-            alertDialog.setTitle("TITLE")
-            alertDialog.setPositiveButton("YES") { dialog, which ->
+            alertDialog.setTitle("¿DO YOU WANT DELETE A COMMERCE OR EDIT?")
+            alertDialog.setPositiveButton("DELETE") { dialog, which ->
                 deleteCommerce(commerce.commerceId)
             }
-            alertDialog.setNegativeButton("NO"){ dialog, which ->
-                Toast.makeText(applicationContext, "Test", Toast.LENGTH_SHORT).show()
+            alertDialog.setNegativeButton("EDIT"){ dialog, which ->
+                goToActivity(UpdateCommerceActivity::class.java)
             }
             alertDialog.show()
             alertDialog.create()
@@ -44,6 +49,8 @@ class ListCommercesActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityListCommercesBinding = DataBindingUtil.setContentView(this, R.layout.activity_list_commerces)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         homeAsUpEnable()
 
         binding.viewModel = viewModel
@@ -51,6 +58,21 @@ class ListCommercesActivity : BaseActivity() {
         viewModel.loadListCommerces()
         showLoading()
         initObservers()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.activity_update_commerce_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+         when (item.itemId){
+            R.id.updateData ->{
+                goToActivity(UpdateCommerceActivity::class.java)
+            }
+        }
+        return true
     }
 
     private fun initObservers() {

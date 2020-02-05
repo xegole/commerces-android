@@ -28,12 +28,12 @@ class ListCategoriesActivity : BaseActivity() {
     private val adapter by lazy {
         CategoryAdapter(ArrayList()) { category ->
             val alertDialog = AlertDialog.Builder(this)
-            alertDialog.setTitle("¿DO YOU WANT TO DELETE A CATEGORY?")
+            alertDialog.setTitle("¿DO YOU WANT DELETE A CATEGORY?")
             alertDialog.setPositiveButton("YES") { dialog, which ->
                 deleteCategory(category.categoryId)
             }
             alertDialog.setNegativeButton("NO") { dialog, which ->
-                Toast.makeText(applicationContext, "Test", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT).show()
             }
             alertDialog.create()
             alertDialog.show()

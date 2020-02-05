@@ -15,6 +15,8 @@ import com.webster.commerces.extensions.content
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.activity_create_category.*
+import kotlinx.android.synthetic.main.activity_create_category.imageCategory
+import kotlinx.android.synthetic.main.category_item_adapter.*
 
 
 const val RESULT_CODE_GALLERY = 121
@@ -68,6 +70,8 @@ class CreateCategoryActivity : AppCompatActivity() {
         category.categoryImage = categoryImage ?: Constants.EMPTY_STRING
         categoriesReference.child(id).setValue(category).addOnSuccessListener {
             textName.clear()
+            textDescription.clear()
+
         }
     }
 

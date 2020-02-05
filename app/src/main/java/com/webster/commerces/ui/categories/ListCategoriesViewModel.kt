@@ -8,18 +8,16 @@ import com.webster.commerces.entity.Category
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.utils.FirebaseReferences
 
-class ListCategoriesViewModel(application: Application): AndroidViewModel(application) {
+class ListCategoriesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = FirebaseDatabase.getInstance()
     private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
 
     val categoryData = MutableLiveData<List<Category>>()
 
-    fun loadListCategories(){
-        categoriesReference.addListDataListener<Category>{ list, success ->
-            if (success)
-                categoryData.value = list
+    fun loadListCategories() {
+        categoriesReference.addListDataListener<Category> { list, success ->
+            categoryData.value = if (success) list else emptyList()
         }
     }
-
 }

@@ -15,10 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+        <activity android:name=".activities.UpdateCommerceActivity"></activity>
+
+        <service
+            android:name=".services.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <activity
             android:name=".activities.CreateCommerceActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.CategoryDetailActivity"
             android:theme="@style/AppTheme" />
@@ -38,29 +47,23 @@
         <activity
             android:name=".ui.admin.AdminActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.commerces.view.ListCommercesActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.categories.view.ListCategoriesActivity"
             android:screenOrientation="portrait" />
-
-        <service android:name=".activities.MessagingService"
-            android:exported="false">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-        </service>
+        <activity android:name=".activities.NotificationActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9df5c7a3f0b5991ac166b9a2596cd2af6da3303a" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
-
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id"></meta-data>
     </application>
+
 </manifest>

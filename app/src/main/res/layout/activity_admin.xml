@@ -67,6 +67,17 @@
             tools:layout_editor_absoluteX="162dp"
             tools:layout_editor_absoluteY="506dp" />
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_notification"
+            android:onClick="@{viewModel.OnClickSendNotification()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/buttonEditCategory"
+            app:layout_constraintStart_toStartOf="@+id/buttonEditCategory"
+            app:layout_constraintTop_toBottomOf="@+id/buttonEditCategory" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
