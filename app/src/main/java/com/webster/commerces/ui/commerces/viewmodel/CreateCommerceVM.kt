@@ -33,6 +33,9 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     val commerceName = MutableLiveData<String>()
     val commerceDescription = MutableLiveData<String>()
     val commerceAddress = MutableLiveData<String>()
+    val commercePhone = MutableLiveData<String>()
+    val commerceWhatsapp = MutableLiveData<String>()
+    val commerceFacebook = MutableLiveData<String>()
 
     var imageFile: Uri? = null
     var category: Category? = null
@@ -133,14 +136,13 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
             commerce.cityId = city?.cityId ?: "1"
             commerce.address = commerceAddress.value ?: Constants.EMPTY_STRING
             commerce.categoryId = category?.categoryId ?: Constants.EMPTY_STRING
-//            commerce.phone = textNumber.content().toLong()
-//            commerce.whatsapp = textWhatsapp.content()
-//            commerce.facebook = textFacebook.content()
+            commerce.phone = commercePhone.value?.toLong() ?: Constants.LONG_ZERO
+            commerce.whatsapp = commerceWhatsapp.value ?: Constants.EMPTY_STRING
+            commerce.facebook = commerceFacebook.value ?: Constants.EMPTY_STRING
             commercesReference.child(id).setValue(commerce).addOnSuccessListener {
                 imageFile?.run {
                     uploadBannerImageCommerce(this, id)
                 }
-
                 uploadImagesCommerce(id)
             }
         }

@@ -102,7 +102,8 @@
                         android:ems="10"
                         android:hint="@string/hint_input_number"
                         android:inputType="number"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        app:liveText="@{viewModel.commercePhone}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -119,7 +120,8 @@
                         android:ems="10"
                         android:hint="@string/hint_input_whatsapp"
                         android:inputType="phone"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        app:liveText="@{viewModel.commerceWhatsapp}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.rilixtech.widget.countrycodepicker.CountryCodePicker
@@ -144,7 +146,8 @@
                         android:ems="10"
                         android:hint="@string/hint_input_facebook"
                         android:inputType="textEmailAddress"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        app:liveText="@{viewModel.commerceFacebook}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
