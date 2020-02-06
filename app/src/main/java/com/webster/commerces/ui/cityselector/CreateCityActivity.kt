@@ -21,6 +21,7 @@ class CreateCityActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityCreateCityBinding>(this, R.layout.activity_create_city)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         viewModel.successMessage.observe(this, Observer {
             Snackbar.make(binding.textName, it, Snackbar.LENGTH_SHORT).show()

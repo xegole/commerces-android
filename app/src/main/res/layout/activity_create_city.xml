@@ -36,7 +36,7 @@
                 android:hint="@string/hint_input_name_city"
                 android:inputType="text"
                 android:singleLine="true"
-                android:text="@{viewModel.cityName}" />
+                app:textLive="@{viewModel.cityName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
