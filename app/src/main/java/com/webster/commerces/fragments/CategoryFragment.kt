@@ -33,7 +33,7 @@ class CategoryFragment : BaseFragment() {
         showLoading()
         categoriesReference.addListDataListener<Category> { list, success ->
             if (success) {
-                categoryAdapter.addItemList(list)
+                categoryAdapter.addItemList(list.sortedBy { it.name })
             }
             dismissLoading()
         }
