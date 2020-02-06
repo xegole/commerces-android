@@ -25,8 +25,6 @@ class CreateCategoryActivity : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
     private val firebaseStorage = FirebaseStorage.getInstance()
-    private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
-    private val bannerReference = database.getReference(FirebaseReferences.BANNERS)
     private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
 
 

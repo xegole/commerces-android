@@ -10,6 +10,7 @@
     <string name="button_text_done">Done</string>
 
     <string name="hint_input_name">Input name</string>
+    <string name="hint_input_name_city">Ingrese nombre de la ciudad</string>
     <string name="hint_input_description">Input description</string>
     <string name="hint_input_address">Input address</string>
     <string name="hint_input_number">Input number phone</string>
@@ -18,6 +19,7 @@
 
     <string name="label_create_category">Crear categoria</string>
     <string name="label_create_commerce">Crear comercio</string>
+    <string name="label_create_city">Crear ciudad</string>
     <string name="label_edit_commerce">Editar comercio</string>
     <string name="label_edit_category">Editar categoria</string>
 
@@ -49,12 +51,17 @@
     <!-- Commerces Fragment String -->
     <string name="transition_name_commerce">transition_commerce</string>
     <string name="message_about">Lo buscas? Lo encuentras! El directorio comercial y de servicios Merka, es una aplicación que te ayuda a encontrar información de los establecimientos registrados en puerto salgar – Cundinamarca y la región. Diferentes tipos de categorías donde podrás encontrar cada uno de los comercios registrados. (Panaderías, hoteles, ferreterías, bares y discotecas, medios de comunicación, etc)\n\nDeseas registrar tu empresa y/o servicio?</string>
-    <string name="messahe_about_contact">ESCRIBENOS\nWEBSTER – INC Desarrolladores Tecnológicos\nCarrera 11 # 10-26 B/centro\nPuerto Salgar, Cundinamarca 2019
-</string>
+    <string name="messahe_about_contact">ESCRIBENOS\nWEBSTER – INC Desarrolladores Tecnológicos\nCarrera 11 # 10-26 B/centro\nPuerto Salgar, Cundinamarca 2019</string>
     <string name="side_menu_item_exit">Salir</string>
     <string name="default_notification_channel_id" translatable="false"> default_cahnel </string>
     <string name="send_notification">Send Notification</string>
     <string name="title">Title</string>
     <string name="actualizar">Actualizar</string>
     <string name="label_update_commerce">UPDATE COMMERCE</string>
+    <string name="label_create_commerce_banner_image">Imagen para banner de comercio</string>
+    <string name="label_create_commerce_internal_image">Imagenes representativas del comercio</string>
+    <string name="label_selected_city">Seleccione una ciudad</string>
+    <string name="label_selected_category">Seleccione una categoria</string>
+
+    <string name="message_city_created_success">La ciudad fue creada</string>
 </resources>

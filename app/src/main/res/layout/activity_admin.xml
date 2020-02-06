@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -46,6 +46,16 @@
             app:layout_constraintTop_toBottomOf="@id/buttonCreateCommerce" />
 
         <Button
+            android:id="@+id/buttonCreateCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel.onClickCreateCity()}"
+            android:text="@string/label_create_city"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonCreateCategory" />
+
+        <Button
             android:id="@+id/buttonEditCommerce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,17 +63,17 @@
             android:text="@string/label_edit_commerce"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonCreateCategory" />
+            app:layout_constraintTop_toBottomOf="@id/buttonCreateCity" />
 
         <Button
             android:id="@+id/buttonEditCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{viewModel.onClickEditCategories()}"
+            android:text="@string/label_edit_category"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/buttonEditCommerce"
-            android:onClick="@{viewModel.onClickEditCategories()}"
-            android:text="@string/label_edit_category"
             tools:layout_editor_absoluteX="162dp"
             tools:layout_editor_absoluteY="506dp" />
 
@@ -71,8 +81,8 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/send_notification"
             android:onClick="@{viewModel.OnClickSendNotification()}"
+            android:text="@string/send_notification"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/buttonEditCategory"
             app:layout_constraintStart_toStartOf="@+id/buttonEditCategory"

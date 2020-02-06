@@ -8,40 +8,38 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
+import com.webster.commerces.databinding.ActivityCreateCommerceBinding
 import com.webster.commerces.entity.Category
-import com.webster.commerces.entity.Commerce
-import com.webster.commerces.extensions.addListDataListener
-import com.webster.commerces.extensions.clear
-import com.webster.commerces.extensions.content
+import com.webster.commerces.entity.City
+import com.webster.commerces.ui.commerces.adapter.PagerImagesAdapter
+import com.webster.commerces.ui.commerces.viewmodel.CreateCommerceVM
 import com.webster.commerces.utils.Constants
-import com.webster.commerces.utils.FirebaseReferences
-import kotlinx.android.synthetic.main.activity_create_category.buttonCreate
-import kotlinx.android.synthetic.main.activity_create_category.textDescription
-import kotlinx.android.synthetic.main.activity_create_category.textName
-import kotlinx.android.synthetic.main.activity_create_category.toolbar
 import kotlinx.android.synthetic.main.activity_create_category.viewGallery
 import kotlinx.android.synthetic.main.activity_create_commerce.*
 
 class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
-    private var category: Category? = null
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(CreateCommerceVM::class.java)
+    }
 
-    private val database = FirebaseDatabase.getInstance()
-    private val firebaseStorage = FirebaseStorage.getInstance()
-    private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
-    private val bannerReference = database.getReference(FirebaseReferences.BANNERS)
-    private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
-    private val myRef = database.getReference(FirebaseReferences.CATEGORIES)
-
-    var imageFile: Uri? = null
+    private val adapter by lazy {
+        PagerImagesAdapter(supportFragmentManager)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_commerce)
+        val binding = DataBindingUtil.setContentView<ActivityCreateCommerceBinding>(
+            this,
+            R.layout.activity_create_commerce
+        )
+        binding.viewModel = viewModel
+        binding.pagerImages.adapter = adapter
         selected_country.enableHint(false)
         selected_country.registerPhoneNumberTextView(textWhatsapp)
 
@@ -49,87 +47,58 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        buttonCreate.setOnClickListener {
-            saveCommerce()
-        }
-
         viewGallery.setOnClickListener {
             onGalleryClick()
         }
 
-        myRef.addListDataListener<Category> { list, success ->
-            if (success) {
-                setSpinnerWithCategories(list)
-            }
-        }
+        viewModel.getCategories()
+        viewModel.getCities()
+
+        viewModel.commercesImages.observe(this, Observer {
+            adapter.setData(it)
+        })
+
+        viewModel.listCategories.observe(this, Observer {
+            setSpinnerWithCategories(it)
+        })
+        viewModel.listCities.observe(this, Observer {
+            setSpinnerWithCities(it)
+        })
     }
 
-    //Spinner Category
     private fun setSpinnerWithCategories(listCategories: List<Category>) {
-        spinnerCategories!!.onItemSelectedListener = this
+        spinnerCategories?.onItemSelectedListener = this
         val adapterCategories = ArrayAdapter(this, android.R.layout.simple_spinner_item, listCategories)
         adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerCategories!!.adapter = adapterCategories
+        spinnerCategories?.adapter = adapterCategories
+    }
+
+    private fun setSpinnerWithCities(listCities: List<City>) {
+        spinnerCities?.onItemSelectedListener = this
+        val adapterCategories = ArrayAdapter(this, android.R.layout.simple_spinner_item, listCities)
+        adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCategories?.adapter = adapterCategories
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        category = parent?.getItemAtPosition(position) as Category
+        val itemSelected = parent?.getItemAtPosition(position)
+        if (itemSelected is Category) {
+            viewModel.category = itemSelected
+        } else if (itemSelected is City) {
+            viewModel.city = itemSelected
+        }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         //Do nothing
     }
 
-    private fun saveCommerce() {
-        val commerceName = textName.content()
-        if (commerceName.isNotEmpty() && imageFile != null) {
-            val id = commercesReference.push().key ?: Constants.EMPTY_STRING
-
-            if (id.isNotEmpty()) {
-                imageFile?.run {
-                    uploadImageCommerce(this, id, commerceName)
-                }
-            }
-        }
-    }
-
-    private fun saveCommerceToFirebase(id: String, commerceName: String, commerceImage: String?) {
-        val commerce = Commerce()
-        commerce.commerceId = id
-        commerce.name = commerceName
-        commerce.description = textDescription.content()
-        commerce.address = textAddress.content()
-        commerce.phone = textNumber.content().toLong()
-        commerce.whatsapp = textWhatsapp.content()
-        commerce.facebook = textFacebook.content()
-        commerce.commerceImage = commerceImage ?: Constants.EMPTY_STRING
-        commercesReference.child(id).setValue(commerce).addOnSuccessListener {
-            textName.clear()
-        }
-    }
 
     private fun onGalleryClick() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select image"), RESULT_CODE_GALLERY)
-    }
-
-    private fun uploadImageCommerce(file: Uri, uidCommerce: String, commerceName: String) {
-        val routeFireStorage = "commerces/$uidCommerce.jpg"
-        val storageReference = firebaseStorage.reference.child(routeFireStorage)
-        val uploadTask = storageReference.putFile(file)
-        uploadTask
-            .addOnSuccessListener {
-                storageReference.downloadUrl.addOnSuccessListener {
-                    saveCommerceToFirebase(uidCommerce, commerceName, it.toString())
-                }
-            }
-            .addOnProgressListener {
-            }
-            .addOnFailureListener {
-                it.printStackTrace()
-            }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -142,13 +111,11 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         if (requestCode == RESULT_CODE_GALLERY && resultCode == Activity.RESULT_OK) {
             try {
                 val selectedImageUri = data?.data ?: Uri.parse(Constants.EMPTY_STRING)
-                imageFile = selectedImageUri
+                viewModel.imageFile = selectedImageUri
                 Picasso.get().load(selectedImageUri).into(imageCommerce)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
         }
     }
-
 }

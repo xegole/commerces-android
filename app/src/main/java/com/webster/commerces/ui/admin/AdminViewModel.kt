@@ -8,6 +8,7 @@ import com.webster.commerces.activities.CreateCommerceActivity
 import com.webster.commerces.activities.NotificationActivity
 import com.webster.commerces.extensions.goActivity
 import com.webster.commerces.ui.categories.view.ListCategoriesActivity
+import com.webster.commerces.ui.cityselector.CreateCityActivity
 import com.webster.commerces.ui.commerces.view.ListCommercesActivity
 
 class AdminViewModel(application: Application) : AndroidViewModel(application) {
@@ -30,5 +31,9 @@ class AdminViewModel(application: Application) : AndroidViewModel(application) {
 
     fun OnClickSendNotification() = View.OnClickListener {
         it.goActivity(NotificationActivity::class.java)
+    }
+
+    fun onClickCreateCity() = View.OnClickListener {
+        it.goActivity(CreateCityActivity::class.java)
     }
 }

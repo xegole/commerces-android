@@ -4,7 +4,7 @@ import com.webster.commerces.utils.Constants
 
 data class City(
     val cityId: String,
-    val name: String,
+    var name: String,
     val longitude: String,
     val latitude: String
 ) {
