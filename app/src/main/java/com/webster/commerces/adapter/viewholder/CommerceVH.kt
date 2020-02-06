@@ -11,7 +11,9 @@ class CommerceVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setData(commerce: Commerce, clickListener: (Commerce, View) -> Unit) {
         itemView.labelName.text = commerce.name
         itemView.labelAddress.text = commerce.address
-        Picasso.get().load(commerce.urlImage()).into(itemView.imageCommerce)
+        if (commerce.urlImage().isNotBlank()) {
+            Picasso.get().load(commerce.urlImage()).into(itemView.imageCommerce)
+        }
         itemView.setOnClickListener { clickListener(commerce, itemView.imageCommerce) }
     }
 }

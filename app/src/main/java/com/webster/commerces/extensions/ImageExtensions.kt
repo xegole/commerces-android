@@ -4,7 +4,6 @@ import android.widget.ImageView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
-import java.lang.Exception
 
 
 fun ImageView.loadUrl(url: String) {
@@ -12,7 +11,9 @@ fun ImageView.loadUrl(url: String) {
 }
 
 inline fun ImageView.loadUrl(url: String, callback: KCallback.() -> Unit) {
-    Picasso.get().load(url).intoWithCallback(this, callback)
+    if (url.isNotBlank()) {
+        Picasso.get().load(url).intoWithCallback(this, callback)
+    }
 }
 
 inline fun RequestCreator.intoWithCallback(target: ImageView, callback: KCallback.() -> Unit) {
