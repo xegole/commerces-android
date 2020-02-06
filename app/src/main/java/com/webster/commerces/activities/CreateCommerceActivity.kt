@@ -43,7 +43,7 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         selected_country.enableHint(false)
         selected_country.registerPhoneNumberTextView(textWhatsapp)
 
-        setSupportActionBar(toolbar2)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -75,9 +75,9 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
     private fun setSpinnerWithCities(listCities: List<City>) {
         spinnerCities?.onItemSelectedListener = this
-        val adapterCategories = ArrayAdapter(this, android.R.layout.simple_spinner_item, listCities)
-        adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerCategories?.adapter = adapterCategories
+        val adapterCities = ArrayAdapter(this, android.R.layout.simple_spinner_item, listCities)
+        adapterCities.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCities?.adapter = adapterCities
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
