@@ -15,6 +15,7 @@ import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.FirebaseReferences
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
+import java.io.File
 
 class CreateCommerceVM(application: Application) : AndroidViewModel(application) {
 
@@ -31,6 +32,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
 
     val commerceName = MutableLiveData<String>()
     val commerceDescription = MutableLiveData<String>()
+    val commerceAddress = MutableLiveData<String>()
 
     var imageFile: Uri? = null
     var category: Category? = null
@@ -79,23 +81,18 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
         val commerceName = commerceName.value ?: Constants.EMPTY_STRING
         if (commerceName.isNotEmpty() && imageFile != null) {
             val id = commercesReference.push().key ?: Constants.EMPTY_STRING
-
-            if (id.isNotEmpty()) {
-                imageFile?.run {
-                    uploadImageCommerce(this, id, commerceName)
-                }
-            }
+            saveCommerceToFirebase(id, commerceName)
         }
     }
 
-    private fun uploadImageCommerce(file: Uri, uidCommerce: String, commerceName: String) {
+    private fun uploadBannerImageCommerce(file: Uri, uidCommerce: String) {
         val routeFireStorage = "commerces/$uidCommerce.jpg"
         val storageReference = firebaseStorage.reference.child(routeFireStorage)
         val uploadTask = storageReference.putFile(file)
         uploadTask
             .addOnSuccessListener {
                 storageReference.downloadUrl.addOnSuccessListener {
-                    saveCommerceToFirebase(uidCommerce, commerceName, it.toString())
+                    updateBannerCommerce(uidCommerce, it.toString())
                 }
             }
             .addOnProgressListener {
@@ -105,20 +102,55 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
             }
     }
 
-    private fun saveCommerceToFirebase(id: String, commerceName: String, commerceImage: String?) {
+    private fun uploadImagesCommerce(uidCommerce: String) {
+        if (albumFiles.isNotEmpty()) {
+            albumFiles.forEachIndexed { index, albumFile ->
+                val routeFireStorage = "commerces/$uidCommerce/$index"
+                val storageReference = firebaseStorage.reference.child(routeFireStorage)
+                val image = File(albumFile.path)
+                val uploadTask = storageReference.putFile(Uri.fromFile(image))
+                uploadTask
+                    .addOnSuccessListener {
+                        storageReference.downloadUrl.addOnSuccessListener {
+                            updateImagesCommerce(uidCommerce, it.toString(), index)
+                        }
+                    }
+                    .addOnProgressListener {
+                    }
+                    .addOnFailureListener {
+                        it.printStackTrace()
+                    }
+            }
+        }
+    }
+
+    private fun saveCommerceToFirebase(id: String, commerceName: String) {
         if (category != null && city != null) {
             val commerce = Commerce()
             commerce.commerceId = category?.categoryId ?: Constants.EMPTY_STRING
             commerce.name = commerceName
             commerce.description = commerceDescription.value ?: Constants.EMPTY_STRING
-//            commerce.address = textAddress.content()
+            commerce.cityId = city?.cityId ?: "1"
+            commerce.address = commerceAddress.value ?: Constants.EMPTY_STRING
+            commerce.categoryId = category?.categoryId ?: Constants.EMPTY_STRING
 //            commerce.phone = textNumber.content().toLong()
 //            commerce.whatsapp = textWhatsapp.content()
 //            commerce.facebook = textFacebook.content()
-            commerce.commerceImage = commerceImage ?: Constants.EMPTY_STRING
-//            commercesReference.child(id).setValue(commerce).addOnSuccessListener {
-//
-//            }
+            commercesReference.child(id).setValue(commerce).addOnSuccessListener {
+                imageFile?.run {
+                    uploadBannerImageCommerce(this, id)
+                }
+
+                uploadImagesCommerce(id)
+            }
         }
+    }
+
+    private fun updateBannerCommerce(id: String, urlImage: String?) {
+        commercesReference.child(id).child("commerceImage").setValue(urlImage)
+    }
+
+    private fun updateImagesCommerce(id: String, urlImage: String?, index: Int) {
+        commercesReference.child(id).child("images").child("$index").setValue(urlImage)
     }
 }
