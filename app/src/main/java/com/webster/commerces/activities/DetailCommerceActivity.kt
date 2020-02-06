@@ -5,19 +5,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.adapter.ImagePagerAdapter
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.loadUrl
 import kotlinx.android.synthetic.main.activity_detail_commerce.*
-import kotlinx.android.synthetic.main.activity_detail_commerce.imageCommerce
 
 
 class DetailCommerceActivity : AppCompatActivity() {
@@ -60,6 +55,7 @@ class DetailCommerceActivity : AppCompatActivity() {
             fabHowLocation.setOnClickListener { goToGoogleMapLocation() }
             fabFacebook.setOnClickListener { goToFacebook(commerce.facebook) }
             fabWhatsapp.setOnClickListener { goToChatWhatsapp(commerce.whatsapp) }
+            fabInstagram.setOnClickListener { goToInstagram(commerce.instagram) }
             viewPagerImages.adapter = ImagePagerAdapter(applicationContext, commerce.images)
             viewPagerImages.setEnableSwipe(true)
         }
@@ -97,6 +93,17 @@ class DetailCommerceActivity : AppCompatActivity() {
             Toast.makeText(this, "Whatsapp not installed", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun goToInstagram(profile: String){
+        val isAppInstalled = appInstalledOrNot("com.instagram.android")
+        if (isAppInstalled){
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/$profile"))
+            startActivity(intent)
+        }else{
+            Toast.makeText(this, "Whatsapp not installed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun appInstalledOrNot(uri: String): Boolean {
         val pm = packageManager
         return try {
