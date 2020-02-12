@@ -64,4 +64,5 @@
     <string name="label_selected_category">Seleccione una categoria</string>
 
     <string name="message_city_created_success">La ciudad fue creada</string>
+    <string name="buscar_categoria">Buscar categoria</string>
 </resources>

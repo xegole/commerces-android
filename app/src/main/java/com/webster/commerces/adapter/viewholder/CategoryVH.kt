@@ -1,6 +1,5 @@
 package com.webster.commerces.adapter.viewholder
 
-import android.app.AlertDialog
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -13,6 +12,5 @@ class CategoryVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.labelName.text = category.name
         Picasso.get().load(category.categoryImage).into(itemView.imageCategory)
         itemView.setOnClickListener { clickListener(category) }
-
     }
 }

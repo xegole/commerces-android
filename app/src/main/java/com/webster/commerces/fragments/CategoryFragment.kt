@@ -1,7 +1,11 @@
 package com.webster.commerces.fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.activities.CategoryDetailActivity
@@ -13,12 +17,12 @@ import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.openActivityWithBundle
 import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.fragment_category.*
-import java.util.*
 
-class CategoryFragment : BaseFragment() {
+class CategoryFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     private val database = FirebaseDatabase.getInstance()
     private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
+    private var mContext: Context? = null
 
     private lateinit var categoryAdapter: CategoryAdapter
 
@@ -26,10 +30,10 @@ class CategoryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        mContext = this.activity
+        setHasOptionsMenu(true)
         categoryAdapter = CategoryAdapter(ArrayList()) { category -> categoryItemClicked(category) }
         recyclerCategories.adapter = categoryAdapter
-
         showLoading()
         categoriesReference.addListDataListener<Category> { list, success ->
             if (success) {
@@ -47,5 +51,25 @@ class CategoryFragment : BaseFragment() {
 
     companion object {
         fun instance() = CategoryFragment()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.activity_search_view_menu, menu)
+        val searchItem = menu.findItem(R.id.search_view)
+        val searchView: SearchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+        super.onCreateOptionsMenu(menu, inflater)
+
+    }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        categoryAdapter.filter.filter(newText)
+        recyclerCategories.adapter = categoryAdapter
+        categoryAdapter.notifyDataSetChanged()
+        return true
     }
 }

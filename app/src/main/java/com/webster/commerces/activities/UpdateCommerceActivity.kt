@@ -1,8 +1,8 @@
 package com.webster.commerces.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 import com.webster.commerces.R
 import com.webster.commerces.entity.Commerce
@@ -56,6 +56,5 @@ class UpdateCommerceActivity : AppCompatActivity() {
 
             }
         })
-
     }
 }

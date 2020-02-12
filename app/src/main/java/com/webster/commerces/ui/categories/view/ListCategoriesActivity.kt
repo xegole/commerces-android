@@ -21,6 +21,7 @@ class ListCategoriesActivity : BaseActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
 
+
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(ListCategoriesViewModel::class.java)
     }
