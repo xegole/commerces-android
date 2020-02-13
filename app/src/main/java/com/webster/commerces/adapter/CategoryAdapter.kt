@@ -8,14 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.webster.commerces.R
 import com.webster.commerces.adapter.viewholder.CategoryVH
 import com.webster.commerces.entity.Category
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CategoryAdapter(
     private var items: ArrayList<Category>,
-    private val clickListener: (Category) -> Unit ) :
+    private val clickListener: (Category) -> Unit
+) :
     RecyclerView.Adapter<CategoryVH>(), Filterable {
 
-    var filteredList: ArrayList<Category> = ArrayList<Category>()
+    var filteredList: ArrayList<Category> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): CategoryVH {
         val view = LayoutInflater.from(parent.context)
@@ -24,14 +27,16 @@ class CategoryAdapter(
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return filteredList.size
     }
 
     override fun onBindViewHolder(viewHolder: CategoryVH, position: Int) {
-        viewHolder.setData(items[position], clickListener)
+        viewHolder.setData(filteredList[position], clickListener)
     }
 
     fun addItemList(list: List<Category>) {
+        filteredList.clear()
+        filteredList.addAll(list)
         items.clear()
         items.addAll(list)
         notifyDataSetChanged()
@@ -43,25 +48,25 @@ class CategoryAdapter(
 
     private val itemsFilter = object : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults? {
-            filteredList.clear()
             val results = FilterResults()
-            if (constraint.isEmpty()) {
-                filteredList.addAll(items)
+            val list = if (constraint.isEmpty()) {
+                items
             } else {
-                val filterPattern: String = constraint.toString().toLowerCase().trim()
-                for (items in items) {
-                    if (items.name.toLowerCase().contains(filterPattern)) {
-                        filteredList.add(items)
-                    }
-                }
+                val filterPattern = constraint.toString().toLowerCase(Locale.getDefault()).trim()
+                items.filter { it.name.toLowerCase(Locale.getDefault()).contains(filterPattern) }
             }
-            results.values = filteredList
-            results.count = filteredList.size
+            results.values = list
+            results.count = list.size
             return results
         }
+
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
-            results.values
-            notifyDataSetChanged()
+            if (results.values is List<*>) {
+                val list = results.values as List<Category>
+                filteredList.clear()
+                filteredList.addAll(list)
+                notifyDataSetChanged()
+            }
         }
     }
 }
