@@ -67,8 +67,12 @@ class CategoryFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
+        if (newText.isEmpty()){
+            categoriesReference.addListDataListener<Category> { list, success ->
+                    categoryAdapter.addItemList(list.sortedBy { it.name })
+            }
+        }
         categoryAdapter.filter.filter(newText)
-        recyclerCategories.adapter = categoryAdapter
         categoryAdapter.notifyDataSetChanged()
         return true
     }

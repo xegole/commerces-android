@@ -11,11 +11,11 @@ import com.webster.commerces.entity.Category
 
 
 class CategoryAdapter(
-    private var items: ArrayList<Category>,
+    private val items: ArrayList<Category>,
     private val clickListener: (Category) -> Unit ) :
     RecyclerView.Adapter<CategoryVH>(), Filterable {
 
-    var filteredList: ArrayList<Category> = ArrayList<Category>()
+    val filteredList: ArrayList<Category> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): CategoryVH {
         val view = LayoutInflater.from(parent.context)
@@ -51,16 +51,17 @@ class CategoryAdapter(
                 val filterPattern: String = constraint.toString().toLowerCase().trim()
                 for (items in items) {
                     if (items.name.toLowerCase().contains(filterPattern)) {
+                        //filteredList.filter { items.name.toLowerCase() == filterPattern }
                         filteredList.add(items)
                     }
                 }
             }
             results.values = filteredList
-            results.count = filteredList.size
             return results
         }
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
-            results.values
+            items.clear()
+            items.addAll(results.values as ArrayList<Category>)
             notifyDataSetChanged()
         }
     }
