@@ -27,7 +27,6 @@ class CreateCategoryActivity : AppCompatActivity() {
     private val firebaseStorage = FirebaseStorage.getInstance()
     private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
 
-
     var imageFile: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +68,6 @@ class CreateCategoryActivity : AppCompatActivity() {
         categoriesReference.child(id).setValue(category).addOnSuccessListener {
             textName.clear()
             textDescription.clear()
-
         }
     }
 

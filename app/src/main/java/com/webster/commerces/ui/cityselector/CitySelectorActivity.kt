@@ -41,6 +41,12 @@ class CitySelectorActivity : BaseActivity(), AdapterView.OnItemSelectedListener 
                 prefs.cityId = it.cityId
             }
         })
+
+        viewModel.cityPrefsData.observe(this, Observer {
+            if (spinnerCities.isEnabled){
+                prefs.remember = it.cityId
+            }
+        })
     }
 
     private fun setSpinnerWithCities(listCities: List<City>) {

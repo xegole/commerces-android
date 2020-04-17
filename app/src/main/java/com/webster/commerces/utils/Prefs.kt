@@ -14,9 +14,13 @@ class Prefs(context: Context){
         get() = prefs.getString(CITY_ID, Constants.EMPTY_STRING)!!
         set(value) = prefs.edit().putString(CITY_ID, value).apply()
 
+    var remember: String
+        get() =  prefs.getString(CITY_ID, Constants.EMPTY_STRING)!!
+        set(value) = prefs.edit().putString(CITY_ID, value).apply()
+
     object Values {
         const val PREFS_FILENAME = "com.webster.prefs"
-        const val CITY_ID = "city_id"
+        const val CITY_ID = "cityId"
     }
 
 }

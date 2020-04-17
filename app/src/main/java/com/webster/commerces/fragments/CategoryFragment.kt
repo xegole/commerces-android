@@ -59,7 +59,6 @@ class CategoryFragment : BaseFragment(), SearchView.OnQueryTextListener {
         val searchView: SearchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(this)
         super.onCreateOptionsMenu(menu, inflater)
-
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {

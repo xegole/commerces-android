@@ -21,7 +21,6 @@ class ListCategoriesActivity : BaseActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
 
-
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(ListCategoriesViewModel::class.java)
     }
@@ -34,7 +33,6 @@ class ListCategoriesActivity : BaseActivity() {
                 deleteCategory(category.categoryId)
             }
             alertDialog.setNegativeButton("NO") { dialog, which ->
-                Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT).show()
             }
             alertDialog.create()
             alertDialog.show()

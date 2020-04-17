@@ -15,7 +15,7 @@ import com.webster.commerces.utils.FirebaseReferences
 class CitySelectorViewModel(application: Application) : AndroidViewModel(application) {
 
     private val firebaseDatabase = FirebaseDatabase.getInstance()
-    private val firebaseReference = firebaseDatabase.getReference(FirebaseReferences.CITIES)
+    private val citiesReference = firebaseDatabase.getReference(FirebaseReferences.CITIES)
 
     val citiesData = MutableLiveData<List<City>>()
     val cityPrefsData = MutableLiveData<City>()
@@ -32,7 +32,7 @@ class CitySelectorViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun loadCitiesByFirebase() {
-        firebaseReference.addListDataListener<City> { list, success ->
+        citiesReference.addListDataListener<City> { list, success ->
             citiesData.value = if (success) list else emptyList()
         }
     }

@@ -18,13 +18,13 @@ class UpdateCommerceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_commerce)
         setSupportActionBar(toolbar2)
+
         //initUpdate()
 
         val childEventListener = object : ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
                 Log.d("TAG", "onChildAdded:" + dataSnapshot.key!!)
 
-                // A new comment has been added, add it to the displayed list
                 val commerce = dataSnapshot.getValue(Commerce::class.java)
 
             }
@@ -42,6 +42,11 @@ class UpdateCommerceActivity : AppCompatActivity() {
             }
         }
         commercesReference.addChildEventListener(childEventListener)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        supportFinishAfterTransition()
+        return true
     }
 
     private fun initUpdate() {

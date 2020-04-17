@@ -49,9 +49,9 @@ class CategoryAdapter(
     private val itemsFilter = object : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults? {
             val results = FilterResults()
-            val list = if (constraint.isEmpty()) {
+            val list = if (constraint.isEmpty()){
                 items
-            } else {
+            }else {
                 val filterPattern = constraint.toString().toLowerCase(Locale.getDefault()).trim()
                 items.filter { it.name.toLowerCase(Locale.getDefault()).contains(filterPattern) }
             }

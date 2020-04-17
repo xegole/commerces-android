@@ -31,13 +31,13 @@ class ListCommercesActivity : BaseActivity() {
     }
 
     private val adapter by lazy {
-        CommercesAdapter(ArrayList()) { commerce, v ->
+        CommercesAdapter(ArrayList()) { commerce, _ ->
             val alertDialog = AlertDialog.Builder(this)
             alertDialog.setTitle("¿DO YOU WANT DELETE A COMMERCE OR EDIT?")
             alertDialog.setPositiveButton("DELETE") { dialog, which ->
                 deleteCommerce(commerce.commerceId)
             }
-            alertDialog.setNegativeButton("EDIT"){ dialog, which ->
+            alertDialog.setNegativeButton("EDIT") { dialog, which ->
                 goToActivity(UpdateCommerceActivity::class.java)
             }
             alertDialog.show()
@@ -47,10 +47,9 @@ class ListCommercesActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityListCommercesBinding = DataBindingUtil.setContentView(this, R.layout.activity_list_commerces)
+        val binding: ActivityListCommercesBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_list_commerces)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
         homeAsUpEnable()
 
         binding.viewModel = viewModel
@@ -67,13 +66,14 @@ class ListCommercesActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-         when (item.itemId){
-            R.id.updateData ->{
+        when (item.itemId) {
+            R.id.updateData -> {
                 goToActivity(UpdateCommerceActivity::class.java)
             }
         }
         return true
     }
+
 
     private fun initObservers() {
         viewModel.commercesData.observe(this, Observer {
@@ -82,9 +82,11 @@ class ListCommercesActivity : BaseActivity() {
         })
     }
 
-    private fun deleteCommerce(id: String){
+    private fun deleteCommerce(id: String) {
         val commerce = Commerce()
         commerce.commerceId = id
-        commercesReference.child(id).removeValue()
+        commercesReference.child(id).removeValue().addOnSuccessListener {
+            Toast.makeText(this, "Elliminado", Toast.LENGTH_LONG).show()
+        }
     }
 }
