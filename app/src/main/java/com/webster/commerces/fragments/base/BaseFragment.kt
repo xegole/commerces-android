@@ -1,6 +1,6 @@
 package com.webster.commerces.fragments.base
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import com.webster.commerces.R

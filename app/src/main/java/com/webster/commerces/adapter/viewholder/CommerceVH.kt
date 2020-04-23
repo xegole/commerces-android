@@ -1,6 +1,6 @@
 package com.webster.commerces.adapter.viewholder
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.squareup.picasso.Picasso
 import com.webster.commerces.entity.Commerce
