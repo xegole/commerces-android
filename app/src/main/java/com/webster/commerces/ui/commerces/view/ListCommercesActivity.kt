@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
@@ -27,7 +28,7 @@ class ListCommercesActivity : BaseActivity() {
     private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ListCommercesViewModel::class.java)
+        ViewModelProvider(this).get(ListCommercesViewModel::class.java)
     }
 
     private val adapter by lazy {

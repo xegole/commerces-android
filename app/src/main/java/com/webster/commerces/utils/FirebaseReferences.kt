@@ -6,4 +6,5 @@ object FirebaseReferences {
     const val COMMERCES = "commerces"
     const val CATEGORIES = "categories"
     const val BANNERS = "banners"
+    const val USERS = "users"
 }
