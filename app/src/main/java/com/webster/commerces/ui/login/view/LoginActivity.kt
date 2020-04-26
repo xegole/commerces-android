@@ -2,7 +2,6 @@ package com.webster.commerces.ui.login.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -27,6 +26,7 @@ import com.webster.commerces.entity.User
 import com.webster.commerces.extensions.goToActivity
 import com.webster.commerces.ui.cityselector.CitySelectorActivity
 import com.webster.commerces.ui.login.viewmodel.LoginViewModel
+import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -38,6 +38,9 @@ class LoginActivity : BaseActivity() {
     private var googleSignInClient: GoogleSignInClient? = null
     private var firebaseDatabase = FirebaseDatabase.getInstance()
     private var databaseReference = firebaseDatabase.reference.child(USERS_DATABASE)
+    private val prefs by lazy {
+        Prefs(this)
+    }
 
     private val viewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
@@ -100,6 +103,7 @@ class LoginActivity : BaseActivity() {
                         val user = User(uid, name ?: "", email ?: "", TypeUser.USER)
                         if (isNewUser == true) {
                             databaseReference.child(uid).setValue(user).addOnCompleteListener {
+                                prefs.typeUser = TypeUser.USER
                                 goToActivity(CitySelectorActivity::class.java)
                             }
                         } else {
@@ -107,7 +111,7 @@ class LoginActivity : BaseActivity() {
                                 .addValueEventListener(object : ValueEventListener {
                                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                                         val userData = dataSnapshot.getValue(User::class.java)
-                                        Log.d("loginFirebase", userData.toString())
+                                        prefs.typeUser = userData?.typeUser ?: TypeUser.USER
                                         goToActivity(CitySelectorActivity::class.java)
                                     }
 
@@ -127,10 +131,5 @@ class LoginActivity : BaseActivity() {
 
     private fun signOutGoogle() {
         googleSignInClient?.signOut()
-    }
-
-    override fun onStop() {
-        signOutGoogle()
-        super.onStop()
     }
 }

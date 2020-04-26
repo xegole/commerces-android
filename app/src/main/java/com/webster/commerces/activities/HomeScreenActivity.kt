@@ -1,18 +1,11 @@
 package com.webster.commerces.activities
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.messaging.RemoteMessage
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.addFragment
@@ -64,8 +57,11 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             R.id.nav_commerces -> validateCurrentFragment(item.itemId, CommercesFragment.instance())
             R.id.nav_category -> validateCurrentFragment(item.itemId, CategoryFragment.instance())
             R.id.nav_about -> validateCurrentFragment(item.itemId, AboutFragment.instance())
-            R.id.nav_contact_us -> validateCurrentFragment(item.itemId,ContactUsFragment.instance())
-            R.id.nav_exit -> consume { goToActivity(CitySelectorActivity::class.java)}
+            R.id.nav_contact_us -> validateCurrentFragment(
+                item.itemId,
+                ContactUsFragment.instance()
+            )
+            R.id.nav_exit -> consume { goToActivity(CitySelectorActivity::class.java) }
             R.id.nav_share -> {
             }
         }
@@ -81,14 +77,10 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
-    private inline fun consume(f: () -> Unit): Boolean {
-        val mSharedPreferences: SharedPreferences = getSharedPreferences(Prefs.Values.PREFS_FILENAME, Context.MODE_PRIVATE)
-        val mEditor: SharedPreferences.Editor = mSharedPreferences.edit()
-        mEditor.clear()
-        mEditor.apply()
+    private inline fun consume(f: () -> Unit) {
+        Prefs.clear(this)
         finish()
         f()
-        return true
     }
 }
 

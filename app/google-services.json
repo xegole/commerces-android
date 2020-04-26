@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "864846404790",
-    "firebase_url": "https://commerces-d756f.firebaseio.com",
-    "project_id": "commerces-d756f",
-    "storage_bucket": "commerces-d756f.appspot.com"
+    "project_number": "762561065396",
+    "firebase_url": "https://merkapp-e5064.firebaseio.com",
+    "project_id": "merkapp-e5064",
+    "storage_bucket": "merkapp-e5064.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:864846404790:android:af39b6bc90a33266",
+        "mobilesdk_app_id": "1:762561065396:android:19edb205a68b739c65c2e1",
         "android_client_info": {
           "package_name": "com.webster.commerces"
         }
       },
       "oauth_client": [
         {
-          "client_id": "864846404790-qo32fq6loev8ls3af0ors4kutj8aetek.apps.googleusercontent.com",
+          "client_id": "762561065396-0qrnvn4u1l4gknl569i8gni1a3hphae1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBE91-XpPLEKqZcVyas40hUEVUpRGTxWnU"
+          "current_key": "AIzaSyBDt5kSix4Cqar3DUshQa6e-ZKBOVoZwo0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "864846404790-qo32fq6loev8ls3af0ors4kutj8aetek.apps.googleusercontent.com",
+              "client_id": "762561065396-0qrnvn4u1l4gknl569i8gni1a3hphae1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

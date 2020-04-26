@@ -6,7 +6,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityCityScreenBinding
@@ -20,7 +20,7 @@ class CitySelectorActivity : BaseActivity(), AdapterView.OnItemSelectedListener 
         Prefs(this)
     }
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(CitySelectorViewModel::class.java)
+        ViewModelProvider(this).get(CitySelectorViewModel::class.java)
     }
 
     private lateinit var binding: ActivityCityScreenBinding
@@ -43,7 +43,7 @@ class CitySelectorActivity : BaseActivity(), AdapterView.OnItemSelectedListener 
         })
 
         viewModel.cityPrefsData.observe(this, Observer {
-            if (spinnerCities.isEnabled){
+            if (spinnerCities.isEnabled) {
                 prefs.remember = it.cityId
             }
         })
