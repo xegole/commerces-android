@@ -10,6 +10,7 @@ import com.webster.commerces.entity.City
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.goActivity
 import com.webster.commerces.ui.admin.AdminActivity
+import com.webster.commerces.ui.commerces.view.AdminCommerceActivity
 import com.webster.commerces.utils.FirebaseReferences
 
 class CitySelectorViewModel(application: Application) : AndroidViewModel(application) {
@@ -22,6 +23,10 @@ class CitySelectorViewModel(application: Application) : AndroidViewModel(applica
 
     fun onClickAdmin() = View.OnClickListener {
         it.goActivity(AdminActivity::class.java)
+    }
+
+    fun onClickAdminCommerce() = View.OnClickListener {
+        it.goActivity(AdminCommerceActivity::class.java)
     }
 
     fun onClickDone(city: City?) = View.OnClickListener {

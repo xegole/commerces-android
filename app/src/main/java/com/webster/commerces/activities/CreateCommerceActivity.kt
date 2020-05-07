@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
 import com.webster.commerces.databinding.ActivityCreateCommerceBinding
@@ -64,11 +66,19 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         viewModel.listCities.observe(this, Observer {
             setSpinnerWithCities(it)
         })
+
+        viewModel.commerceCreatedSuccess.observe(this, Observer { success ->
+            if (success) {
+                Toast.makeText(this, "Comercio creado", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        })
     }
 
     private fun setSpinnerWithCategories(listCategories: List<Category>) {
         spinnerCategories?.onItemSelectedListener = this
-        val adapterCategories = ArrayAdapter(this, android.R.layout.simple_spinner_item, listCategories)
+        val adapterCategories =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, listCategories)
         adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCategories?.adapter = adapterCategories
     }

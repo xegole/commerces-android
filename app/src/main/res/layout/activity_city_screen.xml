@@ -7,12 +7,22 @@
     <data>
 
         <variable
+            name="isAdmin"
+            type="Boolean" />
+
+        <variable
+            name="isUserCommerce"
+            type="Boolean" />
+
+        <variable
             name="viewModel"
             type="com.webster.commerces.ui.cityselector.CitySelectorViewModel" />
 
         <variable
             name="city"
             type="com.webster.commerces.entity.City" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,8 +88,21 @@
             android:layout_marginTop="@dimen/margin_large"
             android:onClick="@{viewModel.onClickAdmin()}"
             android:text="@string/label_admin_screen"
+            android:visibility="@{isAdmin ? View.VISIBLE: View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <Button
+            android:id="@+id/buttonUserCommerceScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:onClick="@{viewModel.onClickAdminCommerce()}"
+            android:text="@string/label_create_commerce"
+            android:visibility="@{isUserCommerce ? View.VISIBLE: View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAdminScreen" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

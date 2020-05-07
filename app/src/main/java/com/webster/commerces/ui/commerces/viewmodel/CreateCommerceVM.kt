@@ -1,20 +1,24 @@
 package com.webster.commerces.ui.commerces.viewmodel
 
 import android.app.Application
+import android.content.Context
 import android.net.Uri
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.webster.commerces.AppCore
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.City
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.FirebaseReferences
+import com.webster.commerces.utils.Prefs
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
+import com.yanzhenjie.album.mvp.BaseActivity
 import java.io.File
 
 class CreateCommerceVM(application: Application) : AndroidViewModel(application) {
@@ -36,10 +40,15 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     val commercePhone = MutableLiveData<String>()
     val commerceWhatsapp = MutableLiveData<String>()
     val commerceFacebook = MutableLiveData<String>()
+    val commerceCreatedSuccess = MutableLiveData<Boolean>()
 
     var imageFile: Uri? = null
     var category: Category? = null
     var city: City? = null
+
+    val prefs by lazy {
+        Prefs(getApplication())
+    }
 
     fun onAddCommerceImages() = View.OnClickListener {
         Album.image(it.context)
@@ -139,11 +148,15 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
             commerce.phone = commercePhone.value?.toLong() ?: Constants.LONG_ZERO
             commerce.whatsapp = commerceWhatsapp.value ?: Constants.EMPTY_STRING
             commerce.facebook = commerceFacebook.value ?: Constants.EMPTY_STRING
+            commerce.uid = prefs.user?.uid
             commercesReference.child(id).setValue(commerce).addOnSuccessListener {
                 imageFile?.run {
                     uploadBannerImageCommerce(this, id)
                 }
                 uploadImagesCommerce(id)
+                commerceCreatedSuccess.value = true
+            }.addOnFailureListener {
+                commerceCreatedSuccess.value = false
             }
         }
     }

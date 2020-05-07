@@ -3,6 +3,8 @@
 
     <!-- Splash Screen Strings -->
     <string name="label_mock_splash">Splash Screen</string>
+    <string name="facebook_app_id">183910015959438</string>
+
 
     <!-- City Screen Strings -->
     <string name="label_check_remember_city">Remember this city</string>
@@ -44,7 +46,17 @@
     <string name="label_hint_phone">Telefono</string>
     <string name="label_hint_email">Correo electronico</string>
     <string name="label_hint_comments">Comentarios</string>
+    <string name="label_hint_password">Contrasena</string>
+    <string name="label_hint_validate_password">Validar Contrasena</string>
     <string name="label_admin_screen">Opciones Admin</string>
+    <string name="label_button_sign_up">Registrarse</string>
+    <string name="label_button_guest">Invitado</string>
+    <string name="label_no_have_account">No tienes cuenta?</string>
+    <string name="label_have_account">ya tienes cuenta?</string>
+    <string name="label_log_in_or_connect_with">o inicia con</string>
+    <string name="label_like_guest">o como</string>
+    <string name="label_google">Google</string>
+    <string name="label_privacy_policy">Al usar Merka, acepta nuestra <a href="https://app.triploop.com/privacy">política de privacidad</a> y los <a href="https://app.triploop.com/terms-and-conditions">términos y condiciones</a>.</string>
 
     <string name="label_send">Enviar</string>
 

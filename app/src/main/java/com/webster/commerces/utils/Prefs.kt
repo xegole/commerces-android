@@ -2,13 +2,19 @@ package com.webster.commerces.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.webster.commerces.AppCore
 import com.webster.commerces.entity.TypeUser
+import com.webster.commerces.entity.User
 
 private const val PREFS_FILENAME = "com.webster.prefs"
 private const val CITY_ID = "cityId"
 private const val TYPE_USER = "type_user"
+private const val USER_DATA = "user_data"
 
 class Prefs(context: Context) {
+
+    private val gson = Gson()
 
     private val prefs: SharedPreferences =
         context.getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
@@ -21,9 +27,12 @@ class Prefs(context: Context) {
         get() = prefs.getString(CITY_ID, "") ?: ""
         set(value) = prefs.edit().putString(CITY_ID, value).apply()
 
-    var typeUser: TypeUser
-        get() = TypeUser.valueOf(prefs.getString(TYPE_USER, "USER") ?: "USER")
-        set(value) = prefs.edit().putString(TYPE_USER, value.name).apply()
+    var user: User?
+        get() = gson.fromJson(prefs.getString(USER_DATA, "{}"), User::class.java)
+        set(value) {
+            val data = gson.toJson(value)
+            prefs.edit().putString(USER_DATA, data).apply()
+        }
 
     companion object {
         fun clear(context: Context) {

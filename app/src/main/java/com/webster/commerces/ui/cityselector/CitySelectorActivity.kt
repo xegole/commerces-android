@@ -11,6 +11,7 @@ import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityCityScreenBinding
 import com.webster.commerces.entity.City
+import com.webster.commerces.entity.TypeUser
 import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.activity_city_screen.*
 
@@ -29,6 +30,8 @@ class CitySelectorActivity : BaseActivity(), AdapterView.OnItemSelectedListener 
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_city_screen)
         binding.viewModel = viewModel
+        binding.isAdmin = prefs.user?.typeUser == TypeUser.ADMIN
+        binding.isUserCommerce = prefs.user?.typeUser == TypeUser.USER_COMMERCE
         showLoading()
         viewModel.loadCitiesByFirebase()
         viewModel.citiesData.observe(this, Observer {
