@@ -5,33 +5,12 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.facebook.AccessToken
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginResult
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.*
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityLoginBinding
-import com.webster.commerces.entity.TypeUser
-import com.webster.commerces.entity.User
 import com.webster.commerces.extensions.goToActivity
-import com.webster.commerces.ui.cityselector.CitySelectorActivity
-import com.webster.commerces.ui.commerces.view.AdminCommerceActivity
+import com.webster.commerces.ui.login.model.UserLogin
 import com.webster.commerces.ui.login.viewmodel.LoginViewModel
-import com.webster.commerces.utils.Prefs
-import kotlinx.android.synthetic.main.activity_create_commerce.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -50,9 +29,32 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         viewModel.initGoogleSignInClient(this)
+        initObserver()
+    }
+
+    private fun initObserver() {
         viewModel.registerSuccess.observe(this, Observer {
             goToActivity(it)
+        })
+        viewModel.liveDataError.observe(this, Observer {
+            when (it) {
+                UserLogin.ERROR_EMAIL -> textFieldEmail.error =
+                    getString(R.string.error_input_email)
+                UserLogin.ERROR_NOT_FOUND -> textFieldEmail.error =
+                    getString(R.string.error_input_email_not_found)
+                UserLogin.ERROR_PASSWORD -> textFieldPassword.error =
+                    getString(R.string.error_input_password)
+                UserLogin.ERROR_WRONG_PASSWORD -> textFieldPassword.error =
+                    getString(R.string.error_input_wrong_password)
+                UserLogin.ERROR_TOO_MANY_REQUESTS -> textFieldPassword.error =
+                    getString(R.string.error_input_too_many_requests)
+                else -> {
+                    textFieldEmail.error = null
+                    textFieldPassword.error = null
+                }
+            }
         })
     }
 

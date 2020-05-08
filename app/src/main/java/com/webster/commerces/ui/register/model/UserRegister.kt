@@ -3,7 +3,12 @@ package com.webster.commerces.ui.register.model
 import android.util.Patterns
 import io.fabric.sdk.android.services.common.CommonUtils.isNullOrEmpty
 
-data class UserRegister(val email: String, val password: String, val validatePassword: String) {
+data class UserRegister(
+    val email: String,
+    val phone: String,
+    val password: String,
+    val validatePassword: String
+) {
 
     private fun isValidEmail() =
         !isNullOrEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -12,11 +17,14 @@ data class UserRegister(val email: String, val password: String, val validatePas
     private fun isValidValidatePassword() =
         !isNullOrEmpty(validatePassword) && validatePassword.length > 5
 
+    private fun invalidPhone() = phone.length <= 9
     private fun isSamePassword() = password == validatePassword
 
     fun validateUser(): ValidateUser {
         return if (!isValidEmail()) {
             ValidateUser.ERROR_EMAIL
+        } else if (invalidPhone()) {
+            ValidateUser.ERROR_PHONE
         } else if (!isValidPassword()) {
             ValidateUser.ERROR_PASSWORD
         } else if (!isValidValidatePassword()) {
@@ -29,7 +37,13 @@ data class UserRegister(val email: String, val password: String, val validatePas
     }
 }
 
-enum class ValidateUser() {
-    ERROR_EMAIL, ERROR_PASSWORD, ERROR_VALIDATE_PASSWORD, ERROR_VERIFY_PASSWORD, VALID_USER
+enum class ValidateUser {
+    ERROR_EMAIL,
+    ERROR_PHONE,
+    ERROR_PASSWORD,
+    ERROR_VALIDATE_PASSWORD,
+    ERROR_VERIFY_PASSWORD,
+    VALID_USER,
+    ERROR_EMAIL_USE
 }
 

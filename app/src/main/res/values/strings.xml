@@ -7,23 +7,26 @@
 
 
     <!-- City Screen Strings -->
-    <string name="label_check_remember_city">Remember this city</string>
-    <string name="label_select_city">Select your favorite city</string>
-    <string name="button_text_done">Done</string>
+    <string name="label_check_remember_city">Recordar esta ciudad</string>
+    <string name="label_select_city">Seleccione su ciudad</string>
+    <string name="button_text_done">Continuar</string>
 
-    <string name="hint_input_name">Input name</string>
-    <string name="hint_input_name_city">Ingrese nombre de la ciudad</string>
-    <string name="hint_input_description">Input description</string>
-    <string name="hint_input_address">Input address</string>
-    <string name="hint_input_number">Input number phone</string>
-    <string name="hint_input_whatsapp">Input number whatsapp </string>
-    <string name="hint_input_facebook">Input facebook</string>
+    <string name="hint_input_whatsapp">WhatsApp</string>
+    <string name="hint_input_facebook">Facebook</string>
 
     <string name="label_create_category">Crear categoria</string>
     <string name="label_create_commerce">Crear comercio</string>
     <string name="label_create_city">Crear ciudad</string>
     <string name="label_edit_commerce">Editar comercio</string>
     <string name="label_edit_category">Editar categoria</string>
+    <string name="label_admin_commerce">Mis comercios</string>
+
+
+    <string name="label_hint_commerce_name">Nombre del comercio</string>
+    <string name="label_hint_city_name">Nombre de la ciudad</string>
+    <string name="label_hint_category_name">Nombre de la categoria</string>
+    <string name="label_hint_commerce_description">Descripción</string>
+    <string name="label_hint_commerce_address">Dirección</string>
 
     <!-- Home Screen Strings -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -39,32 +42,35 @@
     <string name="side_menu_item_about">Acerca</string>
     <string name="side_menu_item_contact_us">Contactanos</string>
     <string name="side_menu_item_communicate">Communicate</string>
-    <string name="side_menu_item_share">Share</string>
+    <string name="side_menu_item_share">Compartir</string>
+    <string name="side_menu_item_change_city">Cambiar ciudad</string>
+    <string name="side_menu_item_log_out">Cerrar sesión</string>
 
     <string name="label_hint_name_last_name">Nombre y Apellidos</string>
     <string name="label_hint_company">Empresa</string>
-    <string name="label_hint_phone">Telefono</string>
-    <string name="label_hint_email">Correo electronico</string>
+    <string name="label_hint_phone">Teléfono</string>
+    <string name="label_hint_email">Correo electrónico</string>
     <string name="label_hint_comments">Comentarios</string>
-    <string name="label_hint_password">Contrasena</string>
-    <string name="label_hint_validate_password">Validar Contrasena</string>
+    <string name="label_hint_password">Contraseña</string>
+    <string name="label_hint_validate_password">Validar Contraseña</string>
     <string name="label_admin_screen">Opciones Admin</string>
     <string name="label_button_sign_up">Registrarse</string>
     <string name="label_button_guest">Invitado</string>
     <string name="label_no_have_account">No tienes cuenta?</string>
     <string name="label_have_account">ya tienes cuenta?</string>
-    <string name="label_log_in_or_connect_with">o inicia con</string>
-    <string name="label_like_guest">o como</string>
+    <string name="label_log_in_or_connect_with">ó inicia con</string>
+    <string name="label_like_guest">ó como</string>
     <string name="label_google">Google</string>
-    <string name="label_privacy_policy">Al usar Merka, acepta nuestra <a href="https://app.triploop.com/privacy">política de privacidad</a> y los <a href="https://app.triploop.com/terms-and-conditions">términos y condiciones</a>.</string>
+    <string name="label_privacy_policy">Al usar MerkaApp, acepta nuestra <a href="https://app.triploop.com/privacy">política de privacidad</a> y los <a href="https://app.triploop.com/terms-and-conditions">términos y condiciones</a>.</string>
 
     <string name="label_send">Enviar</string>
+
+    <string name="message_created_commerce_success">Se ha creado su comercio</string>
 
     <!-- Commerces Fragment String -->
     <string name="transition_name_commerce">transition_commerce</string>
     <string name="message_about">Lo buscas? Lo encuentras! El directorio comercial y de servicios Merka, es una aplicación que te ayuda a encontrar información de los establecimientos registrados en puerto salgar – Cundinamarca y la región. Diferentes tipos de categorías donde podrás encontrar cada uno de los comercios registrados. (Panaderías, hoteles, ferreterías, bares y discotecas, medios de comunicación, etc)\n\nDeseas registrar tu empresa y/o servicio?</string>
     <string name="messahe_about_contact">ESCRIBENOS\nWEBSTER – INC Desarrolladores Tecnológicos\nCarrera 11 # 10-26 B/centro\nPuerto Salgar, Cundinamarca 2019</string>
-    <string name="side_menu_item_exit">Salir</string>
     <string name="default_notification_channel_id" translatable="false"> default_cahnel </string>
     <string name="send_notification">Send Notification</string>
     <string name="title">Title</string>
@@ -77,5 +83,14 @@
 
     <string name="message_city_created_success">La ciudad fue creada</string>
     <string name="buscar_categoria">Buscar categoria</string>
-    <string name="label_login">Iniciar sesion</string>
+    <string name="label_login">Iniciar sesión</string>
+
+    <string name="error_input_email">Ingrese un correo válido</string>
+    <string name="error_input_email_in_use">El correo electrónico ya está registrado</string>
+    <string name="error_input_email_not_found">El correo electrónico no esta registrado</string>
+    <string name="error_input_phone">Ingrese un teléfono válido</string>
+    <string name="error_input_password">La contraseña debe contener mínimo 5 caracteres</string>
+    <string name="error_input_wrong_password">La contraseña incorrecta</string>
+    <string name="error_input_validate_password">Las contraseñas no coinciden</string>
+    <string name="error_input_too_many_requests">Demasiados intentos con contraseña incorrecta, espera unos minutos e intenta de nuevo</string>
 </resources>

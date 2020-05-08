@@ -13,10 +13,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -27,8 +25,10 @@ import com.webster.commerces.entity.TypeUser
 import com.webster.commerces.entity.User
 import com.webster.commerces.extensions.getString
 import com.webster.commerces.extensions.goActivity
-import com.webster.commerces.ui.cityselector.CitySelectorActivity
-import com.webster.commerces.ui.commerces.view.AdminCommerceActivity
+import com.webster.commerces.extensions.hideKeyboard
+import com.webster.commerces.ui.cityselector.view.CitySelectorActivity
+import com.webster.commerces.ui.login.model.UserLogin
+import com.webster.commerces.ui.login.model.UserLoginData
 import com.webster.commerces.ui.login.view.RC_SIGN_IN
 import com.webster.commerces.ui.login.view.USERS_DATABASE
 import com.webster.commerces.ui.register.view.RegisterActivity
@@ -46,9 +46,12 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val liveDataPassword = MutableLiveData<String>()
     val registerSuccess = MutableLiveData<Class<*>>()
     val liveDataLoading = MutableLiveData(false)
+    val liveDataError = MutableLiveData<UserLogin>()
 
     fun onAppLoginClick() = View.OnClickListener {
         liveDataLoading.value = true
+        liveDataError.value = UserLogin.VALID_USER
+        it.hideKeyboard()
         onLogin()
     }
 
@@ -57,6 +60,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun onGuestClick() = View.OnClickListener {
+        prefs.clear()
         registerSuccess.value = CitySelectorActivity::class.java
     }
 
@@ -118,6 +122,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 databaseReference.child(uid).setValue(user).addOnCompleteListener {
                     prefs.user = user
                     registerSuccess.value = CitySelectorActivity::class.java
+                    liveDataLoading.value = false
                 }
             } else {
                 databaseReference.child(uid)
@@ -125,14 +130,12 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             val userData = dataSnapshot.getValue(User::class.java)
                             prefs.user = userData
-                            when (userData?.typeUser) {
-                                TypeUser.ADMIN -> registerSuccess.value =
-                                    AdminCommerceActivity::class.java
-                                else -> registerSuccess.value = CitySelectorActivity::class.java
-                            }
+                            registerSuccess.value = CitySelectorActivity::class.java
+                            liveDataLoading.value = false
                         }
 
                         override fun onCancelled(p0: DatabaseError) {
+                            liveDataLoading.value = false
                         }
                     })
             }
@@ -140,20 +143,34 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun onLogin() {
-        val email = liveDataEmail.value ?: ""
-        val password = liveDataPassword.value ?: ""
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            firebaseAuth.signInWithEmailAndPassword(email, password)
+        val userLogin = UserLoginData(liveDataEmail.value ?: "", liveDataPassword.value ?: "")
+        val validateUser = userLogin.validateUser()
+        if (validateUser == UserLogin.VALID_USER) {
+            firebaseAuth.signInWithEmailAndPassword(userLogin.email, userLogin.password)
                 .addOnCompleteListener { authTask: Task<AuthResult> ->
                     if (authTask.isSuccessful) {
                         loginRegisterFirebase(authTask)
                     } else {
-                        authTask.exception?.printStackTrace()
+                        authTask.exception?.let {
+                            if (it is FirebaseAuthInvalidUserException) {
+                                if (it.errorCode == "ERROR_USER_NOT_FOUND") {
+                                    liveDataError.value = UserLogin.ERROR_NOT_FOUND
+                                }
+                            } else if (it is FirebaseAuthInvalidCredentialsException) {
+                                if (it.errorCode == "ERROR_WRONG_PASSWORD") {
+                                    liveDataError.value = UserLogin.ERROR_WRONG_PASSWORD
+                                }
+                            } else if(it is FirebaseTooManyRequestsException){
+                                liveDataError.value = UserLogin.ERROR_TOO_MANY_REQUESTS
+                            }
+                        }
                     }
-                    liveDataLoading.value = false
                 }.addOnFailureListener {
                     liveDataLoading.value = false
                 }
+        } else {
+            liveDataLoading.value = false
+            liveDataError.value = validateUser
         }
     }
 }

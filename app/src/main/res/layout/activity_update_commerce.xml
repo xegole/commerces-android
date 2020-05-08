@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="@string/hint_input_name"
+                    android:hint="@string/label_hint_commerce_name"
                     android:inputType="text"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="@string/hint_input_description"
+                    android:hint="@string/label_hint_commerce_description"
                     android:inputType="text"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="@string/hint_input_address"
+                    android:hint="@string/label_hint_commerce_address"
                     android:inputType="text"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="@string/hint_input_number"
+                    android:hint="@string/label_hint_phone"
                     android:inputType="number"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -114,8 +114,8 @@
             <com.rilixtech.widget.countrycodepicker.CountryCodePicker
                 android:id="@+id/selected_country"
                 android:layout_width="match_parent"
-                android:layout_margin="@dimen/margin_medium"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
                 app:ccp_defaultCode="57"
                 app:layout_constraintTop_toBottomOf="@id/inputWhatsapp" />
 

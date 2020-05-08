@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/createCommerce"
-        android:icon="@drawable/album_ic_add_photo_white"
+        android:icon="@drawable/ic_edit_commerce"
         android:title="@string/label_create_commerce"
         app:showAsAction="always" />
 </menu>

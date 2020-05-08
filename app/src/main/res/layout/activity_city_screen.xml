@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.cityselector.CitySelectorActivity">
+    tools:context=".ui.cityselector.view.CitySelectorActivity">
 
     <data>
 
@@ -16,7 +16,7 @@
 
         <variable
             name="viewModel"
-            type="com.webster.commerces.ui.cityselector.CitySelectorViewModel" />
+            type="com.webster.commerces.ui.cityselector.viewmodel.CitySelectorViewModel" />
 
         <variable
             name="city"
@@ -34,15 +34,12 @@
             android:id="@+id/spinnerCities"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_xx_large"
-            android:layout_marginLeft="@dimen/margin_xx_large"
-            android:layout_marginTop="@dimen/margin_xx_large"
-            android:layout_marginEnd="@dimen/margin_xx_large"
-            android:layout_marginRight="@dimen/margin_xx_large"
+            android:layout_margin="@dimen/margin_xx_large"
             app:backgroundTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="Testing item"
             app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox

@@ -55,6 +55,7 @@ class ListCommercesActivity : BaseActivity() {
 
         binding.viewModel = viewModel
         binding.recyclerCommerces.adapter = adapter
+        binding.lifecycleOwner = this
         viewModel.loadListCommerces()
         showLoading()
         initObservers()

@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.webster.commerces.R
-import com.webster.commerces.activities.CreateCommerceActivity
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.extensions.goToActivity
 import com.webster.commerces.ui.commerces.viewmodel.AdminCommerceViewModel
 import com.webster.commerces.utils.Prefs
-import com.yanzhenjie.album.mvp.BaseActivity
-import kotlinx.android.synthetic.main.activity_list_commerces.*
+import kotlinx.android.synthetic.main.activity_admin_commerce.*
 
-class AdminCommerceActivity : BaseActivity() {
+class AdminCommerceActivity : AppCompatActivity() {
 
     private val viewModel by lazy {
         ViewModelProvider(this).get(AdminCommerceViewModel::class.java)
@@ -34,6 +33,8 @@ class AdminCommerceActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_commerce)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         viewModel.getCommercesByUuid(prefs.user?.uid)
 
         initViews()
@@ -59,10 +60,11 @@ class AdminCommerceActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.createCommerce -> {
-                if (adapter.itemCount == 0) {
+                if (adapter.itemCount <= 2) {
                     goToActivity(CreateCommerceActivity::class.java, false)
                 }
             }
+            android.R.id.home -> finish()
         }
         return true
     }

@@ -5,7 +5,12 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.webster.commerces.AppCore
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.addFragment
@@ -14,15 +19,21 @@ import com.webster.commerces.fragments.AboutFragment
 import com.webster.commerces.fragments.CategoryFragment
 import com.webster.commerces.fragments.CommercesFragment
 import com.webster.commerces.fragments.ContactUsFragment
-import com.webster.commerces.ui.cityselector.CitySelectorActivity
+import com.webster.commerces.ui.cityselector.view.CitySelectorActivity
+import com.webster.commerces.ui.login.view.LoginActivity
 import com.webster.commerces.utils.ConstantsArray
-import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.activity_home_screen.*
 import kotlinx.android.synthetic.main.content_toolbar.*
 
 class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private val firebaseAuth = FirebaseAuth.getInstance()
+    private var googleSignInClient: GoogleSignInClient? = null
 
     private var currentFragment: Int = 0
+
+    private val prefs by lazy {
+        AppCore.prefs
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +72,8 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 item.itemId,
                 ContactUsFragment.instance()
             )
-            R.id.nav_exit -> consume { goToActivity(CitySelectorActivity::class.java) }
+            R.id.nav_change_city -> navigate { goToActivity(CitySelectorActivity::class.java) }
+            R.id.nav_log_out -> logOut()
             R.id.nav_share -> {
             }
         }
@@ -77,10 +89,22 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
-    private inline fun consume(f: () -> Unit) {
-        Prefs.clear(this)
-        finish()
+    private inline fun navigate(f: () -> Unit) {
+        prefs.cityId = ""
         f()
+    }
+
+    private fun logOut() {
+        prefs.clear()
+        val googleSignInOptions =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
+        googleSignInClient?.signOut()
+        firebaseAuth.signOut()
+        goToActivity(LoginActivity::class.java)
     }
 }
 

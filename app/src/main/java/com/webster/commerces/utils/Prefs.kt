@@ -3,8 +3,6 @@ package com.webster.commerces.utils
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.webster.commerces.AppCore
-import com.webster.commerces.entity.TypeUser
 import com.webster.commerces.entity.User
 
 private const val PREFS_FILENAME = "com.webster.prefs"
@@ -20,7 +18,7 @@ class Prefs(context: Context) {
         context.getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
 
     var cityId: String
-        get() = prefs.getString(CITY_ID, Constants.EMPTY_STRING)!!
+        get() = prefs.getString(CITY_ID, "") ?: ""
         set(value) = prefs.edit().putString(CITY_ID, value).apply()
 
     var remember: String
@@ -28,11 +26,17 @@ class Prefs(context: Context) {
         set(value) = prefs.edit().putString(CITY_ID, value).apply()
 
     var user: User?
-        get() = gson.fromJson(prefs.getString(USER_DATA, "{}"), User::class.java)
+        get() = gson.fromJson(prefs.getString(USER_DATA, null), User::class.java)
         set(value) {
             val data = gson.toJson(value)
             prefs.edit().putString(USER_DATA, data).apply()
         }
+
+    fun clear() {
+        val editor: SharedPreferences.Editor = prefs.edit()
+        editor.clear()
+        editor.apply()
+    }
 
     companion object {
         fun clear(context: Context) {

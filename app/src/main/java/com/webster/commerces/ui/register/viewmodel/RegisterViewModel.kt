@@ -1,16 +1,19 @@
 package com.webster.commerces.ui.register.viewmodel
 
 import android.app.Application
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.AppCore
 import com.webster.commerces.entity.TypeUser
 import com.webster.commerces.entity.User
 import com.webster.commerces.extensions.goActivity
-import com.webster.commerces.ui.cityselector.CitySelectorActivity
+import com.webster.commerces.extensions.hideKeyboard
+import com.webster.commerces.ui.cityselector.view.CitySelectorActivity
 import com.webster.commerces.ui.login.view.LoginActivity
 import com.webster.commerces.ui.login.view.USERS_DATABASE
 import com.webster.commerces.ui.register.model.UserRegister
@@ -25,35 +28,30 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
     }
 
     val liveDataEmail = MutableLiveData<String>()
+    val liveDataPhone = MutableLiveData<String>()
     val liveDataPassword = MutableLiveData<String>()
     val liveDataValidatePassword = MutableLiveData<String>()
     val liveDataLoading = MutableLiveData(false)
     val liveDataRegisterSuccess = MutableLiveData<Class<*>>()
+
+    val liveDataError = MutableLiveData<ValidateUser>()
 
     fun onLoginActivityClick() = View.OnClickListener {
         it.goActivity(LoginActivity::class.java, true)
     }
 
     fun onRegisterClick() = View.OnClickListener {
+        it.hideKeyboard()
         val userRegister = UserRegister(
             liveDataEmail.value ?: "",
+            liveDataPhone.value ?: "",
             liveDataPassword.value ?: "",
             liveDataValidatePassword.value ?: ""
         )
-
-        when (userRegister.validateUser()) {
-            ValidateUser.ERROR_EMAIL -> {
-            }
-            ValidateUser.ERROR_PASSWORD -> {
-            }
-            ValidateUser.ERROR_VALIDATE_PASSWORD -> {
-            }
-            ValidateUser.ERROR_VERIFY_PASSWORD -> {
-
-            }
-            ValidateUser.VALID_USER -> {
-                registerInFirebase(userRegister)
-            }
+        val validateUser = userRegister.validateUser()
+        liveDataError.value = validateUser
+        if (validateUser == ValidateUser.VALID_USER) {
+            registerInFirebase(userRegister)
         }
     }
 
@@ -71,8 +69,18 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
                     }
                 } else {
                     task.exception?.let {
+                        if (it is FirebaseAuthUserCollisionException) {
+                            if (it.errorCode == "ERROR_EMAIL_ALREADY_IN_USE") {
+                                liveDataError.value = ValidateUser.ERROR_EMAIL_USE
+                            }
+                        }
                     }
                 }
+                liveDataLoading.value = false
+            }.addOnFailureListener {
+                Log.d("statusChanged", it.localizedMessage ?: "")
+                it.printStackTrace()
+                liveDataLoading.value = false
             }
     }
 }

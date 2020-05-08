@@ -1,24 +1,22 @@
 package com.webster.commerces.ui.commerces.viewmodel
 
 import android.app.Application
-import android.content.Context
 import android.net.Uri
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.webster.commerces.AppCore
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.City
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.addListDataListener
+import com.webster.commerces.extensions.hideKeyboard
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.FirebaseReferences
 import com.webster.commerces.utils.Prefs
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumFile
-import com.yanzhenjie.album.mvp.BaseActivity
 import java.io.File
 
 class CreateCommerceVM(application: Application) : AndroidViewModel(application) {
@@ -41,6 +39,8 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     val commerceWhatsapp = MutableLiveData<String>()
     val commerceFacebook = MutableLiveData<String>()
     val commerceCreatedSuccess = MutableLiveData<Boolean>()
+
+    val liveDataLoading = MutableLiveData(false)
 
     var imageFile: Uri? = null
     var category: Category? = null
@@ -70,6 +70,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     }
 
     fun onCreateCommerce() = View.OnClickListener {
+        it.hideKeyboard()
         saveCommerce()
     }
 
@@ -138,6 +139,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
 
     private fun saveCommerceToFirebase(id: String, commerceName: String) {
         if (category != null && city != null) {
+            liveDataLoading.value = true
             val commerce = Commerce()
             commerce.commerceId = category?.categoryId ?: Constants.EMPTY_STRING
             commerce.name = commerceName
@@ -154,8 +156,10 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
                     uploadBannerImageCommerce(this, id)
                 }
                 uploadImagesCommerce(id)
+                liveDataLoading.value = false
                 commerceCreatedSuccess.value = true
             }.addOnFailureListener {
+                liveDataLoading.value = false
                 commerceCreatedSuccess.value = false
             }
         }

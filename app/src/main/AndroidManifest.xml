@@ -26,7 +26,8 @@
         </service>
 
         <activity
-            android:name=".activities.CreateCommerceActivity"
+            android:name=".ui.commerces.view.CreateCommerceActivity"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.CategoryDetailActivity"
@@ -40,7 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.cityselector.CitySelectorActivity" />
+        <activity android:name=".ui.cityselector.view.CitySelectorActivity" />
         <activity android:name=".activities.HomeScreenActivity" />
         <activity
             android:name=".activities.CreateCategoryActivity"
@@ -60,7 +61,7 @@
             android:name=".activities.UpdateCommerceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.cityselector.CreateCityActivity"
+            android:name=".ui.cityselector.view.CreateCityActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -69,6 +70,7 @@
 
         <activity
             android:name=".ui.register.view.RegisterActivity"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
 
         <activity

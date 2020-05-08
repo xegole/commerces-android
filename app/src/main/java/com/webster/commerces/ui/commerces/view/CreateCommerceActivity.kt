@@ -1,4 +1,4 @@
-package com.webster.commerces.activities
+package com.webster.commerces.ui.commerces.view
 
 import android.app.Activity
 import android.content.Intent
@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
+import com.webster.commerces.activities.RESULT_CODE_GALLERY
 import com.webster.commerces.databinding.ActivityCreateCommerceBinding
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.City
@@ -42,8 +42,7 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         )
         binding.viewModel = viewModel
         binding.pagerImages.adapter = adapter
-        selected_country.enableHint(false)
-        selected_country.registerPhoneNumberTextView(textWhatsapp)
+        binding.lifecycleOwner = this
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -69,8 +68,12 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
         viewModel.commerceCreatedSuccess.observe(this, Observer { success ->
             if (success) {
-                Toast.makeText(this, "Comercio creado", Toast.LENGTH_SHORT).show()
-                finish()
+                Toast.makeText(
+                    this,
+                    getString(R.string.message_created_commerce_success),
+                    Toast.LENGTH_SHORT
+                ).show()
+                onSupportNavigateUp()
             }
         })
     }
@@ -103,12 +106,14 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         //Do nothing
     }
 
-
     private fun onGalleryClick() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select image"), RESULT_CODE_GALLERY)
+        startActivityForResult(
+            Intent.createChooser(intent, "Select image"),
+            RESULT_CODE_GALLERY
+        )
     }
 
     override fun onSupportNavigateUp(): Boolean {

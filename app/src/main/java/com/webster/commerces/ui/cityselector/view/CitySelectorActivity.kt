@@ -1,4 +1,4 @@
-package com.webster.commerces.ui.cityselector
+package com.webster.commerces.ui.cityselector.view
 
 import android.os.Bundle
 import android.view.View
@@ -12,6 +12,7 @@ import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityCityScreenBinding
 import com.webster.commerces.entity.City
 import com.webster.commerces.entity.TypeUser
+import com.webster.commerces.ui.cityselector.viewmodel.CitySelectorViewModel
 import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.activity_city_screen.*
 

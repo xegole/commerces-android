@@ -1,4 +1,4 @@
-package com.webster.commerces.ui.cityselector
+package com.webster.commerces.ui.cityselector.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
