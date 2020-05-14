@@ -34,25 +34,24 @@
             android:id="@+id/spinnerCities"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_xx_large"
+            android:layout_marginStart="@dimen/margin_xx_large"
+            android:layout_marginEnd="@dimen/margin_xx_large"
             app:backgroundTint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/checkBoxRememberCity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="Testing item"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:listitem="Testing item" />
 
         <CheckBox
             android:id="@+id/checkBoxRememberCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_xx_large"
-            android:layout_marginTop="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_xx_large"
+            android:layout_marginBottom="@dimen/margin_large"
             android:text="@string/label_check_remember_city"
             android:textColor="@android:color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerCities" />
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView"
@@ -71,35 +70,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xx_large"
+            android:layout_marginBottom="@dimen/margin_large"
             android:onClick="@{viewModel.onClickDone(city)}"
             android:text="@string/button_text_done"
             android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAdminScreen"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBoxRememberCity" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/buttonAdminScreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
             android:onClick="@{viewModel.onClickAdmin()}"
             android:text="@string/label_admin_screen"
             android:visibility="@{isAdmin ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/buttonUserCommerceScreen"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/buttonUserCommerceScreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_medium"
             android:onClick="@{viewModel.onClickAdminCommerce()}"
             android:text="@string/label_create_commerce"
             android:visibility="@{isUserCommerce ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAdminScreen" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

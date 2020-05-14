@@ -38,6 +38,9 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     val commercePhone = MutableLiveData<String>()
     val commerceWhatsapp = MutableLiveData<String>()
     val commerceFacebook = MutableLiveData<String>()
+    val commerceInstagram = MutableLiveData<String>()
+    val commerceWebPage = MutableLiveData<String>()
+    val commerceEmail = MutableLiveData<String>()
     val commerceCreatedSuccess = MutableLiveData<Boolean>()
 
     val liveDataLoading = MutableLiveData(false)
@@ -48,6 +51,15 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
 
     val prefs by lazy {
         Prefs(getApplication())
+    }
+
+    fun initEditMode(commerce: Commerce) {
+        commerceName.value = commerce.name
+        commerceDescription.value = commerce.description
+        commerceAddress.value = commerce.address
+        commercePhone.value = commerce.phone.toString()
+        commerceWhatsapp.value = commerce.whatsapp
+        commerceFacebook.value = commerce.facebook
     }
 
     fun onAddCommerceImages() = View.OnClickListener {
@@ -150,6 +162,9 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
             commerce.phone = commercePhone.value?.toLong() ?: Constants.LONG_ZERO
             commerce.whatsapp = commerceWhatsapp.value ?: Constants.EMPTY_STRING
             commerce.facebook = commerceFacebook.value ?: Constants.EMPTY_STRING
+            commerce.instagram = commerceInstagram.value ?: Constants.EMPTY_STRING
+            commerce.webPage = commerceWebPage.value ?: Constants.EMPTY_STRING
+            commerce.email = commerceEmail.value ?: Constants.EMPTY_STRING
             commerce.uid = prefs.user?.uid
             commercesReference.child(id).setValue(commerce).addOnSuccessListener {
                 imageFile?.run {
@@ -163,6 +178,10 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
                 commerceCreatedSuccess.value = false
             }
         }
+    }
+
+    fun onCommerceNameChanged(textChanged: String) {
+        commerceName.value = textChanged
     }
 
     private fun updateBannerCommerce(id: String, urlImage: String?) {

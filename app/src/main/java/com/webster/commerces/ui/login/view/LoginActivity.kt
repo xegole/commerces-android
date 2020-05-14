@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.webster.commerces.BuildConfig
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityLoginBinding
@@ -56,6 +57,10 @@ class LoginActivity : BaseActivity() {
                 }
             }
         })
+
+        if (BuildConfig.DEBUG) {
+            //viewModel.initTestData()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

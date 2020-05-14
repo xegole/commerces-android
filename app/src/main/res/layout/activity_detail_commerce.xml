@@ -80,39 +80,69 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/labelAddress" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabFacebook"
+            <LinearLayout
+                android:id="@+id/containerSocial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:src="@drawable/ic_facebook"
-                android:visibility="gone"
-                app:backgroundTint="@color/colorPrimary"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/labelDescription"
-                app:tint="@color/white" />
+                app:layout_constraintTop_toBottomOf="@+id/labelDescription">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabWhatsapp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:src="@drawable/ic_whatsapp"
-                android:visibility="gone"
-                app:backgroundTint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/fabFacebook"
-                app:layout_constraintStart_toEndOf="@id/fabFacebook"
-                app:layout_constraintTop_toTopOf="@+id/fabFacebook"
-                app:tint="@color/white" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabFacebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:src="@drawable/ic_facebook"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:tint="@color/white"
+                    tools:visibility="visible" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabInstagram"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/fabWhatsapp"
-                app:layout_constraintStart_toStartOf="parent" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabWhatsapp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:src="@drawable/ic_whatsapp"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:tint="@color/white"
+                    tools:visibility="visible" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabInstagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:src="@drawable/ic_instagram"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:tint="@color/white"
+                    tools:visibility="visible" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabWebPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:src="@drawable/ic_webpage"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:tint="@color/white"
+                    tools:visibility="visible" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:src="@drawable/ic_email"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:tint="@color/white"
+                    tools:visibility="visible" />
+            </LinearLayout>
 
             <com.webster.commerces.widgets.CustomViewPager
                 android:id="@+id/viewPagerImages"
@@ -121,7 +151,7 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fabFacebook" />
+                app:layout_constraintTop_toBottomOf="@+id/containerSocial" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

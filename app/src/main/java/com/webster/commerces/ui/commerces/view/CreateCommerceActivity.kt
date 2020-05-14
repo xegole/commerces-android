@@ -18,11 +18,16 @@ import com.webster.commerces.activities.RESULT_CODE_GALLERY
 import com.webster.commerces.databinding.ActivityCreateCommerceBinding
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.City
+import com.webster.commerces.entity.Commerce
 import com.webster.commerces.ui.commerces.adapter.PagerImagesAdapter
 import com.webster.commerces.ui.commerces.viewmodel.CreateCommerceVM
 import com.webster.commerces.utils.Constants
 import kotlinx.android.synthetic.main.activity_create_category.viewGallery
 import kotlinx.android.synthetic.main.activity_create_commerce.*
+
+
+const val EXTRA_EDIT_MODE = "extra_edit_mode"
+const val EXTRA_COMMERCE_DATA = "extra_commerce_data"
 
 class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
@@ -32,6 +37,14 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
     private val adapter by lazy {
         PagerImagesAdapter(supportFragmentManager)
+    }
+
+    private val editMode by lazy {
+        intent.extras?.getBoolean(EXTRA_EDIT_MODE, false) ?: false
+    }
+
+    private val commerceData by lazy {
+        intent.extras?.getSerializable(EXTRA_COMMERCE_DATA) as Commerce?
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +89,12 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                 onSupportNavigateUp()
             }
         })
+
+        if (editMode) {
+            commerceData?.let {
+                viewModel.initEditMode(it)
+            }
+        }
     }
 
     private fun setSpinnerWithCategories(listCategories: List<Category>) {
@@ -84,6 +103,13 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             ArrayAdapter(this, android.R.layout.simple_spinner_item, listCategories)
         adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCategories?.adapter = adapterCategories
+
+        if (editMode) {
+            commerceData?.let { commerce ->
+                val index = listCategories.indexOfFirst { it.categoryId == commerce.categoryId }
+                spinnerCategories?.setSelection(index)
+            }
+        }
     }
 
     private fun setSpinnerWithCities(listCities: List<City>) {
@@ -91,6 +117,13 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         val adapterCities = ArrayAdapter(this, android.R.layout.simple_spinner_item, listCities)
         adapterCities.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCities?.adapter = adapterCities
+
+        if (editMode) {
+            commerceData?.let { commerce ->
+                val index = listCities.indexOfFirst { it.cityId == commerce.cityId }
+                spinnerCities?.setSelection(index)
+            }
+        }
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

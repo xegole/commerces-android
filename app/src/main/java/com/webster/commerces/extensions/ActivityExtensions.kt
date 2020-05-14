@@ -18,11 +18,17 @@ fun AppCompatActivity.goToActivity(clazz: Class<*>, isFinish: Boolean = true) {
     }
 }
 
-fun AppCompatActivity.openActivityWithBundle(bundle: Bundle, clazz: Class<*>) {
+fun AppCompatActivity.openActivityWithBundle(
+    bundle: Bundle,
+    clazz: Class<*>,
+    isFinish: Boolean = true
+) {
     val intent = Intent(this, clazz)
     intent.putExtras(bundle)
     startActivity(intent)
-    finish()
+    if (isFinish) {
+        finish()
+    }
 }
 
 fun AppCompatActivity.addFragment(fragment: Fragment) {

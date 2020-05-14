@@ -62,7 +62,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        app:inputText="@{viewModel.commerceName}" />
+                        android:text="@{viewModel.commerceName}"
+                        app:liveText="@{viewModel.commerceName}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,7 +78,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textMultiLine"
-                        app:inputText="@{viewModel.commerceDescription}" />
+                        android:text="@{viewModel.commerceDescription}"
+                        app:liveText="@{viewModel.commerceDescription}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,6 +113,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:text="@{viewModel.commerceAddress}"
                         app:inputText="@{viewModel.commerceAddress}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -128,6 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:text="@{viewModel.commercePhone}"
                         app:inputText="@{viewModel.commercePhone}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -144,6 +148,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:text="@{viewModel.commerceWhatsapp}"
                         app:inputText="@{viewModel.commerceWhatsapp}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -160,7 +165,59 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:text="@{viewModel.commerceFacebook}"
                         app:inputText="@{viewModel.commerceFacebook}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputCommerceInstagram"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:hint="@string/hint_input_instagram">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@{viewModel.commerceInstagram}"
+                        app:inputText="@{viewModel.commerceInstagram}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputCommerceWebPage"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:hint="@string/hint_input_web_page">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@{viewModel.commerceWebPage}"
+                        app:inputText="@{viewModel.commerceWebPage}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputCommerceEmail"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:hint="@string/label_hint_email">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@{viewModel.commerceEmail}"
+                        app:inputText="@{viewModel.commerceEmail}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

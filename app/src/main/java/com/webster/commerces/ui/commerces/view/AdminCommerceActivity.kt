@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.webster.commerces.R
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.extensions.goToActivity
+import com.webster.commerces.extensions.openActivityWithBundle
 import com.webster.commerces.ui.commerces.viewmodel.AdminCommerceViewModel
 import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.activity_admin_commerce.*
@@ -22,6 +23,10 @@ class AdminCommerceActivity : AppCompatActivity() {
 
     private val adapter by lazy {
         CommercesAdapter { commerce, _ ->
+            val extras = Bundle()
+            extras.putBoolean(EXTRA_EDIT_MODE, true)
+            extras.putSerializable(EXTRA_COMMERCE_DATA, commerce)
+            openActivityWithBundle(extras, CreateCommerceActivity::class.java, false)
         }
     }
 

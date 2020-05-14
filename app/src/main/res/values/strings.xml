@@ -12,7 +12,9 @@
     <string name="button_text_done">Continuar</string>
 
     <string name="hint_input_whatsapp">WhatsApp</string>
-    <string name="hint_input_facebook">Facebook</string>
+    <string name="hint_input_facebook">Ingresar perfil de facebook</string>
+    <string name="hint_input_instagram">Instagram</string>
+    <string name="hint_input_web_page">Página web</string>
 
     <string name="label_create_category">Crear categoria</string>
     <string name="label_create_commerce">Crear comercio</string>

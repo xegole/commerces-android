@@ -37,6 +37,10 @@ class DetailCommerceActivity : AppCompatActivity() {
 
             fabFacebook.visibility = if (commerce.facebook.isNotEmpty()) View.VISIBLE else View.GONE
             fabWhatsapp.visibility = if (commerce.whatsapp.isNotEmpty()) View.VISIBLE else View.GONE
+            fabInstagram.visibility =
+                if (commerce.instagram.isNotEmpty()) View.VISIBLE else View.GONE
+            fabWebPage.visibility = if (commerce.webPage.isNotEmpty()) View.VISIBLE else View.GONE
+            fabEmail.visibility = if (commerce.email.isNotEmpty()) View.VISIBLE else View.GONE
 
             imageCommerce.loadUrl(commerce.urlImage()) {
                 onSuccess {
@@ -73,13 +77,19 @@ class DetailCommerceActivity : AppCompatActivity() {
     }
 
     private fun goToGoogleMap() {
-        val intent = Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:q=Parque Simon Bolivar, Cra. 3 #15-77, La Dorada, Caldas"))
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("google.navigation:q=Parque Simon Bolivar, Cra. 3 #15-77, La Dorada, Caldas")
+        )
         intent.setPackage("com.google.android.apps.maps")
         startActivity(intent)
     }
 
     private fun goToGoogleMapLocation() {
-        val intent = Intent(Intent.ACTION_VIEW,Uri.parse("geo:0,0?q=Parque Simon Bolivar, Cra. 3 #15-77, La Dorada, Caldas"))
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("geo:0,0?q=Parque Simon Bolivar, Cra. 3 #15-77, La Dorada, Caldas")
+        )
         intent.setPackage("com.google.android.apps.maps")
         startActivity(intent)
     }
@@ -87,20 +97,21 @@ class DetailCommerceActivity : AppCompatActivity() {
     private fun goToChatWhatsapp(num: String) {
         val isAppInstalled = appInstalledOrNot("com.whatsapp")
         if (isAppInstalled) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=$num"))
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=+57$num"))
             startActivity(intent)
         } else {
-            Toast.makeText(this, "Whatsapp not installed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "No tiene whatsapp instalado", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun goToInstagram(profile: String){
+    private fun goToInstagram(profile: String) {
         val isAppInstalled = appInstalledOrNot("com.instagram.android")
-        if (isAppInstalled){
+        if (isAppInstalled) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/$profile"))
             startActivity(intent)
-        }else{
-            Toast.makeText(this, "Whatsapp not installed", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "No tiene instagram instalado", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -114,13 +125,13 @@ class DetailCommerceActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToFacebook(facebook: String){
+    private fun goToFacebook(facebook: String) {
         val isAppInstalled = appInstalledOrNot("com.facebook.katana")
-        if(isAppInstalled){
-            val intent = Intent(Intent.ACTION_VIEW,  Uri.parse("fb://profile/$facebook"))
+        if (isAppInstalled) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/$facebook"))
             startActivity(intent)
-        }else{
-            Toast.makeText(this, "not installed", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "No tiene facebook instalado", Toast.LENGTH_SHORT).show()
         }
     }
 }
