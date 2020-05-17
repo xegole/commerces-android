@@ -1,29 +1,26 @@
 package com.webster.commerces.fragments
 
 
-import android.content.Context
-import android.icu.text.Transliterator
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
-import com.webster.commerces.activities.DetailCommerceActivity
 import com.webster.commerces.adapter.BannerPagerAdapter
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.base.BaseFragment
 import com.webster.commerces.entity.Banner
-import com.webster.commerces.entity.City
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.openActivityWithBundleOptions
+import com.webster.commerces.ui.commerces.view.DetailCommerceActivity
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.FirebaseReferences
 import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.fragment_commerces.*
 import java.util.*
 import kotlin.collections.ArrayList
-import com.webster.commerces.activities.DetailCommerceActivity.Companion.EXTRA_COMMERCE_DATA as EXTRA_COMMERCE_DATA1
+import com.webster.commerces.ui.commerces.view.DetailCommerceActivity.Companion.EXTRA_COMMERCE_DATA as EXTRA_COMMERCE_DATA1
 
 class CommercesFragment : BaseFragment() {
 
@@ -58,13 +55,14 @@ class CommercesFragment : BaseFragment() {
                     }
                     dismissLoading()
                 }
-        }else{
-            commercesReference.orderByChild("cityId").equalTo(prefs.remember).addListDataListener<Commerce>{list, b ->
-                if (b){
-                    adapter.addItemList(list)
+        } else {
+            commercesReference.orderByChild("cityId").equalTo(prefs.remember)
+                .addListDataListener<Commerce> { list, b ->
+                    if (b) {
+                        adapter.addItemList(list)
+                    }
+                    dismissLoading()
                 }
-                dismissLoading()
-            }
         }
         bannerReference.addListDataListener<Banner> { list, success ->
             if (success) {
@@ -78,21 +76,23 @@ class CommercesFragment : BaseFragment() {
 
     private val swipeTimer = Timer()
 
-    private fun setViewPagerWithBanners(banners: List<Banner>) {
-        viewPagerBanner.adapter = context?.let { ctx -> BannerPagerAdapter(ctx, banners) }
-        indicatorBanner.setViewPager(viewPagerBanner)
+    private fun setViewPagerWithBanners(banners: List<Banner>? = arrayListOf()) {
+        banners?.let {
+            viewPagerBanner.adapter = context?.let { ctx -> BannerPagerAdapter(ctx, it) }
+            indicatorBanner.setViewPager(viewPagerBanner)
 
-        update = Runnable {
-            if (currentPage == banners.size) {
-                currentPage = Constants.INT_ZERO
+            update = Runnable {
+                if (currentPage == banners.size) {
+                    currentPage = Constants.INT_ZERO
+                }
+                viewPagerBanner?.setCurrentItem(currentPage++, true)
             }
-            viewPagerBanner?.setCurrentItem(currentPage++, true)
+            swipeTimer.schedule(object : TimerTask() {
+                override fun run() {
+                    handler.post(update)
+                }
+            }, Constants.LONG_ZERO, Constants.DELAY_BANNER)
         }
-        swipeTimer.schedule(object : TimerTask() {
-            override fun run() {
-                handler.post(update)
-            }
-        }, Constants.LONG_ZERO, Constants.DELAY_BANNER)
     }
 
     override fun onPause() {

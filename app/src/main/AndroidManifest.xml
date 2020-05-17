@@ -33,7 +33,7 @@
             android:name=".activities.CategoryDetailActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".activities.DetailCommerceActivity" />
+        <activity android:name=".ui.commerces.view.DetailCommerceActivity" />
         <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

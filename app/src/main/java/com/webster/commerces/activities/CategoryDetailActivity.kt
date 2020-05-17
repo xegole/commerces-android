@@ -10,6 +10,7 @@ import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.openActivityWithBundleOptions
+import com.webster.commerces.ui.commerces.view.DetailCommerceActivity
 import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.activity_detail_commerce.*
 import kotlinx.android.synthetic.main.fragment_commerces.*

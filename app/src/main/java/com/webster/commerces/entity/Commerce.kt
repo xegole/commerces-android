@@ -18,7 +18,8 @@ data class Commerce(
     var instagram: String = Constants.EMPTY_STRING,
     var webPage: String = Constants.EMPTY_STRING,
     var email: String = Constants.EMPTY_STRING,
-    var uid: String? = Constants.EMPTY_STRING
+    var uid: String? = Constants.EMPTY_STRING,
+    var comments: HashMap<String, Comment> = hashMapOf()
 ) : Serializable {
 
     constructor() : this(

@@ -15,6 +15,7 @@
     <string name="hint_input_facebook">Ingresar perfil de facebook</string>
     <string name="hint_input_instagram">Instagram</string>
     <string name="hint_input_web_page">Página web</string>
+    <string name="hint_label_facebook">Facebook</string>
 
     <string name="label_create_category">Crear categoria</string>
     <string name="label_create_commerce">Crear comercio</string>
@@ -22,6 +23,7 @@
     <string name="label_edit_commerce">Editar comercio</string>
     <string name="label_edit_category">Editar categoria</string>
     <string name="label_admin_commerce">Mis comercios</string>
+    <string name="label_admin_rate">Calificar</string>
 
 
     <string name="label_hint_commerce_name">Nombre del comercio</string>
@@ -29,6 +31,7 @@
     <string name="label_hint_category_name">Nombre de la categoria</string>
     <string name="label_hint_commerce_description">Descripción</string>
     <string name="label_hint_commerce_address">Dirección</string>
+    <string name="label_hint_commerce_comments">Comentarios</string>
 
     <!-- Home Screen Strings -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -95,4 +98,7 @@
     <string name="error_input_wrong_password">La contraseña incorrecta</string>
     <string name="error_input_validate_password">Las contraseñas no coinciden</string>
     <string name="error_input_too_many_requests">Demasiados intentos con contraseña incorrecta, espera unos minutos e intenta de nuevo</string>
+    <string name="error_action_no_facebook">No tiene instalado facebook</string>
+    <string name="error_action_no_instagram">No tiene instalado instagram</string>
+    <string name="error_action_no_whatsapp">No tiene instalado whatsapp</string>
 </resources>

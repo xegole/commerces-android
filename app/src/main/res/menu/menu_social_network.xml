@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_facebook"
+        android:icon="@drawable/ic_facebook"
+        android:title="@string/hint_label_facebook"/>
+
+    <item
+        android:id="@+id/action_whatsapp"
+        android:icon="@drawable/ic_whatsapp"
+        android:title="@string/hint_input_whatsapp" />
+
+    <item
+        android:id="@+id/action_instagram"
+        android:icon="@drawable/ic_instagram"
+        android:title="@string/hint_input_instagram"/>
+
+    <item
+        android:id="@+id/action_web_page"
+        android:icon="@drawable/ic_webpage"
+        android:title="@string/hint_input_web_page"/>
+    <item
+        android:id="@+id/action_email"
+        android:icon="@drawable/ic_email"
+        android:title="@string/label_hint_email"/>
+</menu>

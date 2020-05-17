@@ -153,7 +153,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
         if (category != null && city != null) {
             liveDataLoading.value = true
             val commerce = Commerce()
-            commerce.commerceId = category?.categoryId ?: Constants.EMPTY_STRING
+            commerce.commerceId = id
             commerce.name = commerceName
             commerce.description = commerceDescription.value ?: Constants.EMPTY_STRING
             commerce.cityId = city?.cityId ?: "1"
