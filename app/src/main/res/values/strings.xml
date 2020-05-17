@@ -21,14 +21,21 @@
     <string name="label_create_commerce">Crear comercio</string>
     <string name="label_create_city">Crear ciudad</string>
     <string name="label_edit_commerce">Editar comercio</string>
+    <string name="label_promo_commerce">Promocionar</string>
+    <string name="label_delete_commerce">Eliminar comercio</string>
+    <string name="label_delete">Eliminar</string>
+    <string name="label_cancel">Cancelar</string>
     <string name="label_edit_category">Editar categoria</string>
     <string name="label_admin_commerce">Mis comercios</string>
+    <string name="label_admin_deals">Promociones</string>
     <string name="label_admin_rate">Calificar</string>
+    <string name="label_create_deal">Crear promocion</string>
 
 
     <string name="label_hint_commerce_name">Nombre del comercio</string>
     <string name="label_hint_city_name">Nombre de la ciudad</string>
     <string name="label_hint_category_name">Nombre de la categoria</string>
+    <string name="label_hint_deal_name">Nombre de la promocion</string>
     <string name="label_hint_commerce_description">Descripción</string>
     <string name="label_hint_commerce_address">Dirección</string>
     <string name="label_hint_commerce_comments">Comentarios</string>
@@ -71,6 +78,8 @@
     <string name="label_send">Enviar</string>
 
     <string name="message_created_commerce_success">Se ha creado su comercio</string>
+    <string name="message_created_deal_success">Se ha creado la promocion</string>
+    <string name="message_create_deal_error">Hubo un error al crear la promocion</string>
 
     <!-- Commerces Fragment String -->
     <string name="transition_name_commerce">transition_commerce</string>
@@ -82,11 +91,14 @@
     <string name="actualizar">Actualizar</string>
     <string name="label_update_commerce">UPDATE COMMERCE</string>
     <string name="label_create_commerce_banner_image">Imagen para banner de comercio</string>
+    <string name="label_create_deal_banner_image">Imagen para promocion</string>
     <string name="label_create_commerce_internal_image">Imagenes representativas del comercio</string>
     <string name="label_selected_city">Seleccione una ciudad</string>
     <string name="label_selected_category">Seleccione una categoria</string>
 
     <string name="message_city_created_success">La ciudad fue creada</string>
+    <string name="message_edit_commerce_dialog">¿Que desea hacer con su comercio?</string>
+    <string name="message_delete_commerce_dialog">¿Desea eliminar su comercio?</string>
     <string name="buscar_categoria">Buscar categoria</string>
     <string name="label_login">Iniciar sesión</string>
 

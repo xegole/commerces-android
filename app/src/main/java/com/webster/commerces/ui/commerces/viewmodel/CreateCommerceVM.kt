@@ -180,10 +180,6 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun onCommerceNameChanged(textChanged: String) {
-        commerceName.value = textChanged
-    }
-
     private fun updateBannerCommerce(id: String, urlImage: String?) {
         commercesReference.child(id).child("commerceImage").setValue(urlImage)
     }

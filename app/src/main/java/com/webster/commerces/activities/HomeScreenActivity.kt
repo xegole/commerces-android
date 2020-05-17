@@ -1,6 +1,7 @@
 package com.webster.commerces.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -8,8 +9,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
 import com.webster.commerces.AppCore
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
@@ -51,6 +54,16 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         navView.setNavigationItemSelectedListener(this)
         navView.menu.getItem(ConstantsArray.FIRST).isChecked = true
         onNavigationItemSelected(navView.menu.getItem(ConstantsArray.FIRST))
+
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    return@OnCompleteListener
+                }
+
+                val token = task.result?.token
+                Log.d("stateChanged", "Token registered: $token")
+            })
 
     }
 
