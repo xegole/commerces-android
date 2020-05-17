@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.internal.NavigationMenu
 import com.google.android.material.snackbar.Snackbar
 import com.webster.commerces.AppCore
@@ -17,7 +18,11 @@ import com.webster.commerces.R
 import com.webster.commerces.adapter.ImagePagerAdapter
 import com.webster.commerces.databinding.ActivityDetailCommerceBinding
 import com.webster.commerces.entity.Commerce
+import com.webster.commerces.extensions.expand
+import com.webster.commerces.extensions.hide
 import com.webster.commerces.extensions.loadUrl
+import com.webster.commerces.extensions.show
+import com.webster.commerces.listener.AppBarStateChangeListener
 import com.webster.commerces.ui.commerces.viewmodel.DetailCommerceViewModel
 import com.webster.commerces.ui.rate.RateDialog
 import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter
@@ -90,6 +95,22 @@ class DetailCommerceActivity : AppCompatActivity() {
             viewModel.initCommerceData(commerce)
         }
         initObserver()
+
+        appBar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+            override fun onStateChanged(appBarLayout: AppBarLayout?, collapsed: State) {
+                when (collapsed) {
+                    State.COLLAPSED -> {
+                        containerButtons.hide()
+                    }
+                    State.EXPANDED -> {
+                        containerButtons.show()
+                    }
+                    State.IDLE -> {
+                        containerButtons.show()
+                    }
+                }
+            }
+        })
     }
 
     private fun initObserver() {

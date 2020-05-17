@@ -9,6 +9,7 @@
     <color name="background_loading_view">#80000000</color>
     <color name="background_category_view">#80000000</color>
     <color name="background_commerce_view">#40000000</color>
+    <color name="background_commerce_detail">#CC000000</color>
     <color name="material_black">#242424</color>
     <color name="white">#ffffff</color>
     <color name="grayLight">#C2BEBE</color>
