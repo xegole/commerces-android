@@ -78,7 +78,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.deal.DealCommerceActivity"
+            android:name=".ui.deal.view.DealCommerceActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

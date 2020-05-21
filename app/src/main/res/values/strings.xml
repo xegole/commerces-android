@@ -21,6 +21,8 @@
     <string name="label_create_commerce">Crear comercio</string>
     <string name="label_create_city">Crear ciudad</string>
     <string name="label_edit_commerce">Editar comercio</string>
+    <string name="label_edit_deal">Editar promocion</string>
+    <string name="label_delete_deal">Eliminar promocion</string>
     <string name="label_promo_commerce">Promocionar</string>
     <string name="label_delete_commerce">Eliminar comercio</string>
     <string name="label_delete">Eliminar</string>
@@ -30,12 +32,15 @@
     <string name="label_admin_deals">Promociones</string>
     <string name="label_admin_rate">Calificar</string>
     <string name="label_create_deal">Crear promocion</string>
+    <string name="label_update_deal">Actualizar promocion</string>
+    <string name="label_go_commerce">Ir al comercio -></string>
 
 
     <string name="label_hint_commerce_name">Nombre del comercio</string>
     <string name="label_hint_city_name">Nombre de la ciudad</string>
     <string name="label_hint_category_name">Nombre de la categoria</string>
     <string name="label_hint_deal_name">Nombre de la promocion</string>
+    <string name="label_hint_deal_price">Precio del producto</string>
     <string name="label_hint_commerce_description">Descripción</string>
     <string name="label_hint_commerce_address">Dirección</string>
     <string name="label_hint_commerce_comments">Comentarios</string>
@@ -51,6 +56,7 @@
     <!-- Side Menu Strings-->
     <string name="side_menu_item_commerces">Comercios</string>
     <string name="side_menu_item_category">Categorias</string>
+    <string name="side_menu_item_deal">Promociones</string>
     <string name="side_menu_item_about">Acerca</string>
     <string name="side_menu_item_contact_us">Contactanos</string>
     <string name="side_menu_item_communicate">Communicate</string>
@@ -98,7 +104,9 @@
 
     <string name="message_city_created_success">La ciudad fue creada</string>
     <string name="message_edit_commerce_dialog">¿Que desea hacer con su comercio?</string>
+    <string name="message_edit_deal_dialog">¿Que desea hacer con su promocion?</string>
     <string name="message_delete_commerce_dialog">¿Desea eliminar su comercio?</string>
+    <string name="message_delete_deal_dialog">¿Desea eliminar su promocion?</string>
     <string name="buscar_categoria">Buscar categoria</string>
     <string name="label_login">Iniciar sesión</string>
 

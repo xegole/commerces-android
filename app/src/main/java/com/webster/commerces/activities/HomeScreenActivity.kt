@@ -18,10 +18,7 @@ import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.addFragment
 import com.webster.commerces.extensions.goToActivity
-import com.webster.commerces.fragments.AboutFragment
-import com.webster.commerces.fragments.CategoryFragment
-import com.webster.commerces.fragments.CommercesFragment
-import com.webster.commerces.fragments.ContactUsFragment
+import com.webster.commerces.fragments.*
 import com.webster.commerces.ui.cityselector.view.CitySelectorActivity
 import com.webster.commerces.ui.login.view.LoginActivity
 import com.webster.commerces.utils.ConstantsArray
@@ -80,6 +77,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         when (item.itemId) {
             R.id.nav_commerces -> validateCurrentFragment(item.itemId, CommercesFragment.instance())
             R.id.nav_category -> validateCurrentFragment(item.itemId, CategoryFragment.instance())
+            R.id.nav_deal -> validateCurrentFragment(item.itemId, DealsFragment.instance())
             R.id.nav_about -> validateCurrentFragment(item.itemId, AboutFragment.instance())
             R.id.nav_contact_us -> validateCurrentFragment(
                 item.itemId,

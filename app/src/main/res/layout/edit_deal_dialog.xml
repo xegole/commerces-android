@@ -10,29 +10,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
-        android:text="@string/message_edit_commerce_dialog" />
-
-
-    <Button
-        android:id="@+id/buttonPromo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
-        android:text="@string/label_promo_commerce" />
+        android:text="@string/message_edit_deal_dialog" />
 
     <Button
         android:id="@+id/buttonEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
-        android:text="@string/label_edit_commerce" />
+        android:text="@string/label_edit_deal" />
 
     <Button
         android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
-        android:text="@string/label_delete_commerce" />
+        android:text="@string/label_delete_deal" />
 
     <Button
         android:id="@+id/buttonCancel"

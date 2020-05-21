@@ -10,12 +10,14 @@
     <color name="background_category_view">#80000000</color>
     <color name="background_commerce_view">#40000000</color>
     <color name="background_commerce_detail">#CC000000</color>
+    <color name="background_transparency">#CCffffff</color>
     <color name="material_black">#242424</color>
     <color name="white">#ffffff</color>
     <color name="grayLight">#C2BEBE</color>
     <color name="purple_accent">#5d74e2</color>
     <color name="purple_accent_50">#805D74E2</color>
     <color name="colorTitleGray">#85858b</color>
+    <color name="colorGrayDark">#383838</color>
 
     <color name="colorBackGround">#f2f2f7</color>
     <color name="selectedCard">#B2949499</color>

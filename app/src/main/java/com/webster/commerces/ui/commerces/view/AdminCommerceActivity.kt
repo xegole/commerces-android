@@ -14,8 +14,8 @@ import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.goToActivity
 import com.webster.commerces.extensions.openActivityWithBundle
 import com.webster.commerces.ui.commerces.viewmodel.AdminCommerceViewModel
-import com.webster.commerces.ui.deal.DealCommerceActivity
-import com.webster.commerces.ui.deal.EXTRA_COMMERCE_ID
+import com.webster.commerces.ui.deal.view.DealCommerceActivity
+import com.webster.commerces.ui.deal.view.EXTRA_COMMERCE_ID
 import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.activity_admin_commerce.*
 
@@ -29,13 +29,20 @@ class AdminCommerceActivity : AppCompatActivity() {
 
     private val adapter by lazy {
         CommercesAdapter { commerce, _ ->
-            editCommerceDialog = EditCommerceDialog(this) {
-                when (it) {
-                    EditState.EDIT -> goEditCommerce(commerce)
-                    EditState.DELETE -> deleteDialog(commerce.commerceId)
-                    EditState.DEAL -> goCommerceDeals(commerce.commerceId)
+            editCommerceDialog =
+                EditCommerceDialog(this) {
+                    when (it) {
+                        EditState.EDIT -> goEditCommerce(
+                            commerce
+                        )
+                        EditState.DELETE -> deleteDialog(
+                            commerce.commerceId
+                        )
+                        EditState.DEAL -> goCommerceDeals(
+                            commerce.commerceId
+                        )
+                    }
                 }
-            }
             editCommerceDialog?.show()
         }
     }
