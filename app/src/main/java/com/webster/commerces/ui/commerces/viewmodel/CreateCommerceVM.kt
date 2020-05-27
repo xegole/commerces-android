@@ -1,6 +1,7 @@
 package com.webster.commerces.ui.commerces.viewmodel
 
 import android.app.Application
+import android.content.Intent
 import android.net.Uri
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
@@ -10,8 +11,10 @@ import com.google.firebase.storage.FirebaseStorage
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.City
 import com.webster.commerces.entity.Commerce
+import com.webster.commerces.entity.CommerceLocation
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.hideKeyboard
+import com.webster.commerces.ui.maps.MapsActivity
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.FirebaseReferences
 import com.webster.commerces.utils.Prefs
@@ -35,6 +38,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     val commerceName = MutableLiveData<String>()
     val commerceDescription = MutableLiveData<String>()
     val commerceAddress = MutableLiveData<String>()
+    val commerceLocation = MutableLiveData<CommerceLocation>()
     val commercePhone = MutableLiveData<String>()
     val commerceWhatsapp = MutableLiveData<String>()
     val commerceFacebook = MutableLiveData<String>()
@@ -42,6 +46,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     val commerceWebPage = MutableLiveData<String>()
     val commerceEmail = MutableLiveData<String>()
     val commerceCreatedSuccess = MutableLiveData<Boolean>()
+    val liveDataIntent = MutableLiveData<Intent>()
 
     val liveDataLoading = MutableLiveData(false)
 
@@ -84,6 +89,11 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     fun onCreateCommerce() = View.OnClickListener {
         it.hideKeyboard()
         saveCommerce()
+    }
+
+    fun onMapsActivity() = View.OnClickListener {
+        val intent = Intent(it.context, MapsActivity::class.java)
+        liveDataIntent.value = intent
     }
 
     fun getCategories() {
@@ -158,6 +168,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
             commerce.description = commerceDescription.value ?: Constants.EMPTY_STRING
             commerce.cityId = city?.cityId ?: "1"
             commerce.address = commerceAddress.value ?: Constants.EMPTY_STRING
+            commerce.location = commerceLocation.value ?: CommerceLocation(0.0, 0.0)
             commerce.categoryId = category?.categoryId ?: Constants.EMPTY_STRING
             commerce.phone = commercePhone.value?.toLong() ?: Constants.LONG_ZERO
             commerce.whatsapp = commerceWhatsapp.value ?: Constants.EMPTY_STRING

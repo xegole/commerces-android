@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.webster.commerces">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -16,6 +18,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity,UnusedAttribute">
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".ui.maps.MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
 
         <service
             android:name=".services.MessagingService"
@@ -32,7 +50,6 @@
         <activity
             android:name=".activities.CategoryDetailActivity"
             android:theme="@style/AppTheme" />
-
         <activity android:name=".ui.commerces.view.DetailCommerceActivity" />
         <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
@@ -56,27 +73,22 @@
             android:name=".ui.categories.view.ListCategoriesActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.NotificationActivity" />
-
         <activity
             android:name=".activities.UpdateCommerceActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.cityselector.view.CreateCityActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.login.view.LoginActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.register.view.RegisterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".ui.commerces.view.AdminCommerceActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.deal.view.DealCommerceActivity"
             android:screenOrientation="portrait" />
@@ -90,7 +102,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

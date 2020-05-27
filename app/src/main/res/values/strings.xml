@@ -19,6 +19,7 @@
 
     <string name="label_create_category">Crear categoria</string>
     <string name="label_create_commerce">Crear comercio</string>
+    <string name="label_location_commerce">Ubicacion</string>
     <string name="label_create_city">Crear ciudad</string>
     <string name="label_edit_commerce">Editar comercio</string>
     <string name="label_edit_deal">Editar promocion</string>
@@ -43,6 +44,7 @@
     <string name="label_hint_deal_price">Precio del producto</string>
     <string name="label_hint_commerce_description">Descripción</string>
     <string name="label_hint_commerce_address">Dirección</string>
+    <string name="label_hint_commerce_location">Ubicacion</string>
     <string name="label_hint_commerce_comments">Comentarios</string>
 
     <!-- Home Screen Strings -->
@@ -121,4 +123,5 @@
     <string name="error_action_no_facebook">No tiene instalado facebook</string>
     <string name="error_action_no_instagram">No tiene instalado instagram</string>
     <string name="error_action_no_whatsapp">No tiene instalado whatsapp</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.maps.model.LatLng
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
 import com.webster.commerces.activities.RESULT_CODE_GALLERY
@@ -19,8 +20,10 @@ import com.webster.commerces.databinding.ActivityCreateCommerceBinding
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.City
 import com.webster.commerces.entity.Commerce
+import com.webster.commerces.entity.CommerceLocation
 import com.webster.commerces.ui.commerces.adapter.PagerImagesAdapter
 import com.webster.commerces.ui.commerces.viewmodel.CreateCommerceVM
+import com.webster.commerces.ui.maps.EXTRA_COMMERCE_LOCATION
 import com.webster.commerces.utils.Constants
 import kotlinx.android.synthetic.main.activity_create_category.viewGallery
 import kotlinx.android.synthetic.main.activity_create_commerce.*
@@ -28,6 +31,7 @@ import kotlinx.android.synthetic.main.activity_create_commerce.*
 
 const val EXTRA_EDIT_MODE = "extra_edit_mode"
 const val EXTRA_COMMERCE_DATA = "extra_commerce_data"
+const val REQUEST_COMMERCE_LOCATION = 201
 
 class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
@@ -88,6 +92,10 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                 ).show()
                 onSupportNavigateUp()
             }
+        })
+
+        viewModel.liveDataIntent.observe(this, Observer {
+            startActivityForResult(it, REQUEST_COMMERCE_LOCATION)
         })
 
         if (editMode) {
@@ -163,6 +171,11 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                 Picasso.get().load(selectedImageUri).into(imageCommerce)
             } catch (e: Exception) {
                 e.printStackTrace()
+            }
+        } else if (requestCode == REQUEST_COMMERCE_LOCATION && resultCode == Activity.RESULT_OK) {
+            val location = data?.getParcelableExtra<LatLng>(EXTRA_COMMERCE_LOCATION)
+            location?.run {
+                viewModel.commerceLocation.value = CommerceLocation(latitude, longitude)
             }
         }
     }
