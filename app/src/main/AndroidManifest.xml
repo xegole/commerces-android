@@ -19,21 +19,14 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity,UnusedAttribute">
 
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
             android:name=".ui.maps.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".services.MessagingService"
@@ -81,7 +74,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.view.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <data android:scheme="terms" />
+                <data android:scheme="privacy" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.register.view.RegisterActivity"
             android:screenOrientation="portrait"
@@ -91,6 +93,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.deal.view.DealCommerceActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.terms.TermsPrivacyActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -112,5 +118,4 @@
             android:exported="true"
             tools:ignore="ExportedContentProvider" />
     </application>
-
 </manifest>

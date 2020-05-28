@@ -81,7 +81,7 @@
     <string name="label_log_in_or_connect_with">ó inicia con</string>
     <string name="label_like_guest">ó como</string>
     <string name="label_google">Google</string>
-    <string name="label_privacy_policy">Al usar MerkaApp, acepta nuestra <a href="https://app.triploop.com/privacy">política de privacidad</a> y los <a href="https://app.triploop.com/terms-and-conditions">términos y condiciones</a>.</string>
+    <string name="label_privacy_policy">Al usar MerkaApp, acepta nuestra <a href="privacy:">política de privacidad</a> y los <a href="terms:">términos y condiciones</a>.</string>
 
     <string name="label_send">Enviar</string>
 

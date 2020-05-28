@@ -2,6 +2,7 @@ package com.webster.commerces.ui.login.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,8 +11,11 @@ import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityLoginBinding
 import com.webster.commerces.extensions.goToActivity
+import com.webster.commerces.extensions.openActivityWithBundle
 import com.webster.commerces.ui.login.model.UserLogin
 import com.webster.commerces.ui.login.viewmodel.LoginViewModel
+import com.webster.commerces.ui.terms.EXTRA_ASSETS_PAGE
+import com.webster.commerces.ui.terms.TermsPrivacyActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -58,8 +62,28 @@ class LoginActivity : BaseActivity() {
             }
         })
 
+        binding.labelTermsPrivacy.movementMethod = LinkMovementMethod.getInstance()
+
         if (BuildConfig.DEBUG) {
             //viewModel.initTestData()
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        when {
+            intent?.scheme.equals("terms") -> {
+                val extras = Bundle()
+                extras.putString(EXTRA_ASSETS_PAGE, "terms")
+                openActivityWithBundle(extras, TermsPrivacyActivity::class.java, false)
+            }
+            intent?.scheme.equals("privacy") -> {
+                val extras = Bundle()
+                extras.putString(EXTRA_ASSETS_PAGE, "privacy")
+                openActivityWithBundle(extras, TermsPrivacyActivity::class.java, false)
+            }
+            else -> {
+                super.onNewIntent(intent)
+            }
         }
     }
 
