@@ -11,7 +11,7 @@ class Commerce : Serializable {
     var cityId = Constants.EMPTY_STRING
     var commerceImage = Constants.EMPTY_STRING
     var address = Constants.EMPTY_STRING
-    var location = CommerceLocation(0.0, 0.0)
+    var location = CommerceLocation()
     var categoryId = Constants.EMPTY_STRING
     var description = Constants.EMPTY_STRING
     val images = listOf<String>()

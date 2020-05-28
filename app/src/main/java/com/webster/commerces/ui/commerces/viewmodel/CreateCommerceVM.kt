@@ -168,7 +168,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
             commerce.description = commerceDescription.value ?: Constants.EMPTY_STRING
             commerce.cityId = city?.cityId ?: "1"
             commerce.address = commerceAddress.value ?: Constants.EMPTY_STRING
-            commerce.location = commerceLocation.value ?: CommerceLocation(0.0, 0.0)
+            commerce.location = commerceLocation.value ?: CommerceLocation()
             commerce.categoryId = category?.categoryId ?: Constants.EMPTY_STRING
             commerce.phone = commercePhone.value?.toLong() ?: Constants.LONG_ZERO
             commerce.whatsapp = commerceWhatsapp.value ?: Constants.EMPTY_STRING

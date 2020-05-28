@@ -174,8 +174,11 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             }
         } else if (requestCode == REQUEST_COMMERCE_LOCATION && resultCode == Activity.RESULT_OK) {
             val location = data?.getParcelableExtra<LatLng>(EXTRA_COMMERCE_LOCATION)
-            location?.run {
-                viewModel.commerceLocation.value = CommerceLocation(latitude, longitude)
+            location?.let {currentMarker->
+                viewModel.commerceLocation.value = CommerceLocation().apply {
+                    latitude = currentMarker.latitude
+                    longitude = currentMarker.longitude
+                }
             }
         }
     }
