@@ -188,18 +188,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
-                android:onClick="@{viewModel.goToGoogleMap()}"
+                android:onClick="@{viewModel.goToGoogleMap(commerce.location)}"
                 android:src="@drawable/ic_location"
-                app:backgroundTint="@color/colorPrimary"
-                app:tint="@color/white" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabHowLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:onClick="@{viewModel.goToGoogleMapLocation()}"
-                android:src="@drawable/ic_how_location"
                 app:backgroundTint="@color/colorPrimary"
                 app:tint="@color/white" />
 

@@ -55,6 +55,8 @@ class LoginActivity : BaseActivity() {
                     getString(R.string.error_input_wrong_password)
                 UserLogin.ERROR_TOO_MANY_REQUESTS -> textFieldPassword.error =
                     getString(R.string.error_input_too_many_requests)
+                UserLogin.EMAIL_NOT_VERIFIED -> textFieldEmail.error =
+                    getString(R.string.error_input_email_not_verified)
                 else -> {
                     textFieldEmail.error = null
                     textFieldPassword.error = null
@@ -65,7 +67,7 @@ class LoginActivity : BaseActivity() {
         binding.labelTermsPrivacy.movementMethod = LinkMovementMethod.getInstance()
 
         if (BuildConfig.DEBUG) {
-            //viewModel.initTestData()
+            viewModel.initTestData()
         }
     }
 

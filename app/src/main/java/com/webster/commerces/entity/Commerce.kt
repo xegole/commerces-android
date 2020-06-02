@@ -22,6 +22,7 @@ class Commerce : Serializable {
     var email: String = Constants.EMPTY_STRING
     var uid: String? = Constants.EMPTY_STRING
     var comments: HashMap<String, Comment> = hashMapOf()
+    var validate: Boolean = false
 
     fun urlImage(): String = commerceImage
 }

@@ -1,7 +1,6 @@
 package com.webster.commerces.ui.register.viewmodel
 
 import android.app.Application
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -32,6 +31,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
     val liveDataPassword = MutableLiveData<String>()
     val liveDataValidatePassword = MutableLiveData<String>()
     val liveDataLoading = MutableLiveData(false)
+    val liveDataVerifyEmail = MutableLiveData(false)
     val liveDataRegisterSuccess = MutableLiveData<Class<*>>()
 
     val liveDataError = MutableLiveData<ValidateUser>()
@@ -61,11 +61,19 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val firebaseUser = firebaseAuth.currentUser
-                    val uid = firebaseUser?.uid ?: ""
-                    val user = User(uid, "", userRegister.email, TypeUser.USER_COMMERCE)
-                    databaseReference.child(uid).setValue(user).addOnCompleteListener {
-                        prefs.user = user
-                        liveDataRegisterSuccess.value = CitySelectorActivity::class.java
+                    if (firebaseUser?.isEmailVerified == true) {
+                        val uid = firebaseUser.uid
+                        val user = User(uid, "", userRegister.email, TypeUser.USER_COMMERCE)
+                        databaseReference.child(uid).setValue(user).addOnCompleteListener {
+                            prefs.user = user
+                            liveDataRegisterSuccess.value = CitySelectorActivity::class.java
+                        }
+                    } else {
+                        firebaseUser?.sendEmailVerification()
+                            ?.addOnCompleteListener {
+                            }
+                        liveDataVerifyEmail.value = true
+                        liveDataRegisterSuccess.value = LoginActivity::class.java
                     }
                 } else {
                     task.exception?.let {
@@ -78,7 +86,6 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
                 }
                 liveDataLoading.value = false
             }.addOnFailureListener {
-                Log.d("statusChanged", it.localizedMessage ?: "")
                 it.printStackTrace()
                 liveDataLoading.value = false
             }

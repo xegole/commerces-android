@@ -93,6 +93,8 @@ class DetailCommerceActivity : AppCompatActivity() {
                 }
             })
             viewModel.initCommerceData(commerce)
+            binding.commerce = commerce
+            binding.executePendingBindings()
         }
         initObserver()
 

@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import com.webster.commerces.AppCore
 import com.webster.commerces.R
 import com.webster.commerces.entity.Commerce
+import com.webster.commerces.entity.CommerceLocation
 
 
 class DetailCommerceViewModel(application: Application) : AndroidViewModel(application) {
@@ -43,22 +44,13 @@ class DetailCommerceViewModel(application: Application) : AndroidViewModel(appli
         liveDataSocialAction.value = intent
     }
 
-    fun goToGoogleMap() = View.OnClickListener {
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("google.navigation:q=Parque Simon Bolivar, Cra. 3 #15-77, La Dorada, Caldas")
-        )
-        intent.setPackage("com.google.android.apps.maps")
-        liveDataSocialAction.value = intent
-    }
-
-    fun goToGoogleMapLocation() = View.OnClickListener {
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("geo:0,0?q=Parque Simon Bolivar, Cra. 3 #15-77, La Dorada, Caldas")
-        )
-        intent.setPackage("com.google.android.apps.maps")
-        liveDataSocialAction.value = intent
+    fun goToGoogleMap(commerceLocation: CommerceLocation?) = View.OnClickListener {
+        commerceLocation?.run {
+            val uriLocation = Uri.parse("geo:0,0?q=$latitude,$longitude")
+            val intent = Intent(Intent.ACTION_VIEW, uriLocation)
+            intent.setPackage("com.google.android.apps.maps")
+            liveDataSocialAction.value = intent
+        }
     }
 
     private fun goToChatWhatsapp(num: String) {

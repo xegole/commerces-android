@@ -70,6 +70,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
     override fun onMapClick(location: LatLng?) {
         mMap.clear()
         location?.let {
+            commerceLocation = it
             mMap.addMarker(MarkerOptions().position(it))
         }
     }

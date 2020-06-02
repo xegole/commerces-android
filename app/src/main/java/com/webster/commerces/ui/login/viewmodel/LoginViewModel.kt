@@ -33,6 +33,7 @@ import com.webster.commerces.ui.login.view.RC_SIGN_IN
 import com.webster.commerces.ui.login.view.USERS_DATABASE
 import com.webster.commerces.ui.register.view.RegisterActivity
 
+
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private var googleSignInClient: GoogleSignInClient? = null
@@ -55,7 +56,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         onLogin()
     }
 
-    fun initTestData(){
+    fun initTestData() {
         liveDataEmail.value = "xegole@hotmail.com"
         liveDataPassword.value = "diegoleon89"
     }
@@ -119,30 +120,38 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         val isNewUser = authTask.result?.additionalUserInfo?.isNewUser
         val firebaseUser = firebaseAuth.currentUser
         if (firebaseUser != null) {
-            val uid = firebaseUser.uid
-            val name = firebaseUser.displayName
-            val email = firebaseUser.email
-            val user = User(uid, name ?: "", email ?: "", TypeUser.USER_COMMERCE)
-            if (isNewUser == true) {
-                databaseReference.child(uid).setValue(user).addOnCompleteListener {
-                    prefs.user = user
-                    registerSuccess.value = CitySelectorActivity::class.java
-                    liveDataLoading.value = false
+            if (firebaseUser.isEmailVerified) {
+                val uid = firebaseUser.uid
+                val name = firebaseUser.displayName
+                val email = firebaseUser.email
+                val user = User(uid, name ?: "", email ?: "", TypeUser.USER_COMMERCE)
+                if (isNewUser == true) {
+                    databaseReference.child(uid).setValue(user).addOnCompleteListener {
+                        prefs.user = user
+                        registerSuccess.value = CitySelectorActivity::class.java
+                        liveDataLoading.value = false
+                    }
+                } else {
+                    databaseReference.child(uid)
+                        .addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                val userData = dataSnapshot.getValue(User::class.java)
+                                prefs.user = userData
+                                registerSuccess.value = CitySelectorActivity::class.java
+                                liveDataLoading.value = false
+                            }
+
+                            override fun onCancelled(p0: DatabaseError) {
+                                liveDataLoading.value = false
+                            }
+                        })
                 }
             } else {
-                databaseReference.child(uid)
-                    .addValueEventListener(object : ValueEventListener {
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            val userData = dataSnapshot.getValue(User::class.java)
-                            prefs.user = userData
-                            registerSuccess.value = CitySelectorActivity::class.java
-                            liveDataLoading.value = false
-                        }
-
-                        override fun onCancelled(p0: DatabaseError) {
-                            liveDataLoading.value = false
-                        }
-                    })
+                firebaseUser.sendEmailVerification()
+                    .addOnCompleteListener {
+                    }
+                liveDataLoading.value = false
+                liveDataError.value = UserLogin.EMAIL_NOT_VERIFIED
             }
         }
     }
@@ -165,7 +174,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                                 if (it.errorCode == "ERROR_WRONG_PASSWORD") {
                                     liveDataError.value = UserLogin.ERROR_WRONG_PASSWORD
                                 }
-                            } else if(it is FirebaseTooManyRequestsException){
+                            } else if (it is FirebaseTooManyRequestsException) {
                                 liveDataError.value = UserLogin.ERROR_TOO_MANY_REQUESTS
                             }
                         }

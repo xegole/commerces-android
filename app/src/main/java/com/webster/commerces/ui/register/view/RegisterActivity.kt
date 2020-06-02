@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityRegisterBinding
@@ -18,9 +19,11 @@ class RegisterActivity : BaseActivity() {
         ViewModelProvider(this).get(RegisterViewModel::class.java)
     }
 
+    lateinit var binding: ActivityRegisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityRegisterBinding>(
+        binding = DataBindingUtil.setContentView(
             this,
             R.layout.activity_register
         )
@@ -33,6 +36,16 @@ class RegisterActivity : BaseActivity() {
     private fun initObservers() {
         viewModel.liveDataRegisterSuccess.observe(this, Observer {
             goToActivity(it)
+        })
+
+        viewModel.liveDataVerifyEmail.observe(this, Observer { verifyEmail ->
+            if (verifyEmail) {
+                Snackbar.make(
+                    binding.buttonSignUp,
+                    R.string.message_verify_email,
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         })
 
         viewModel.liveDataError.observe(this, Observer {
@@ -50,7 +63,7 @@ class RegisterActivity : BaseActivity() {
                     getString(R.string.error_input_validate_password)
                 ValidateUser.ERROR_EMAIL_USE -> textFieldEmail.error =
                     getString(R.string.error_input_email_in_use)
-                else ->{
+                else -> {
                 }
             }
         })

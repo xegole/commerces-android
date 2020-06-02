@@ -49,8 +49,8 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
-        navView.menu.getItem(ConstantsArray.FIRST).isChecked = true
-        onNavigationItemSelected(navView.menu.getItem(ConstantsArray.FIRST))
+        navView.menu.getItem(ConstantsArray.SECOND).isChecked = true
+        onNavigationItemSelected(navView.menu.getItem(ConstantsArray.SECOND))
 
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->

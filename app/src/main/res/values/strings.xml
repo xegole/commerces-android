@@ -59,6 +59,8 @@
     <string name="side_menu_item_commerces">Comercios</string>
     <string name="side_menu_item_category">Categorias</string>
     <string name="side_menu_item_deal">Promociones</string>
+    <string name="side_menu_item_emergency">Emergencias</string>
+    <string name="side_menu_item_interesting_places">Sitios de interes</string>
     <string name="side_menu_item_about">Acerca</string>
     <string name="side_menu_item_contact_us">Contactanos</string>
     <string name="side_menu_item_communicate">Communicate</string>
@@ -109,12 +111,14 @@
     <string name="message_edit_deal_dialog">¿Que desea hacer con su promocion?</string>
     <string name="message_delete_commerce_dialog">¿Desea eliminar su comercio?</string>
     <string name="message_delete_deal_dialog">¿Desea eliminar su promocion?</string>
+    <string name="message_verify_email">Enviamos un enlace de verificacion al correo registrado</string>
     <string name="buscar_categoria">Buscar categoria</string>
     <string name="label_login">Iniciar sesión</string>
 
     <string name="error_input_email">Ingrese un correo válido</string>
     <string name="error_input_email_in_use">El correo electrónico ya está registrado</string>
     <string name="error_input_email_not_found">El correo electrónico no esta registrado</string>
+    <string name="error_input_email_not_verified">El correo electrónico no esta verificado</string>
     <string name="error_input_phone">Ingrese un teléfono válido</string>
     <string name="error_input_password">La contraseña debe contener mínimo 5 caracteres</string>
     <string name="error_input_wrong_password">La contraseña incorrecta</string>
