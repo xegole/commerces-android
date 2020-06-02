@@ -24,7 +24,13 @@ class CommercesAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: CommerceVH, position: Int) {
-        viewHolder.setData(items[position], clickListener)
+        val commerce = items[position]
+        if (commerce.verified) {
+            viewHolder.itemView.visibility = View.VISIBLE
+            viewHolder.setData(commerce, clickListener)
+        } else {
+            viewHolder.itemView.visibility = View.GONE
+        }
     }
 
     fun addItemList(list: List<Commerce>) {

@@ -22,12 +22,13 @@ import java.util.*
 import kotlin.collections.ArrayList
 import com.webster.commerces.ui.commerces.view.DetailCommerceActivity.Companion.EXTRA_COMMERCE_DATA as EXTRA_COMMERCE_DATA1
 
+private const val CITY_PARAMS = "cityId"
+
 class CommercesFragment : BaseFragment() {
 
     private val database = FirebaseDatabase.getInstance()
     private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
     private val bannerReference = database.getReference(FirebaseReferences.BANNERS)
-    private val categoriesReference = database.getReference(FirebaseReferences.CATEGORIES)
 
     private val adapter by lazy {
         CommercesAdapter(ArrayList()) { commerce, v -> commerceItemClicked(commerce, v) }
@@ -48,17 +49,9 @@ class CommercesFragment : BaseFragment() {
     private fun initObservers() {
         showLoading()
         if (prefs.cityId.isNotEmpty()) {
-            commercesReference.orderByChild("cityId").equalTo(prefs.cityId)
+            commercesReference.orderByChild(CITY_PARAMS).equalTo(prefs.cityId)
                 .addListDataListener<Commerce> { list, success ->
                     if (success) {
-                        adapter.addItemList(list)
-                    }
-                    dismissLoading()
-                }
-        } else {
-            commercesReference.orderByChild("cityId").equalTo(prefs.remember)
-                .addListDataListener<Commerce> { list, b ->
-                    if (b) {
                         adapter.addItemList(list)
                     }
                     dismissLoading()
