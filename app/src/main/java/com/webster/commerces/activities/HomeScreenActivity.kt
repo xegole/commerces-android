@@ -19,7 +19,7 @@ import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.addFragment
 import com.webster.commerces.extensions.goToActivity
 import com.webster.commerces.fragments.*
-import com.webster.commerces.ui.cityselector.view.CitySelectorActivity
+import com.webster.commerces.ui.cityselector.view.SelectCityDialog
 import com.webster.commerces.ui.login.view.LoginActivity
 import com.webster.commerces.utils.ConstantsArray
 import kotlinx.android.synthetic.main.activity_home_screen.*
@@ -29,7 +29,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private val firebaseAuth = FirebaseAuth.getInstance()
     private var googleSignInClient: GoogleSignInClient? = null
 
-    private var currentFragment: Int = 0
+    private var currentFragment = 0
 
     private val prefs by lazy {
         AppCore.prefs
@@ -47,11 +47,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
         navView.setNavigationItemSelectedListener(this)
-        navView.menu.getItem(ConstantsArray.SECOND).isChecked = true
-        onNavigationItemSelected(navView.menu.getItem(ConstantsArray.SECOND))
-
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
@@ -62,6 +58,10 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 Log.d("stateChanged", "Token registered: $token")
             })
 
+        if (prefs.cityId.isEmpty()) {
+            showSelectCityDialog()
+        }
+        defaultItem()
     }
 
     override fun onBackPressed() {
@@ -73,7 +73,6 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        toolbar.title = item.title
         when (item.itemId) {
             R.id.nav_commerces -> validateCurrentFragment(item.itemId, CommercesFragment.instance())
             R.id.nav_category -> validateCurrentFragment(item.itemId, CategoryFragment.instance())
@@ -83,13 +82,13 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 item.itemId,
                 ContactUsFragment.instance()
             )
-            R.id.nav_change_city -> navigate { goToActivity(CitySelectorActivity::class.java) }
+            R.id.nav_change_city -> showSelectCityDialog()
             R.id.nav_log_out -> logOut()
             R.id.nav_share -> {
             }
         }
-
         drawer_layout.closeDrawer(GravityCompat.START)
+        toolbar.title = item.title
         return true
     }
 
@@ -100,9 +99,10 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
-    private inline fun navigate(f: () -> Unit) {
-        prefs.cityId = ""
-        f()
+    private fun showSelectCityDialog() {
+        SelectCityDialog(this) {
+            defaultItem()
+        }.show()
     }
 
     private fun logOut() {
@@ -117,5 +117,10 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         firebaseAuth.signOut()
         goToActivity(LoginActivity::class.java)
     }
-}
 
+    private fun defaultItem() {
+        navView.menu.getItem(ConstantsArray.SECOND).isChecked = true
+        onNavigationItemSelected(navView.menu.getItem(ConstantsArray.SECOND))
+        toolbar.title = getString(R.string.side_menu_item_category)
+    }
+}

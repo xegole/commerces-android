@@ -4,9 +4,9 @@ data class User(
     var uid: String? = "",
     var name: String? = "",
     var email: String? = "",
-    var typeUser: TypeUser? = TypeUser.USER
+    var typeUser: TypeUser? = TypeUser.GUEST
 )
 
 enum class TypeUser {
-    ADMIN, USER_COMMERCE, USER
+    ADMIN, USER_COMMERCE, GUEST
 }

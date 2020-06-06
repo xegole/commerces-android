@@ -21,12 +21,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.webster.commerces.AppCore
 import com.webster.commerces.R
+import com.webster.commerces.activities.HomeScreenActivity
 import com.webster.commerces.entity.TypeUser
 import com.webster.commerces.entity.User
 import com.webster.commerces.extensions.getString
 import com.webster.commerces.extensions.goActivity
 import com.webster.commerces.extensions.hideKeyboard
-import com.webster.commerces.ui.cityselector.view.CitySelectorActivity
 import com.webster.commerces.ui.login.model.UserLogin
 import com.webster.commerces.ui.login.model.UserLoginData
 import com.webster.commerces.ui.login.view.RC_SIGN_IN
@@ -67,7 +67,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onGuestClick() = View.OnClickListener {
         prefs.clear()
-        registerSuccess.value = CitySelectorActivity::class.java
+        registerSuccess.value = HomeScreenActivity::class.java
     }
 
     fun onGoogleLoginClick() = View.OnClickListener {
@@ -128,7 +128,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 if (isNewUser == true) {
                     databaseReference.child(uid).setValue(user).addOnCompleteListener {
                         prefs.user = user
-                        registerSuccess.value = CitySelectorActivity::class.java
+                        registerSuccess.value = HomeScreenActivity::class.java
                         liveDataLoading.value = false
                     }
                 } else {
@@ -137,7 +137,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 val userData = dataSnapshot.getValue(User::class.java)
                                 prefs.user = userData
-                                registerSuccess.value = CitySelectorActivity::class.java
+                                registerSuccess.value = HomeScreenActivity::class.java
                                 liveDataLoading.value = false
                             }
 

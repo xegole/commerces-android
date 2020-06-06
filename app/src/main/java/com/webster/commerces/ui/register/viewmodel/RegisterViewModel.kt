@@ -8,11 +8,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.AppCore
+import com.webster.commerces.activities.HomeScreenActivity
 import com.webster.commerces.entity.TypeUser
 import com.webster.commerces.entity.User
 import com.webster.commerces.extensions.goActivity
 import com.webster.commerces.extensions.hideKeyboard
-import com.webster.commerces.ui.cityselector.view.CitySelectorActivity
 import com.webster.commerces.ui.login.view.LoginActivity
 import com.webster.commerces.ui.login.view.USERS_DATABASE
 import com.webster.commerces.ui.register.model.UserRegister
@@ -66,7 +66,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
                         val user = User(uid, "", userRegister.email, TypeUser.USER_COMMERCE)
                         databaseReference.child(uid).setValue(user).addOnCompleteListener {
                             prefs.user = user
-                            liveDataRegisterSuccess.value = CitySelectorActivity::class.java
+                            liveDataRegisterSuccess.value = HomeScreenActivity::class.java
                         }
                     } else {
                         firebaseUser?.sendEmailVerification()

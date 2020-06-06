@@ -5,7 +5,6 @@ import android.os.Handler
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.goToActivity
-import com.webster.commerces.ui.cityselector.view.CitySelectorActivity
 import com.webster.commerces.ui.login.view.LoginActivity
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.Prefs
@@ -21,7 +20,7 @@ class SplashScreenActivity : BaseActivity() {
         if (prefs.user == null) {
             goToActivity(LoginActivity::class.java)
         } else {
-            goToActivity(CitySelectorActivity::class.java)
+            goToActivity(HomeScreenActivity::class.java)
         }
     }
 
