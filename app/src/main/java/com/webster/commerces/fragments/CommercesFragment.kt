@@ -46,7 +46,7 @@ class CommercesFragment : BaseFragment() {
         initObservers()
     }
 
-    fun initObservers() {
+    private fun initObservers() {
         showLoading()
         if (prefs.cityId.isNotEmpty()) {
             commercesReference.orderByChild(CITY_PARAMS).equalTo(prefs.cityId)

@@ -120,7 +120,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     private fun defaultItem() {
         navView.menu.getItem(ConstantsArray.SECOND).isChecked = true
-        onNavigationItemSelected(navView.menu.getItem(ConstantsArray.SECOND))
+        onNavigationItemSelected(navView.menu.findItem(R.id.nav_category))
         toolbar.title = getString(R.string.side_menu_item_category)
     }
 }

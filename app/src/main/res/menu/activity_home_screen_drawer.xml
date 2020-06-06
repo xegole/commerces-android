@@ -3,49 +3,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_commerces"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/side_menu_item_commerces" />
-        <item
-            android:id="@+id/nav_category"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/side_menu_item_category" />
+    <item android:title="@string/side_menu_item_menu">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_commerces"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="@string/side_menu_item_commerces" />
+                <item
+                    android:id="@+id/nav_category"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="@string/side_menu_item_category" />
 
-        <item
-            android:id="@+id/nav_deal"
-            android:icon="@drawable/ic_edit_commerce"
-            android:title="@string/side_menu_item_deal" />
+                <item
+                    android:id="@+id/nav_deal"
+                    android:icon="@drawable/ic_edit_commerce"
+                    android:title="@string/side_menu_item_deal" />
 
-        <item
-            android:id="@+id/nav_emergency"
-            android:icon="@drawable/ic_webpage"
-            android:title="@string/side_menu_item_emergency" />
+                <item
+                    android:id="@+id/nav_emergency"
+                    android:icon="@drawable/ic_webpage"
+                    android:title="@string/side_menu_item_emergency" />
 
-        <item
-            android:id="@+id/nav_interesting_places"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/side_menu_item_interesting_places" />
+                <item
+                    android:id="@+id/nav_interesting_places"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="@string/side_menu_item_interesting_places" />
 
-        <item
-            android:id="@+id/nav_contact_us"
-            android:icon="@drawable/ic_menu_contact_us"
-            android:title="@string/side_menu_item_contact_us" />
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_about"
-            android:title="@string/side_menu_item_about" />
+                <item
+                    android:id="@+id/nav_contact_us"
+                    android:icon="@drawable/ic_menu_contact_us"
+                    android:title="@string/side_menu_item_contact_us" />
+                <item
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_menu_about"
+                    android:title="@string/side_menu_item_about" />
 
-        <item
-            android:id="@+id/nav_change_city"
-            android:icon="@drawable/ic_change_city"
-            android:title="@string/side_menu_item_change_city" />
-        <item
-            android:id="@+id/nav_log_out"
-            android:icon="@drawable/ic_log_out"
-            android:title="@string/side_menu_item_log_out" />
-    </group>
+                <item
+                    android:id="@+id/nav_change_city"
+                    android:icon="@drawable/ic_change_city"
+                    android:title="@string/side_menu_item_change_city" />
+                <item
+                    android:id="@+id/nav_log_out"
+                    android:icon="@drawable/ic_log_out"
+                    android:title="@string/side_menu_item_log_out" />
+            </group>
+        </menu>
+    </item>
+
 
     <item android:title="@string/side_menu_item_communicate">
         <menu>
