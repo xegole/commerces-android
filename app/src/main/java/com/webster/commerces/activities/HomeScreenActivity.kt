@@ -76,8 +76,13 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         when (item.itemId) {
             R.id.nav_commerces -> validateCurrentFragment(item.itemId, CommercesFragment.instance())
             R.id.nav_category -> validateCurrentFragment(item.itemId, CategoryFragment.instance())
-            R.id.nav_deal -> validateCurrentFragment(item.itemId, DealsFragment.instance())
+            R.id.nav_deal -> validateCurrentFragment(item.itemId, CategoryDealsFragment.instance())
             R.id.nav_about -> validateCurrentFragment(item.itemId, AboutFragment.instance())
+            R.id.nav_emergency -> validateCurrentFragment(item.itemId, EmergencyFragment.instance())
+            R.id.nav_interesting_places -> validateCurrentFragment(
+                item.itemId,
+                InterestPlacesFragment.instance()
+            )
             R.id.nav_contact_us -> validateCurrentFragment(
                 item.itemId,
                 ContactUsFragment.instance()
