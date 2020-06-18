@@ -9,7 +9,8 @@ import androidx.appcompat.widget.SearchView
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.activities.CategoryDetailActivity
-import com.webster.commerces.activities.CategoryDetailActivity.Companion.EXTRA_CATEGORY_DATA
+import com.webster.commerces.activities.EXTRA_CATEGORY_DATA
+import com.webster.commerces.activities.EXTRA_CATEGORY_DEAL
 import com.webster.commerces.adapter.CategoryDealAdapter
 import com.webster.commerces.base.BaseFragment
 import com.webster.commerces.entity.Category
@@ -47,6 +48,7 @@ class CategoryDealsFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private fun categoryItemClicked(category: Category) {
         val extras = Bundle()
         extras.putSerializable(EXTRA_CATEGORY_DATA, category)
+        extras.putBoolean(EXTRA_CATEGORY_DEAL, true)
         openActivityWithBundle(extras, CategoryDetailActivity::class.java)
     }
 

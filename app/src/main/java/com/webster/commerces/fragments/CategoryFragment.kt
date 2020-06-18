@@ -9,7 +9,7 @@ import androidx.appcompat.widget.SearchView
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.activities.CategoryDetailActivity
-import com.webster.commerces.activities.CategoryDetailActivity.Companion.EXTRA_CATEGORY_DATA
+import com.webster.commerces.activities.EXTRA_CATEGORY_DATA
 import com.webster.commerces.adapter.CategoryAdapter
 import com.webster.commerces.base.BaseFragment
 import com.webster.commerces.entity.Category

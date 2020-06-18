@@ -16,16 +16,21 @@ import kotlinx.android.synthetic.main.activity_detail_commerce.*
 import kotlinx.android.synthetic.main.fragment_commerces.*
 import java.util.*
 
+const val EXTRA_CATEGORY_DATA = "extra_category_data"
+const val EXTRA_CATEGORY_DEAL = "extra_category_deal"
+
+private const val CATEGORY_ID = "categoryId"
+
 class CategoryDetailActivity : BaseActivity() {
 
     private val database = FirebaseDatabase.getInstance()
     private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
 
-    companion object {
-        const val EXTRA_CATEGORY_DATA = "extra_category_data"
+    private val adapter by lazy {
+        CommercesAdapter(ArrayList()) { commerce, v -> commerceItemClicked(commerce, v) }
     }
 
-    private lateinit var commercesAdapter: CommercesAdapter
+    private var openFromDeals = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,16 +42,15 @@ class CategoryDetailActivity : BaseActivity() {
 
         intent.extras?.let { bundle ->
             val category = bundle.getSerializable(EXTRA_CATEGORY_DATA) as Category
+            openFromDeals = bundle.getBoolean(EXTRA_CATEGORY_DEAL, false)
             supportActionBar?.title = category.name
-
-            commercesAdapter = CommercesAdapter(ArrayList()) { commerce, v -> commerceItemClicked(commerce, v) }
-            recyclerCommerces.adapter = commercesAdapter
+            recyclerCommerces.adapter = adapter
 
             showLoading()
-            commercesReference.orderByChild("categoryId").equalTo(category.categoryId)
+            commercesReference.orderByChild(CATEGORY_ID).equalTo(category.categoryId)
                 .addListDataListener<Commerce> { list, success ->
                     if (success) {
-                        commercesAdapter.addItemList(list)
+                        adapter.addItemList(list)
                     }
                     dismissLoading()
                 }
@@ -61,6 +65,10 @@ class CategoryDetailActivity : BaseActivity() {
     private fun commerceItemClicked(commerce: Commerce, view: View) {
         val bundle = Bundle()
         bundle.putSerializable(DetailCommerceActivity.EXTRA_COMMERCE_DATA, commerce)
-        openActivityWithBundleOptions(view, bundle, DetailCommerceActivity::class.java)
+        openActivityWithBundleOptions(
+            view,
+            bundle,
+            if (openFromDeals) DealsActivity::class.java else DetailCommerceActivity::class.java
+        )
     }
 }
