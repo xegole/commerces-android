@@ -26,6 +26,8 @@ import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.activity_home_screen.*
 import kotlinx.android.synthetic.main.content_toolbar.*
 
+private const val KEY_DEVICES = "devices"
+
 class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private var googleSignInClient: GoogleSignInClient? = null
@@ -101,6 +103,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         SelectCityDialog(this) { cityId ->
             cityId?.let { id ->
                 if (prefs.cityId != id) {
+                    deleteToken(prefs.cityId)
                     prefs.cityId = id
                     registerToken(id)
                 }
@@ -110,6 +113,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun logOut() {
+        deleteToken(prefs.cityId)
         prefs.clear()
         val googleSignInOptions =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -120,6 +124,18 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         googleSignInClient?.signOut()
         firebaseAuth.signOut()
         goToActivity(LoginActivity::class.java)
+    }
+
+    private fun deleteToken(cityId: String) {
+        if (prefs.cityId.isNotEmpty()) {
+            val uid = prefs.user?.uid ?: ""
+            if (uid.isNotEmpty()) {
+                citiesReference.child(cityId)
+                    .child(KEY_DEVICES)
+                    .child(uid)
+                    .removeValue()
+            }
+        }
     }
 
     private fun defaultItem() {
