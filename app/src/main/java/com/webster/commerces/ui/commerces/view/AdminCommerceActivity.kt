@@ -15,7 +15,6 @@ import com.webster.commerces.extensions.goToActivity
 import com.webster.commerces.extensions.openActivityWithBundle
 import com.webster.commerces.ui.commerces.viewmodel.AdminCommerceViewModel
 import com.webster.commerces.ui.deal.view.DealCommerceActivity
-import com.webster.commerces.ui.deal.view.EXTRA_COMMERCE_ID
 import com.webster.commerces.utils.Prefs
 import kotlinx.android.synthetic.main.activity_admin_commerce.*
 
@@ -38,9 +37,7 @@ class AdminCommerceActivity : AppCompatActivity() {
                         EditState.DELETE -> deleteDialog(
                             commerce.commerceId
                         )
-                        EditState.DEAL -> goCommerceDeals(
-                            commerce.commerceId
-                        )
+                        EditState.DEAL -> goCommerceDeals(commerce)
                     }
                 }
             editCommerceDialog?.show()
@@ -98,9 +95,9 @@ class AdminCommerceActivity : AppCompatActivity() {
         openActivityWithBundle(extras, CreateCommerceActivity::class.java, false)
     }
 
-    private fun goCommerceDeals(commerceId: String) {
+    private fun goCommerceDeals(commerce: Commerce) {
         val extras = Bundle()
-        extras.putString(EXTRA_COMMERCE_ID, commerceId)
+        extras.putSerializable(EXTRA_COMMERCE_DATA, commerce)
         openActivityWithBundle(extras, DealCommerceActivity::class.java, false)
     }
 

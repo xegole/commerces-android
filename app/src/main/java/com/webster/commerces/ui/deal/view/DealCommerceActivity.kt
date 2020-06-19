@@ -17,12 +17,13 @@ import com.webster.commerces.R
 import com.webster.commerces.activities.RESULT_CODE_GALLERY
 import com.webster.commerces.adapter.DealsAdapter
 import com.webster.commerces.databinding.ActivityDealCommerceBinding
+import com.webster.commerces.entity.Commerce
 import com.webster.commerces.entity.Deal
+import com.webster.commerces.ui.commerces.view.EXTRA_COMMERCE_DATA
 import com.webster.commerces.ui.deal.viewmodel.DealCommerceViewModel
 import com.webster.commerces.utils.Constants
 import kotlinx.android.synthetic.main.activity_deal_commerce.*
 
-const val EXTRA_COMMERCE_ID = "extra_commerce_id"
 
 class DealCommerceActivity : AppCompatActivity() {
 
@@ -33,8 +34,8 @@ class DealCommerceActivity : AppCompatActivity() {
 
     private var editDealDialog: EditDealDialog? = null
 
-    private val commerceId by lazy {
-        intent.getStringExtra(EXTRA_COMMERCE_ID)
+    private val commerce by lazy {
+        intent.getSerializableExtra(EXTRA_COMMERCE_DATA) as Commerce
     }
 
     private val adapter by lazy {
@@ -53,7 +54,7 @@ class DealCommerceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_deal_commerce)
         binding.viewModel = viewModel
-        binding.commerceId = commerceId
+        binding.commerce = commerce
         binding.lifecycleOwner = this
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -64,7 +65,7 @@ class DealCommerceActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        viewModel.getDealsByCommerce(commerceId)
+        viewModel.getDealsByCommerce(commerce.commerceId)
         viewModel.liveDataSuccess.observe(this, Observer { success ->
             if (success) {
                 showSnack(R.string.message_created_deal_success)

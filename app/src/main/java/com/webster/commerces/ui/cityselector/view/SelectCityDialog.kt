@@ -18,7 +18,7 @@ import com.webster.commerces.ui.commerces.view.AdminCommerceActivity
 import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.select_city_dialog.*
 
-class SelectCityDialog(context: Context, private val callback: () -> Unit) :
+class SelectCityDialog(context: Context, private val callback: (String?) -> Unit) :
     Dialog(context), AdapterView.OnItemSelectedListener {
 
     private val firebaseDatabase = FirebaseDatabase.getInstance()
@@ -28,6 +28,8 @@ class SelectCityDialog(context: Context, private val callback: () -> Unit) :
         AppCore.prefs
     }
 
+    private var selectedCity: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.select_city_dialog)
@@ -35,7 +37,7 @@ class SelectCityDialog(context: Context, private val callback: () -> Unit) :
         loadCitiesByFirebase()
         buttonDone.setOnClickListener {
             prefs.remember = checkBoxRememberCity.isChecked
-            callback.invoke()
+            callback.invoke(selectedCity)
             dismiss()
         }
 
@@ -48,14 +50,14 @@ class SelectCityDialog(context: Context, private val callback: () -> Unit) :
         buttonAdmin.setOnClickListener {
             val intent = Intent(context, AdminActivity::class.java)
             context.startActivity(intent)
-            callback.invoke()
+            callback.invoke(null)
             dismiss()
         }
 
         buttonUser.setOnClickListener {
             val intent = Intent(context, AdminCommerceActivity::class.java)
             context.startActivity(intent)
-            callback.invoke()
+            callback.invoke(null)
             dismiss()
         }
     }
@@ -79,6 +81,6 @@ class SelectCityDialog(context: Context, private val callback: () -> Unit) :
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val citySelected = parent?.getItemAtPosition(position) as City
-        prefs.cityId = citySelected.cityId
+        selectedCity = citySelected.cityId
     }
 }

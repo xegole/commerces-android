@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.webster.commerces.entity.Commerce
 import com.webster.commerces.entity.Deal
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.utils.Constants
@@ -49,7 +50,7 @@ class DealCommerceViewModel(application: Application) : AndroidViewModel(applica
         dealId = deal.id
     }
 
-    fun saveDeal(commerceId: String) = View.OnClickListener {
+    fun saveDeal(commerce: Commerce) = View.OnClickListener {
         val dealName = liveDataDealName.value ?: Constants.EMPTY_STRING
         if (dealName.isNotEmpty()) {
             if (editMode) {
@@ -58,18 +59,19 @@ class DealCommerceViewModel(application: Application) : AndroidViewModel(applica
                 }
             } else if (imageFile != null) {
                 val id = dealsReference.push().key ?: Constants.EMPTY_STRING
-                saveDealToFirebase(id, dealName, commerceId)
+                saveDealToFirebase(id, dealName, commerce)
             }
         }
     }
 
-    private fun saveDealToFirebase(id: String, dealName: String, commerceId: String) {
+    private fun saveDealToFirebase(id: String, dealName: String, commerce: Commerce) {
         val map = HashMap<String, Any>()
         map["id"] = id
         map["name"] = dealName
         map["price"] = liveDataDealPrice.value ?: ""
         map["description"] = liveDataDealDescription.value ?: ""
-        map["commerce"] = commerceId
+        map["commerce"] = commerce.commerceId
+        map["cityId"] = commerce.cityId
 
         dealsReference.child(id).setValue(map).addOnSuccessListener {
             imageFile?.let { imageUri ->

@@ -7,6 +7,7 @@ import com.webster.commerces.entity.User
 
 private const val PREFS_FILENAME = "com.webster.prefs"
 private const val CITY_ID = "city_id"
+private const val TOKEN_ID = "token_id"
 private const val REMEMBER_CITY = "remember_city"
 private const val TYPE_USER = "type_user"
 private const val USER_DATA = "user_data"
@@ -21,6 +22,10 @@ class Prefs(context: Context) {
     var cityId: String
         get() = prefs.getString(CITY_ID, "") ?: ""
         set(value) = prefs.edit().putString(CITY_ID, value).apply()
+
+    var tokenDevice: String
+        get() = prefs.getString(TOKEN_ID, "") ?: ""
+        set(value) = prefs.edit().putString(TOKEN_ID, value).apply()
 
     var remember: Boolean
         get() = prefs.getBoolean(REMEMBER_CITY, false)

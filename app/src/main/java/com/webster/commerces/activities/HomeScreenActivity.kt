@@ -1,7 +1,6 @@
 package com.webster.commerces.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -12,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import com.webster.commerces.AppCore
 import com.webster.commerces.R
@@ -22,12 +22,15 @@ import com.webster.commerces.fragments.*
 import com.webster.commerces.ui.cityselector.view.SelectCityDialog
 import com.webster.commerces.ui.login.view.LoginActivity
 import com.webster.commerces.utils.ConstantsArray
+import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.activity_home_screen.*
 import kotlinx.android.synthetic.main.content_toolbar.*
 
 class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private var googleSignInClient: GoogleSignInClient? = null
+    private val firebaseDatabase = FirebaseDatabase.getInstance()
+    private val citiesReference = firebaseDatabase.getReference(FirebaseReferences.CITIES)
 
     private var currentFragment = 0
 
@@ -48,16 +51,6 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    return@OnCompleteListener
-                }
-
-                val token = task.result?.token
-                Log.d("stateChanged", "Token registered: $token")
-            })
-
         if (prefs.cityId.isEmpty()) {
             showSelectCityDialog()
         }
@@ -105,7 +98,13 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun showSelectCityDialog() {
-        SelectCityDialog(this) {
+        SelectCityDialog(this) { cityId ->
+            cityId?.let { id ->
+                if (prefs.cityId != id) {
+                    prefs.cityId = id
+                    registerToken(id)
+                }
+            }
             defaultItem()
         }.show()
     }
@@ -127,5 +126,26 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         navView.menu.getItem(ConstantsArray.SECOND).isChecked = true
         onNavigationItemSelected(navView.menu.findItem(R.id.nav_category))
         toolbar.title = getString(R.string.side_menu_item_category)
+    }
+
+    private fun registerToken(cityId: String) {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    return@OnCompleteListener
+                }
+                val tokenDevice = task.result?.token ?: ""
+                updateToken(tokenDevice, cityId)
+            })
+    }
+
+    private fun updateToken(token: String, cityId: String) {
+        prefs.tokenDevice = token
+        citiesReference.child(cityId)
+            .child("devices")
+            .child(prefs.user?.uid ?: "")
+            .setValue(token)
+            .addOnSuccessListener {
+            }
     }
 }
