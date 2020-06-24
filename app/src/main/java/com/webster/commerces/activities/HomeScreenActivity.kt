@@ -16,10 +16,15 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.webster.commerces.AppCore
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
+import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.addFragment
+import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.goToActivity
+import com.webster.commerces.extensions.openActivityWithBundle
 import com.webster.commerces.fragments.*
+import com.webster.commerces.services.EXTRA_DATA_COMMERCE
 import com.webster.commerces.ui.cityselector.view.SelectCityDialog
+import com.webster.commerces.ui.commerces.view.DetailCommerceActivity
 import com.webster.commerces.ui.login.view.LoginActivity
 import com.webster.commerces.utils.ConstantsArray
 import com.webster.commerces.utils.FirebaseReferences
@@ -27,12 +32,14 @@ import kotlinx.android.synthetic.main.activity_home_screen.*
 import kotlinx.android.synthetic.main.content_toolbar.*
 
 private const val KEY_DEVICES = "devices"
+private const val KEY_COMMERCES_ID = "commerceId"
 
 class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private var googleSignInClient: GoogleSignInClient? = null
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private val citiesReference = firebaseDatabase.getReference(FirebaseReferences.CITIES)
+    private val commercesReference = firebaseDatabase.getReference(FirebaseReferences.COMMERCES)
 
     private var currentFragment = 0
 
@@ -57,6 +64,21 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             showSelectCityDialog()
         }
         defaultItem()
+
+
+        intent?.let {
+            val commerceId = it.getStringExtra(EXTRA_DATA_COMMERCE) ?: ""
+            if (commerceId.isNotEmpty()) {
+                showLoading()
+                commercesReference.orderByChild(KEY_COMMERCES_ID).equalTo(commerceId)
+                    .addListDataListener<Commerce> { list, success ->
+                        if (success) {
+                            openCommerceDeals(list.first())
+                        }
+                        dismissLoading()
+                    }
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -97,6 +119,12 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             addFragment(currentFragment)
             this.currentFragment = currentId
         }
+    }
+
+    private fun openCommerceDeals(commerce: Commerce) {
+        val bundle = Bundle()
+        bundle.putSerializable(DetailCommerceActivity.EXTRA_COMMERCE_DATA, commerce)
+        openActivityWithBundle(bundle, DealsActivity::class.java, false)
     }
 
     private fun showSelectCityDialog() {

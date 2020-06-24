@@ -15,11 +15,17 @@ import com.google.firebase.messaging.RemoteMessage
 import com.webster.commerces.R
 import com.webster.commerces.activities.HomeScreenActivity
 
+const val EXTRA_DATA_COMMERCE = " extra_data_commerce"
+
 class MessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         val intent = Intent(this, HomeScreenActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        if (remoteMessage.data.isNotEmpty()) {
+            Log.d(TAG, "Message data payload: " + remoteMessage.data["commerce"])
+            intent.putExtra(EXTRA_DATA_COMMERCE, remoteMessage.data["commerce"])
+        }
 
         val pendingIntent = PendingIntent.getActivity(
             this, 0, intent,
@@ -29,7 +35,7 @@ class MessagingService : FirebaseMessagingService() {
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_address_location)
+            .setSmallIcon(R.drawable.ic_discount)
             .setContentTitle(remoteMessage.notification?.title)
             .setContentText(remoteMessage.notification?.body)
             .setAutoCancel(true)
