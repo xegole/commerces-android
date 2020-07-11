@@ -218,7 +218,8 @@
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
                 android:text="@string/label_like_guest"
-                android:textColor="@color/colorGrayDark" />
+                android:textColor="@color/colorGrayDark"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/buttonGuest"
@@ -226,7 +227,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{viewModel.onGuestClick()}"
-                android:text="@string/label_button_guest" />
+                android:text="@string/label_button_guest"
+                android:visibility="gone" />
         </LinearLayout>
 
         <TextView

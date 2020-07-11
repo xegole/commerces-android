@@ -53,7 +53,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/background_commerce_detail" />
+                    android:background="@color/background_commerce_view" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"

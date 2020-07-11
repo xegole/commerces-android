@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.activities.UpdateCommerceActivity
@@ -18,7 +17,7 @@ import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityListCommercesBinding
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.extensions.goToActivity
-import com.webster.commerces.ui.commerces.ListCommercesViewModel
+import com.webster.commerces.ui.commerces.viewmodel.ListCommercesViewModel
 import com.webster.commerces.utils.FirebaseReferences
 import kotlinx.android.synthetic.main.activity_list_commerces.*
 

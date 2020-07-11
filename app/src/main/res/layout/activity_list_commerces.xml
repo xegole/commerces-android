@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.webster.commerces.ui.commerces.ListCommercesViewModel" />
+            type="com.webster.commerces.ui.commerces.viewmodel.ListCommercesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

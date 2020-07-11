@@ -1,4 +1,4 @@
-package com.webster.commerces.ui.commerces
+package com.webster.commerces.ui.commerces.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
