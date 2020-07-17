@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4918B7</color>
-    <color name="colorPrimaryDark">#341977</color>
-    <color name="colorAccent">#5A29B4</color>
+    <color name="colorPrimary">#c72624</color>
+    <color name="colorPrimaryDark">#c72640</color>
+    <color name="colorAccent">#29b6f6</color>
 
     <color name="colorGoogle">#de5246</color>
 
@@ -22,5 +22,7 @@
     <color name="colorBackGround">#f2f2f7</color>
     <color name="selectedCard">#B2949499</color>
     <color name="colorGrayBlur">#8c939393</color>
+
+    <color name="colorSplash">#c72624</color>
 
 </resources>

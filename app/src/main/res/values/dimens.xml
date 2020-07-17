@@ -7,6 +7,8 @@
     <dimen name="margin_x_large">30dp</dimen>
     <dimen name="margin_xx_large">40dp</dimen>
 
+    <dimen name="margin_splash_vector">100dp</dimen>
+
     <dimen name="padding_small">5dp</dimen>
     <dimen name="padding_medium">10dp</dimen>
     <dimen name="padding_large">20dp</dimen>

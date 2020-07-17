@@ -2,12 +2,15 @@ package com.webster.commerces.activities
 
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.goToActivity
 import com.webster.commerces.ui.login.view.LoginActivity
+import com.webster.commerces.ui.register.view.RegisterActivity
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.Prefs
+import kotlinx.android.synthetic.main.activity_pre_login.*
 
 class SplashScreenActivity : BaseActivity() {
 
@@ -18,7 +21,7 @@ class SplashScreenActivity : BaseActivity() {
     private val handler = Handler()
     private val runnable = Runnable {
         if (prefs.user == null) {
-            goToActivity(LoginActivity::class.java)
+            containerFlowLogin.visibility = View.VISIBLE
         } else {
             goToActivity(HomeScreenActivity::class.java)
         }
@@ -26,7 +29,14 @@ class SplashScreenActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(R.layout.activity_pre_login)
+        buttonLogin.setOnClickListener {
+            goToActivity(LoginActivity::class.java)
+        }
+
+        buttonSingUp.setOnClickListener {
+            goToActivity(RegisterActivity::class.java)
+        }
     }
 
     override fun onResume() {

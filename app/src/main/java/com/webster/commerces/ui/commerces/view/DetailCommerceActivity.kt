@@ -25,6 +25,8 @@ import com.webster.commerces.extensions.show
 import com.webster.commerces.listener.AppBarStateChangeListener
 import com.webster.commerces.ui.commerces.viewmodel.DetailCommerceViewModel
 import com.webster.commerces.ui.rate.RateDialog
+import com.webster.commerces.utils.Constants.EMPTY_STRING
+import io.fabric.sdk.android.InitializationCallback
 import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter
 import kotlinx.android.synthetic.main.activity_detail_commerce.*
 
@@ -60,7 +62,7 @@ class DetailCommerceActivity : AppCompatActivity() {
 
         intent.extras?.let {
             commerce = it.getSerializable(EXTRA_COMMERCE_DATA) as Commerce
-            supportActionBar?.title = commerce.name
+            supportActionBar?.title = EMPTY_STRING
             imageCommerce.loadUrl(commerce.urlImage()) {
                 onSuccess {
                     supportStartPostponedEnterTransition()

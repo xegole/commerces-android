@@ -16,16 +16,16 @@ import com.webster.commerces.entity.CommerceLocation
 
 class DetailCommerceViewModel(application: Application) : AndroidViewModel(application) {
 
-
     val liveDataSocialAction = MutableLiveData<Intent>()
     val liveDataErrorMessage = MutableLiveData<Int>()
     val liveDataDescription = MutableLiveData<String>()
     val liveDataAddress = MutableLiveData<String>()
-
+    val liveDataNameCommerce = MutableLiveData<String>()
 
     fun initCommerceData(commerce: Commerce) {
         liveDataAddress.value = commerce.address
         liveDataDescription.value = commerce.description
+        liveDataNameCommerce.value = commerce.name
     }
 
     fun onClickItemMenu(menuItem: MenuItem, commerce: Commerce) {

@@ -53,7 +53,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/background_commerce_view" />
+                    android:background="@color/background_category_view" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -80,7 +80,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_x_large"
+                    android:layout_marginTop="@dimen/margin_large"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -88,6 +88,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/labelNameCommerce"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.liveDataNameCommerce}"
+                            android:textSize="@dimen/text_size_large"
+                            android:textStyle="bold"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:textColor="@color/material_black"
+                            tools:text="Name Commerce testing" />
 
                         <TextView
                             android:id="@+id/labelAddress"
