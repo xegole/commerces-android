@@ -58,6 +58,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- Side Menu Strings-->
+    <string name="side_menu_item_commerces_own">Mis comercios</string>
     <string name="side_menu_item_commerces">Comercios</string>
     <string name="side_menu_item_menu">Menú</string>
     <string name="side_menu_item_category">Categorias</string>

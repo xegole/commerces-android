@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -91,6 +92,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.nav_commerces_own -> validateCurrentFragment(item.itemId, CommercesOwnFragment.instance())
             R.id.nav_commerces -> validateCurrentFragment(item.itemId, CommercesFragment.instance())
             R.id.nav_category -> validateCurrentFragment(item.itemId, CategoryFragment.instance())
             R.id.nav_deal -> validateCurrentFragment(item.itemId, CategoryDealsFragment.instance())
@@ -163,7 +165,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun defaultItem() {
-        navView.menu.getItem(ConstantsArray.SECOND).isChecked = true
+        navView.menu.getItem(ConstantsArray.DEFAULT_ITEM_MENU).isChecked = true
         onNavigationItemSelected(navView.menu.findItem(R.id.nav_category))
         toolbar.title = getString(R.string.side_menu_item_category)
     }

@@ -13,4 +13,6 @@ object Constants {
 object ConstantsArray {
     const val FIRST = 0
     const val SECOND = 1
+
+    const val DEFAULT_ITEM_MENU = 2
 }

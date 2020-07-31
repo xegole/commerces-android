@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_splash_vector"
             android:background="@color/white"
+            android:visibility="gone"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,15 +59,15 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_bulding"
-            android:tint="@color/colorGrayDark"
+            android:src="@drawable/img_tutorial_1"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/containerLogo" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <LinearLayout
             android:id="@+id/containerFlowLogin"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_large"
             android:orientation="horizontal"
