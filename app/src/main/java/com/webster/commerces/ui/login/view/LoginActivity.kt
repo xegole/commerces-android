@@ -66,9 +66,9 @@ class LoginActivity : BaseActivity() {
 
         binding.labelTermsPrivacy.movementMethod = LinkMovementMethod.getInstance()
 
-        if (BuildConfig.DEBUG) {
-            viewModel.initTestData()
-        }
+//        if (BuildConfig.DEBUG) {
+//            viewModel.initTestData()
+//        }
     }
 
     override fun onNewIntent(intent: Intent?) {

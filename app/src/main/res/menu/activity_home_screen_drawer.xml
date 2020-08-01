@@ -6,34 +6,34 @@
 
         <item
             android:id="@+id/nav_commerces_own"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_commerces"
             android:title="@string/side_menu_item_commerces_own" />
         <item
             android:id="@+id/nav_commerces"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_commerces"
             android:title="@string/side_menu_item_commerces" />
         <item
             android:id="@+id/nav_category"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_category"
             android:title="@string/side_menu_item_category" />
 
         <item
             android:id="@+id/nav_deal"
-            android:icon="@drawable/ic_edit_commerce"
+            android:icon="@drawable/ic_deals"
             android:title="@string/side_menu_item_deal" />
 
         <item
             android:id="@+id/nav_emergency"
-            android:icon="@drawable/ic_webpage"
+            android:icon="@drawable/ic_emergency"
             android:title="@string/side_menu_item_emergency" />
 
         <item
             android:id="@+id/nav_contact_us"
-            android:icon="@drawable/ic_menu_contact_us"
+            android:icon="@drawable/ic_contact_us"
             android:title="@string/side_menu_item_contact_us" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_about"
+            android:icon="@drawable/ic_about"
             android:title="@string/side_menu_item_about" />
 
         <item

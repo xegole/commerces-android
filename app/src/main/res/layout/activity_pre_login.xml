@@ -15,62 +15,19 @@
         android:layout_height="match_parent"
         android:background="@color/colorSplash">
 
-        <LinearLayout
-            android:id="@+id/containerLogo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_splash_vector"
-            android:background="@color/white"
-            android:visibility="gone"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="91.5dp"
-                android:src="@drawable/ic_wave" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_xx_large"
-                android:text="MERKA"
-                android:textColor="@color/colorSplash"
-                android:textSize="60sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_xx_large"
-                android:text="Lo buscas, lo encuentras."
-                android:textColor="@color/colorSplash"
-                android:textSize="30sp" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="91.5dp"
-                android:layout_marginTop="@dimen/margin_xx_large"
-                android:src="@drawable/ic_wave_invert" />
-        </LinearLayout>
-
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_tutorial_1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_splash_1" />
 
         <LinearLayout
             android:id="@+id/containerFlowLogin"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_large"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
