@@ -71,7 +71,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
         Album.image(it.context)
             .multipleChoice()
             .camera(true)
-            .columnCount(5)
+            .columnCount(4)
             .selectCount(3)
             .checkedList(albumFiles)
             .filterSize { false }

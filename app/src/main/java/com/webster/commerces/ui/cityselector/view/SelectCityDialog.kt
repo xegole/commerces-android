@@ -44,18 +44,8 @@ class SelectCityDialog(context: Context, private val callback: (String?) -> Unit
         buttonAdmin.visibility =
             if (prefs.user?.typeUser == TypeUser.ADMIN) View.VISIBLE else View.GONE
 
-        buttonUser.visibility =
-            if (prefs.user?.typeUser == TypeUser.USER_COMMERCE) View.VISIBLE else View.GONE
-
         buttonAdmin.setOnClickListener {
             val intent = Intent(context, AdminActivity::class.java)
-            context.startActivity(intent)
-            callback.invoke(null)
-            dismiss()
-        }
-
-        buttonUser.setOnClickListener {
-            val intent = Intent(context, AdminCommerceActivity::class.java)
             context.startActivity(intent)
             callback.invoke(null)
             dismiss()

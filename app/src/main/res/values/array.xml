@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="emergency_types">
+        <item>Hospital</item>
+        <item>Alcaldia</item>
+        <item>Bomberos</item>
+        <item>Ambulancia</item>
+        <item>Defenza civil</item>
+        <item>Policia</item>
+    </string-array>
+</resources>

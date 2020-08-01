@@ -21,6 +21,7 @@
 
     <string name="label_create_category">Crear categoria</string>
     <string name="label_create_commerce">Crear comercio</string>
+    <string name="label_create_emergency">Crear emergencia</string>
     <string name="label_location_commerce">Ubicacion</string>
     <string name="label_create_city">Crear ciudad</string>
     <string name="label_edit_commerce">Editar comercio</string>
@@ -40,6 +41,9 @@
 
 
     <string name="label_hint_commerce_name">Nombre del comercio</string>
+    <string name="label_hint_emergency_number">Numero de emergencia</string>
+    <string name="label_hint_dial_number">Numero de cuadrante</string>
+    <string name="label_hint_whatsapp">Numero de whatsapp</string>
     <string name="label_hint_city_name">Nombre de la ciudad</string>
     <string name="label_hint_category_name">Nombre de la categoria</string>
     <string name="label_hint_deal_name">Nombre de la promocion</string>
@@ -92,6 +96,7 @@
     <string name="label_send">Enviar</string>
 
     <string name="message_created_commerce_success">Se ha creado su comercio</string>
+    <string name="message_created_emergency_success">Se ha creado nueva emergencia</string>
     <string name="message_created_deal_success">Se ha creado la promocion</string>
     <string name="message_create_deal_error">Hubo un error al crear la promocion</string>
 
@@ -108,6 +113,7 @@
     <string name="label_create_deal_banner_image">Imagen para promocion</string>
     <string name="label_create_commerce_internal_image">Imagenes representativas del comercio</string>
     <string name="label_selected_city">Seleccione una ciudad</string>
+    <string name="label_selected_emergency">Seleccione tipo de emergencia</string>
     <string name="label_selected_category">Seleccione una categoria</string>
 
     <string name="message_city_created_success">La ciudad fue creada</string>

@@ -42,13 +42,4 @@
         android:text="@string/label_admin_screen"
         android:textAllCaps="false"
         android:visibility="gone" />
-
-    <Button
-        android:id="@+id/buttonUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/label_create_commerce"
-        android:textAllCaps="false"
-        android:visibility="gone" />
 </LinearLayout>

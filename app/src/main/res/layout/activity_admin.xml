@@ -12,82 +12,98 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/grayLight">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:theme="@style/AppTheme.AppBarOverlay" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <Button
-            android:id="@+id/buttonCreateCommerce"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{viewModel.onClickCreateCommerce()}"
-            android:text="@string/label_create_commerce"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/buttonCreateCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{viewModel.onClickCreateCategory()}"
-            android:text="@string/label_create_category"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonCreateCommerce" />
+            <Button
+                android:id="@+id/buttonCreateCommerce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel.onClickCreateCommerce()}"
+                android:text="@string/label_create_commerce"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/buttonCreateCity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{viewModel.onClickCreateCity()}"
-            android:text="@string/label_create_city"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonCreateCategory" />
+            <Button
+                android:id="@+id/buttonCreateCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel.onClickCreateCategory()}"
+                android:text="@string/label_create_category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonCreateCommerce" />
 
-        <Button
-            android:id="@+id/buttonEditCommerce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{viewModel.onClickEditCommerces()}"
-            android:text="@string/label_edit_commerce"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonCreateCity" />
+            <Button
+                android:id="@+id/buttonCreateCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel.onClickCreateCity()}"
+                android:text="@string/label_create_city"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonCreateCategory" />
 
-        <Button
-            android:id="@+id/buttonEditCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{viewModel.onClickEditCategories()}"
-            android:text="@string/label_edit_category"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonEditCommerce"
-            tools:layout_editor_absoluteX="162dp"
-            tools:layout_editor_absoluteY="506dp" />
+            <Button
+                android:id="@+id/buttonEditCommerce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel.onClickEditCommerces()}"
+                android:text="@string/label_edit_commerce"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonCreateCity" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{viewModel.OnClickSendNotification()}"
-            android:text="@string/send_notification"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/buttonEditCategory"
-            app:layout_constraintStart_toStartOf="@+id/buttonEditCategory"
-            app:layout_constraintTop_toBottomOf="@+id/buttonEditCategory" />
+            <Button
+                android:id="@+id/buttonEditCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel.onClickEditCategories()}"
+                android:text="@string/label_edit_category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonEditCommerce"
+                tools:layout_editor_absoluteX="162dp"
+                tools:layout_editor_absoluteY="506dp" />
 
+            <Button
+                android:id="@+id/buttonCreateEmergency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel.onClickCreateEmergency()}"
+                android:text="@string/label_create_emergency" />
 
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel.OnClickSendNotification()}"
+                android:text="@string/send_notification"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/buttonEditCategory"
+                app:layout_constraintStart_toStartOf="@+id/buttonEditCategory"
+                app:layout_constraintTop_toBottomOf="@+id/buttonEditCategory" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

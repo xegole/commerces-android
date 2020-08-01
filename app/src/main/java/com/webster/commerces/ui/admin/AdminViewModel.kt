@@ -10,6 +10,7 @@ import com.webster.commerces.extensions.goActivity
 import com.webster.commerces.ui.categories.view.ListCategoriesActivity
 import com.webster.commerces.ui.cityselector.view.CreateCityActivity
 import com.webster.commerces.ui.commerces.view.ListCommercesActivity
+import com.webster.commerces.ui.emergency.CreateEmergencyActivity
 
 class AdminViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -27,6 +28,10 @@ class AdminViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onClickEditCategories() = View.OnClickListener {
         it.goActivity(ListCategoriesActivity::class.java)
+    }
+
+    fun onClickCreateEmergency() = View.OnClickListener {
+        it.goActivity(CreateEmergencyActivity::class.java)
     }
 
     fun OnClickSendNotification() = View.OnClickListener {
