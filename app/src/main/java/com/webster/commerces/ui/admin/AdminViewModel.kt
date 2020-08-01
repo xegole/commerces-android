@@ -10,7 +10,7 @@ import com.webster.commerces.extensions.goActivity
 import com.webster.commerces.ui.categories.view.ListCategoriesActivity
 import com.webster.commerces.ui.cityselector.view.CreateCityActivity
 import com.webster.commerces.ui.commerces.view.ListCommercesActivity
-import com.webster.commerces.ui.emergency.CreateEmergencyActivity
+import com.webster.commerces.ui.emergency.view.CreateEmergencyActivity
 
 class AdminViewModel(application: Application) : AndroidViewModel(application) {
 

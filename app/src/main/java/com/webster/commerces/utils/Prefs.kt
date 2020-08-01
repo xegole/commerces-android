@@ -9,7 +9,7 @@ private const val PREFS_FILENAME = "com.webster.prefs"
 private const val CITY_ID = "city_id"
 private const val TOKEN_ID = "token_id"
 private const val REMEMBER_CITY = "remember_city"
-private const val TYPE_USER = "type_user"
+private const val FIRST_TIME = "first_time"
 private const val USER_DATA = "user_data"
 
 class Prefs(context: Context) {
@@ -37,6 +37,10 @@ class Prefs(context: Context) {
             val data = gson.toJson(value)
             prefs.edit().putString(USER_DATA, data).apply()
         }
+
+    var firstTime: Boolean
+        get() = prefs.getBoolean(FIRST_TIME, true)
+        set(value) = prefs.edit().putBoolean(FIRST_TIME, value).apply()
 
     fun clear() {
         val editor: SharedPreferences.Editor = prefs.edit()

@@ -111,7 +111,11 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.emergency.CreateEmergencyActivity"
+            android:name=".ui.emergency.view.CreateEmergencyActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.tutorial.TutorialActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

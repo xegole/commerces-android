@@ -1,4 +1,4 @@
-package com.webster.commerces.ui.emergency
+package com.webster.commerces.ui.emergency.view
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
