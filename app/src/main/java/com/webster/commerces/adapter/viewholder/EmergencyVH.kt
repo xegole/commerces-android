@@ -1,5 +1,7 @@
 package com.webster.commerces.adapter.viewholder
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import com.webster.commerces.R
 import com.webster.commerces.adapter.base.BaseViewHolder
@@ -23,5 +25,39 @@ class EmergencyVH(itemView: View) : BaseViewHolder<Emergency>(itemView) {
         itemView.containerDial.setOnClickListener {
             itemView.containerDial.visibility = View.GONE
         }
+
+        itemView.buttonWhatsapp.setOnClickListener {
+            goToChatWhatsapp(item.whatsapp)
+        }
+
+        itemView.buttonDial.setOnClickListener {
+            goToContact(item.number)
+        }
+
+        itemView.imageEmergency.setImageResource(getImage(item.type))
+    }
+
+    private fun getImage(type: Int): Int {
+        val drawableName = "ic_emergency_$type"
+        return itemView.context.resources.getIdentifier(
+            drawableName,
+            "drawable",
+            itemView.context.packageName
+        )
+    }
+
+    private fun goToChatWhatsapp(num: String) {
+        val isAppInstalled = appInstalledOrNot(itemView.context, "com.whatsapp")
+        if (isAppInstalled) {
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=+57$num"))
+            itemView.context.startActivity(intent)
+        }
+    }
+
+    private fun goToContact(phone: String) {
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$phone")
+        itemView.context.startActivity(intent)
     }
 }
