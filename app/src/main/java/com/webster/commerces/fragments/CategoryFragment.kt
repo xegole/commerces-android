@@ -61,9 +61,7 @@ class CategoryFragment : BaseFragment(), SearchView.OnQueryTextListener {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onQueryTextSubmit(query: String): Boolean {
-        return false
-    }
+    override fun onQueryTextSubmit(query: String) = false
 
     override fun onQueryTextChange(newText: String): Boolean {
         categoryAdapter.filter.filter(newText)
