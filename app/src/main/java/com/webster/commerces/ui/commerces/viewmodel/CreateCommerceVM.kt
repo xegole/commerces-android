@@ -8,12 +8,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.webster.commerces.R
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.City
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.entity.CommerceLocation
 import com.webster.commerces.extensions.addListDataListener
 import com.webster.commerces.extensions.hideKeyboard
+import com.webster.commerces.extensions.serializeToMap
 import com.webster.commerces.ui.maps.MapsActivity
 import com.webster.commerces.utils.Constants
 import com.webster.commerces.utils.FirebaseReferences
@@ -45,7 +47,7 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     val commerceInstagram = MutableLiveData<String>()
     val commerceWebPage = MutableLiveData<String>()
     val commerceEmail = MutableLiveData<String>()
-    val commerceCreatedSuccess = MutableLiveData<Boolean>()
+    val commerceCreatedSuccess = MutableLiveData(0)
     val liveDataIntent = MutableLiveData<Intent>()
 
     val liveDataLoading = MutableLiveData(false)
@@ -53,18 +55,35 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     var imageFile: Uri? = null
     var category: Category? = null
     var city: City? = null
+    private var currentCommerce: Commerce? = null
+    private var editMode = false
 
     val prefs by lazy {
         Prefs(getApplication())
     }
 
     fun initEditMode(commerce: Commerce) {
+        currentCommerce = commerce
+        editMode = true
+
         commerceName.value = commerce.name
         commerceDescription.value = commerce.description
         commerceAddress.value = commerce.address
         commercePhone.value = commerce.phone.toString()
         commerceWhatsapp.value = commerce.whatsapp
         commerceFacebook.value = commerce.facebook
+        commerceInstagram.value = commerce.instagram
+        commerceWebPage.value = commerce.webPage
+        commerceEmail.value = commerce.email
+        commerceLocation.value = commerce.location
+
+        val albumFiles = commerce.images.map { imageData ->
+            val album = AlbumFile().apply {
+                path = imageData
+            }
+            album
+        }
+        commercesImages.value = albumFiles
     }
 
     fun onAddCommerceImages() = View.OnClickListener {
@@ -88,7 +107,13 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
 
     fun onCreateCommerce() = View.OnClickListener {
         it.hideKeyboard()
-        saveCommerce()
+        if (editMode) {
+            currentCommerce?.let { commerce ->
+                updateCommerceToFirebase(commerce)
+            }
+        } else {
+            saveCommerce()
+        }
     }
 
     fun onMapsActivity() = View.OnClickListener {
@@ -162,33 +187,59 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     private fun saveCommerceToFirebase(id: String, commerceName: String) {
         if (category != null && city != null) {
             liveDataLoading.value = true
-            val commerce = Commerce()
-            commerce.commerceId = id
-            commerce.name = commerceName
-            commerce.description = commerceDescription.value ?: Constants.EMPTY_STRING
-            commerce.cityId = city?.cityId ?: "1"
-            commerce.address = commerceAddress.value ?: Constants.EMPTY_STRING
-            commerce.location = commerceLocation.value ?: CommerceLocation()
-            commerce.categoryId = category?.categoryId ?: Constants.EMPTY_STRING
-            commerce.phone = commercePhone.value?.toLong() ?: Constants.LONG_ZERO
-            commerce.whatsapp = commerceWhatsapp.value ?: Constants.EMPTY_STRING
-            commerce.facebook = commerceFacebook.value ?: Constants.EMPTY_STRING
-            commerce.instagram = commerceInstagram.value ?: Constants.EMPTY_STRING
-            commerce.webPage = commerceWebPage.value ?: Constants.EMPTY_STRING
-            commerce.email = commerceEmail.value ?: Constants.EMPTY_STRING
-            commerce.uid = prefs.user?.uid
-            commercesReference.child(id).setValue(commerce).addOnSuccessListener {
+            commercesReference.child(id).setValue(getCommerce(id, commerceName)).addOnSuccessListener {
                 imageFile?.run {
                     uploadBannerImageCommerce(this, id)
                 }
                 uploadImagesCommerce(id)
                 liveDataLoading.value = false
-                commerceCreatedSuccess.value = true
+                commerceCreatedSuccess.value = R.string.message_created_commerce_success
             }.addOnFailureListener {
                 liveDataLoading.value = false
-                commerceCreatedSuccess.value = false
+                commerceCreatedSuccess.value = R.string.message_error_created_commerce_success
             }
         }
+    }
+
+    private fun updateCommerceToFirebase(commerce: Commerce) {
+        val commerceName = commerceName.value ?: commerce.name
+        if (commerceName.isNotEmpty()) {
+            liveDataLoading.value = true
+            val commerceToUpdate = getCommerce(commerce.commerceId, commerceName)
+            commerceToUpdate.verified = commerce.verified
+            commerceToUpdate.commerceImage = commerce.commerceImage
+            commerceToUpdate.images = commerce.images
+            commercesReference.child(commerce.commerceId).updateChildren(commerceToUpdate.serializeToMap()).addOnSuccessListener {
+                imageFile?.run {
+                    uploadBannerImageCommerce(this, commerce.commerceId)
+                }
+                uploadImagesCommerce(commerce.commerceId)
+                liveDataLoading.value = false
+                commerceCreatedSuccess.value = R.string.message_updated_commerce_success
+            }.addOnFailureListener {
+                liveDataLoading.value = false
+                commerceCreatedSuccess.value = R.string.message_error_updated_commerce_success
+            }
+        }
+    }
+
+    private fun getCommerce(commerceId: String, name: String): Commerce {
+        val commerce = Commerce()
+        commerce.commerceId = commerceId
+        commerce.name = name
+        commerce.description = commerceDescription.value ?: Constants.EMPTY_STRING
+        commerce.cityId = city?.cityId ?: "1"
+        commerce.address = commerceAddress.value ?: Constants.EMPTY_STRING
+        commerce.location = commerceLocation.value ?: CommerceLocation()
+        commerce.categoryId = category?.categoryId ?: Constants.EMPTY_STRING
+        commerce.phone = commercePhone.value?.toLong() ?: Constants.LONG_ZERO
+        commerce.whatsapp = commerceWhatsapp.value ?: Constants.EMPTY_STRING
+        commerce.facebook = commerceFacebook.value ?: Constants.EMPTY_STRING
+        commerce.instagram = commerceInstagram.value ?: Constants.EMPTY_STRING
+        commerce.webPage = commerceWebPage.value ?: Constants.EMPTY_STRING
+        commerce.email = commerceEmail.value ?: Constants.EMPTY_STRING
+        commerce.uid = prefs.user?.uid
+        return commerce
     }
 
     private fun updateBannerCommerce(id: String, urlImage: String?) {

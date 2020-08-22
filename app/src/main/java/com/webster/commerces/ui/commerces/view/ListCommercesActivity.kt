@@ -34,10 +34,10 @@ class ListCommercesActivity : BaseActivity() {
         CommercesAdapter(ArrayList()) { commerce, _ ->
             val alertDialog = AlertDialog.Builder(this)
             alertDialog.setTitle("¿DO YOU WANT DELETE A COMMERCE OR EDIT?")
-            alertDialog.setPositiveButton("DELETE") { dialog, which ->
+            alertDialog.setPositiveButton("DELETE") { _, _ ->
                 deleteCommerce(commerce.commerceId)
             }
-            alertDialog.setNegativeButton("EDIT") { dialog, which ->
+            alertDialog.setNegativeButton("EDIT") { _, _ ->
                 goToActivity(UpdateCommerceActivity::class.java)
             }
             alertDialog.show()

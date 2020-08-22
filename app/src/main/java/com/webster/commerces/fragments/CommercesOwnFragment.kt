@@ -33,12 +33,8 @@ class CommercesOwnFragment : BaseFragment(), SearchView.OnQueryTextListener {
             editCommerceDialog =
                 EditCommerceDialog(requireActivity()) {
                     when (it) {
-                        EditState.EDIT -> goEditCommerce(
-                            commerce
-                        )
-                        EditState.DELETE -> deleteDialog(
-                            commerce.commerceId
-                        )
+                        EditState.EDIT -> goEditCommerce(commerce)
+                        EditState.DELETE -> deleteDialog(commerce.commerceId)
                         EditState.DEAL -> goCommerceDeals(commerce)
                     }
                 }
@@ -84,12 +80,14 @@ class CommercesOwnFragment : BaseFragment(), SearchView.OnQueryTextListener {
         extras.putBoolean(EXTRA_EDIT_MODE, true)
         extras.putSerializable(EXTRA_COMMERCE_DATA, commerce)
         openActivityWithBundle(extras, CreateCommerceActivity::class.java)
+        editCommerceDialog?.dismiss()
     }
 
     private fun goCommerceDeals(commerce: Commerce) {
         val extras = Bundle()
         extras.putSerializable(EXTRA_COMMERCE_DATA, commerce)
         openActivityWithBundle(extras, DealCommerceActivity::class.java)
+        editCommerceDialog?.dismiss()
     }
 
     private fun deleteDialog(commerceId: String) {

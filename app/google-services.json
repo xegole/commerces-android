@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "762561065396-kkfeqnk5e1dfed7bjvtfkgete01u5a4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.webster.commerces",
+            "certificate_hash": "2253dd610fb3daae216bbb85ee473d7e5b9a9676"
+          }
+        },
+        {
+          "client_id": "762561065396-i1oabgbrhq1er1fldolpcsj1n53fe4ll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.webster.commerces",
+            "certificate_hash": "7d7dc611ad12b8e94a142eb45d53f88c2bec5e03"
+          }
+        },
+        {
+          "client_id": "762561065396-djik9j18t48s3pdrc98h5h8g7ehf8tk9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.webster.commerces",
+            "certificate_hash": "3b07a990ccee1cc30ddc2a810c313e337f0d95d3"
+          }
+        },
+        {
           "client_id": "762561065396-0qrnvn4u1l4gknl569i8gni1a3hphae1.apps.googleusercontent.com",
           "client_type": 3
         }

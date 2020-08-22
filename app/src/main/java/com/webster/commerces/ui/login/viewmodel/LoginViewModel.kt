@@ -56,11 +56,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         onLogin()
     }
 
-    fun initTestData() {
-        liveDataEmail.value = "xegole@hotmail.com"
-        liveDataPassword.value = "diegoleon89"
-    }
-
     fun onRegisterClick() = View.OnClickListener {
         it.goActivity(RegisterActivity::class.java, true)
     }

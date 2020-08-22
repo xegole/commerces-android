@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.model.LatLng
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
-import com.webster.commerces.activities.RESULT_CODE_GALLERY
+import com.webster.commerces.ui.categories.view.RESULT_CODE_GALLERY
 import com.webster.commerces.databinding.ActivityCreateCommerceBinding
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.City
@@ -27,6 +27,7 @@ import com.webster.commerces.ui.maps.EXTRA_COMMERCE_LOCATION
 import com.webster.commerces.utils.Constants
 import kotlinx.android.synthetic.main.activity_create_category.viewGallery
 import kotlinx.android.synthetic.main.activity_create_commerce.*
+import kotlinx.android.synthetic.main.activity_create_commerce.toolbar
 
 
 const val EXTRA_EDIT_MODE = "extra_edit_mode"
@@ -39,9 +40,7 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         ViewModelProvider(this).get(CreateCommerceVM::class.java)
     }
 
-    private val adapter by lazy {
-        PagerImagesAdapter(supportFragmentManager)
-    }
+    private val adapter by lazy { PagerImagesAdapter(supportFragmentManager) }
 
     private val editMode by lazy {
         intent.extras?.getBoolean(EXTRA_EDIT_MODE, false) ?: false
@@ -72,9 +71,9 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         viewModel.getCategories()
         viewModel.getCities()
 
-        viewModel.commercesImages.observe(this, Observer {
+        viewModel.commercesImages.observe(this) {
             adapter.setData(it)
-        })
+        }
 
         viewModel.listCategories.observe(this, Observer {
             setSpinnerWithCategories(it)
@@ -83,16 +82,16 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             setSpinnerWithCities(it)
         })
 
-        viewModel.commerceCreatedSuccess.observe(this, Observer { success ->
-            if (success) {
+        viewModel.commerceCreatedSuccess.observe(this) { resource ->
+            if (resource != 0) {
                 Toast.makeText(
                     this,
-                    getString(R.string.message_created_commerce_success),
+                    getString(resource),
                     Toast.LENGTH_SHORT
                 ).show()
                 onSupportNavigateUp()
             }
-        })
+        }
 
         viewModel.liveDataIntent.observe(this, Observer {
             startActivityForResult(it, REQUEST_COMMERCE_LOCATION)
@@ -101,6 +100,10 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         if (editMode) {
             commerceData?.let {
                 viewModel.initEditMode(it)
+                buttonCreate.setText(R.string.label_update_commerce)
+                if (it.commerceImage.isNotEmpty()) {
+                    Picasso.get().load(it.commerceImage).into(imageCommerce)
+                }
             }
         }
     }
@@ -174,7 +177,7 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             }
         } else if (requestCode == REQUEST_COMMERCE_LOCATION && resultCode == Activity.RESULT_OK) {
             val location = data?.getParcelableExtra<LatLng>(EXTRA_COMMERCE_LOCATION)
-            location?.let {currentMarker->
+            location?.let { currentMarker ->
                 viewModel.commerceLocation.value = CommerceLocation().apply {
                     latitude = currentMarker.latitude
                     longitude = currentMarker.longitude

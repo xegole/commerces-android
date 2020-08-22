@@ -38,6 +38,7 @@
     <string name="label_admin_rate">Calificar</string>
     <string name="label_create_deal">Crear promocion</string>
     <string name="label_update_deal">Actualizar promocion</string>
+    <string name="label_update_category">Actualizar categoria</string>
     <string name="label_go_commerce">Ir al comercio -></string>
 
 
@@ -93,11 +94,20 @@
     <string name="label_log_in_or_connect_with">ó inicia con</string>
     <string name="label_like_guest">ó como</string>
     <string name="label_google">Google</string>
+    <string name="label_see_more"><u>ver mas</u></string>
+    <string name="label_see_less"><u>ver menos</u></string>
     <string name="label_privacy_policy">Al usar MerkaApp, acepta nuestra <a href="privacy:">política de privacidad</a> y los <a href="terms:">términos y condiciones</a>.</string>
 
     <string name="label_send">Enviar</string>
 
     <string name="message_created_commerce_success">Se ha creado su comercio</string>
+    <string name="message_created_category_success">Se ha creado su categoria</string>
+    <string name="message_updated_commerce_success">Se ha actualizado su comercio</string>
+    <string name="message_updated_category_success">Se ha actualizado su categoria</string>
+    <string name="message_error_created_commerce_success">Error al crear su comercio</string>
+    <string name="message_error_created_category">Error al crear su categoria</string>
+    <string name="message_error_update_category">Error al actualizar su categoria</string>
+    <string name="message_error_updated_commerce_success">Error al actualizar su comercio</string>
     <string name="message_created_emergency_success">Se ha creado nueva emergencia</string>
     <string name="message_created_deal_success">Se ha creado la promocion</string>
     <string name="message_create_deal_error">Hubo un error al crear la promocion</string>

@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
-import com.webster.commerces.activities.RESULT_CODE_GALLERY
+import com.webster.commerces.ui.categories.view.RESULT_CODE_GALLERY
 import com.webster.commerces.adapter.DealsAdapter
 import com.webster.commerces.databinding.ActivityDealCommerceBinding
 import com.webster.commerces.entity.Commerce

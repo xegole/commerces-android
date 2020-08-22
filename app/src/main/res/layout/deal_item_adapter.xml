@@ -53,21 +53,38 @@
             android:orientation="horizontal"
             android:padding="@dimen/padding_medium">
 
-            <TextView
-                android:id="@+id/labelDescription"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:textColor="@android:color/darker_gray"
-                tools:text="Test Description for deal long and another text and other word for testing that and more letter and more words" />
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/labelDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:textColor="@android:color/darker_gray"
+                    tools:text="Test Description for deal long and another text and other word for testing that and more letter and more words" />
+
+                <TextView
+                    android:id="@+id/labelSeeMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelDescription"
+                    android:layout_alignParentEnd="true"
+                    android:padding="@dimen/margin_small"
+                    android:text="@string/label_see_more"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/labelGoToCommerce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
+                android:paddingTop="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_small"
                 android:text="@string/label_go_commerce"
                 android:textColor="@color/com_facebook_blue" />
         </LinearLayout>

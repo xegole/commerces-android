@@ -29,8 +29,12 @@ class ImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fileImage?.let {
-            val file = File(it.path)
-            Picasso.get().load(file).into(imageFile)
+            if (it.path.contains("http")) {
+                Picasso.get().load(it.path).into(imageFile)
+            } else {
+                val file = File(it.path)
+                Picasso.get().load(file).into(imageFile)
+            }
         }
     }
 

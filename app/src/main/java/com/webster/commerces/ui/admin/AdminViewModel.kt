@@ -3,7 +3,7 @@ package com.webster.commerces.ui.admin
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
-import com.webster.commerces.activities.CreateCategoryActivity
+import com.webster.commerces.ui.categories.view.CreateCategoryActivity
 import com.webster.commerces.activities.NotificationActivity
 import com.webster.commerces.extensions.goActivity
 import com.webster.commerces.ui.categories.view.ListCategoriesActivity

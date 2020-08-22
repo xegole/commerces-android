@@ -14,7 +14,7 @@ class Commerce : Serializable {
     var location = CommerceLocation()
     var categoryId = Constants.EMPTY_STRING
     var description = Constants.EMPTY_STRING
-    val images = listOf<String>()
+    var images = listOf<String>()
     var whatsapp: String = Constants.EMPTY_STRING
     var facebook: String = Constants.EMPTY_STRING
     var instagram: String = Constants.EMPTY_STRING
