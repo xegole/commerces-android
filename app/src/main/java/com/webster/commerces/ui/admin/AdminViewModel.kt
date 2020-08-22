@@ -4,15 +4,21 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import com.webster.commerces.activities.CreateCategoryActivity
-import com.webster.commerces.ui.commerces.view.CreateCommerceActivity
 import com.webster.commerces.activities.NotificationActivity
 import com.webster.commerces.extensions.goActivity
 import com.webster.commerces.ui.categories.view.ListCategoriesActivity
 import com.webster.commerces.ui.cityselector.view.CreateCityActivity
+import com.webster.commerces.ui.commerces.view.CreateCommerceActivity
 import com.webster.commerces.ui.commerces.view.ListCommercesActivity
+import com.webster.commerces.ui.commerces.view.ValidateCommercesActivity
 import com.webster.commerces.ui.emergency.view.CreateEmergencyActivity
 
 class AdminViewModel(application: Application) : AndroidViewModel(application) {
+
+
+    fun onClickValidateCommerces() = View.OnClickListener {
+        it.goActivity(ValidateCommercesActivity::class.java)
+    }
 
     fun onClickCreateCommerce() = View.OnClickListener {
         it.goActivity(CreateCommerceActivity::class.java)

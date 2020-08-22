@@ -52,7 +52,7 @@ class CommercesFragment : BaseFragment() {
             commercesReference.orderByChild(CITY_PARAMS).equalTo(prefs.cityId)
                 .addListDataListener<Commerce> { list, success ->
                     if (success) {
-                        adapter.addItemList(list)
+                        adapter.addItemList(list.filter { it.verified })
                     }
                     dismissLoading()
                 }

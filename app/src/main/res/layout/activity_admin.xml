@@ -35,6 +35,17 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <Button
+                android:id="@+id/buttonValidateCommerces"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel.onClickValidateCommerces()}"
+                android:text="@string/label_validate_commerces"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
                 android:id="@+id/buttonCreateCommerce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

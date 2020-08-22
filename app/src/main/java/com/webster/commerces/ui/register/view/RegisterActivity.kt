@@ -51,6 +51,8 @@ class RegisterActivity : BaseActivity() {
         viewModel.liveDataError.observe(this, Observer {
             defaultErrorInputLayout()
             when (it) {
+                ValidateUser.ERROR_NAME -> textFieldName.error =
+                    getString(R.string.error_input_name)
                 ValidateUser.ERROR_EMAIL -> textFieldEmail.error =
                     getString(R.string.error_input_email)
                 ValidateUser.ERROR_PHONE -> textFieldPhone.error =
@@ -70,6 +72,7 @@ class RegisterActivity : BaseActivity() {
     }
 
     private fun defaultErrorInputLayout() {
+        textFieldName.error = null
         textFieldEmail.error = null
         textFieldPhone.error = null
         textFieldPassword.error = null

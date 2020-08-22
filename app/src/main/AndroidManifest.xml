@@ -118,6 +118,10 @@
             android:name=".ui.tutorial.TutorialActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.commerces.view.ValidateCommercesActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9df5c7a3f0b5991ac166b9a2596cd2af6da3303a" />

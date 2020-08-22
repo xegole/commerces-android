@@ -4,11 +4,13 @@ import android.util.Patterns
 import io.fabric.sdk.android.services.common.CommonUtils.isNullOrEmpty
 
 data class UserRegister(
+    val name: String,
     val email: String,
     val phone: String,
     val password: String,
     val validatePassword: String
 ) {
+    private val invalidName = name.isBlank() || name.length < 3
 
     private fun isValidEmail() =
         !isNullOrEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -21,23 +23,20 @@ data class UserRegister(
     private fun isSamePassword() = password == validatePassword
 
     fun validateUser(): ValidateUser {
-        return if (!isValidEmail()) {
-            ValidateUser.ERROR_EMAIL
-        } else if (invalidPhone()) {
-            ValidateUser.ERROR_PHONE
-        } else if (!isValidPassword()) {
-            ValidateUser.ERROR_PASSWORD
-        } else if (!isValidValidatePassword()) {
-            ValidateUser.ERROR_VALIDATE_PASSWORD
-        } else if (!isSamePassword()) {
-            ValidateUser.ERROR_VERIFY_PASSWORD
-        } else {
-            ValidateUser.VALID_USER
+        return when {
+            invalidName -> ValidateUser.ERROR_NAME
+            !isValidEmail() -> ValidateUser.ERROR_EMAIL
+            invalidPhone() -> ValidateUser.ERROR_PHONE
+            !isValidPassword() -> ValidateUser.ERROR_PASSWORD
+            !isValidValidatePassword() -> ValidateUser.ERROR_VALIDATE_PASSWORD
+            !isSamePassword() -> ValidateUser.ERROR_VERIFY_PASSWORD
+            else -> ValidateUser.VALID_USER
         }
     }
 }
 
 enum class ValidateUser {
+    ERROR_NAME,
     ERROR_EMAIL,
     ERROR_PHONE,
     ERROR_PASSWORD,

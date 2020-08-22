@@ -26,6 +26,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
         AppCore.prefs
     }
 
+    val nameLiveData = MutableLiveData<String>()
     val liveDataEmail = MutableLiveData<String>()
     val liveDataPhone = MutableLiveData<String>()
     val liveDataPassword = MutableLiveData<String>()
@@ -43,6 +44,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
     fun onRegisterClick() = View.OnClickListener {
         it.hideKeyboard()
         val userRegister = UserRegister(
+            nameLiveData.value ?: "",
             liveDataEmail.value ?: "",
             liveDataPhone.value ?: "",
             liveDataPassword.value ?: "",

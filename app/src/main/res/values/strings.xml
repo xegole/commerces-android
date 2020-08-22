@@ -21,6 +21,7 @@
 
     <string name="label_create_category">Crear categoria</string>
     <string name="label_create_commerce">Crear comercio</string>
+    <string name="label_validate_commerces">Validar comercios</string>
     <string name="label_create_emergency">Crear emergencia</string>
     <string name="label_location_commerce">Ubicacion</string>
     <string name="label_create_city">Crear ciudad</string>
@@ -77,6 +78,7 @@
     <string name="side_menu_item_log_out">Cerrar sesión</string>
 
     <string name="label_hint_name_last_name">Nombre y Apellidos</string>
+    <string name="label_hint_name">Nombre</string>
     <string name="label_hint_company">Empresa</string>
     <string name="label_hint_phone">Teléfono</string>
     <string name="label_hint_email">Correo electrónico</string>
@@ -125,6 +127,7 @@
     <string name="buscar_categoria">Buscar categoria</string>
     <string name="label_login">Iniciar sesión</string>
 
+    <string name="error_input_name">Ingrese un nombre válido</string>
     <string name="error_input_email">Ingrese un correo válido</string>
     <string name="error_input_email_in_use">El correo electrónico ya está registrado</string>
     <string name="error_input_email_not_found">El correo electrónico no esta registrado</string>

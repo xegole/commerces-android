@@ -8,7 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.webster.commerces.R
 import com.webster.commerces.adapter.viewholder.CategoryVH
 import com.webster.commerces.entity.Category
+import com.webster.commerces.extensions.containsDeAccentLowCase
+import com.webster.commerces.extensions.deAccent
+import java.text.Normalizer
 import java.util.*
+import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
 
@@ -53,7 +57,7 @@ class CategoryAdapter(
                 items
             }else {
                 val filterPattern = constraint.toString().toLowerCase(Locale.getDefault()).trim()
-                items.filter { it.name.toLowerCase(Locale.getDefault()).contains(filterPattern) }
+                items.filter { it.name.containsDeAccentLowCase(filterPattern) }
             }
             results.values = list
             results.count = list.size
