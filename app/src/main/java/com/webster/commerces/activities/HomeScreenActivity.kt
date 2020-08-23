@@ -3,8 +3,8 @@ package com.webster.commerces.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.app.ShareCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -104,12 +104,19 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             )
             R.id.nav_change_city -> showSelectCityDialog()
             R.id.nav_log_out -> logOut()
-            R.id.nav_share -> {
-            }
+            R.id.nav_share -> shareApp()
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         toolbar.title = item.title
         return true
+    }
+
+    private fun shareApp() {
+        ShareCompat.IntentBuilder.from(this)
+            .setType("text/plain")
+            .setChooserTitle("Chooser title")
+            .setText("http://play.google.com/store/apps/details?id=$packageName")
+            .startChooser();
     }
 
     private fun validateCurrentFragment(currentId: Int, currentFragment: Fragment) {

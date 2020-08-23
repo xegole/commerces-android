@@ -9,6 +9,7 @@ import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.databinding.ActivityRegisterBinding
 import com.webster.commerces.extensions.goToActivity
+import com.webster.commerces.ui.login.view.LoginActivity
 import com.webster.commerces.ui.register.model.ValidateUser
 import com.webster.commerces.ui.register.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.activity_register.*
@@ -23,13 +24,12 @@ class RegisterActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(
-            this,
-            R.layout.activity_register
-        )
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         initObservers()
     }
 
@@ -69,6 +69,11 @@ class RegisterActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        goToActivity(LoginActivity::class.java)
+        return true
     }
 
     private fun defaultErrorInputLayout() {

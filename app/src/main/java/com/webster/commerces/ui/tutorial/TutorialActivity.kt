@@ -55,8 +55,8 @@ class TutorialActivity : BaseActivity() {
         )
         list.add(
             TutorialItem(
-                "",
-                "Aumente sus ventas desde casa",
+                "\"Sencillo\"",
+                "Aumente sus ventas desde la comodidad de su casa",
                 2
             )
         )

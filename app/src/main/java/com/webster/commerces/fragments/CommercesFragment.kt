@@ -3,7 +3,10 @@ package com.webster.commerces.fragments
 
 import android.os.Bundle
 import android.os.Handler
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.adapter.BannerPagerAdapter
@@ -24,7 +27,7 @@ import com.webster.commerces.ui.commerces.view.DetailCommerceActivity.Companion.
 
 private const val CITY_PARAMS = "cityId"
 
-class CommercesFragment : BaseFragment() {
+class CommercesFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     private val database = FirebaseDatabase.getInstance()
     private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
@@ -42,6 +45,7 @@ class CommercesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         recyclerCommerces.adapter = adapter
         initObservers()
     }
@@ -102,5 +106,20 @@ class CommercesFragment : BaseFragment() {
     companion object {
         private var currentPage = Constants.INT_ZERO
         fun instance() = CommercesFragment()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.activity_search_view_menu, menu)
+        val searchItem = menu.findItem(R.id.search_view)
+        val searchView: SearchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onQueryTextSubmit(query: String?) = false
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        adapter.filter.filter(newText)
+        return true
     }
 }

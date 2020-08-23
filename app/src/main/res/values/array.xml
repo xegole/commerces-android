@@ -3,10 +3,10 @@
     <string-array
         name="emergency_types">
         <item>Hospital</item>
-        <item>Alcaldia</item>
+        <item>Alcaldía</item>
         <item>Bomberos</item>
         <item>Ambulancia</item>
         <item>Defenza civil</item>
-        <item>Policia</item>
+        <item>Policía</item>
     </string-array>
 </resources>
