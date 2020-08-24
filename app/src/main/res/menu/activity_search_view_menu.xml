@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/search_view"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
         android:icon="@drawable/ic_search"
-        app:showAsAction="collapseActionView|ifRoom"
-        android:title="@string/buscar_categoria" />
+        android:title="@string/label_search_category"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom" />
 
 </menu>

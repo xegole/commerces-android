@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.webster.commerces.R
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.base.BaseFragment
@@ -59,8 +60,12 @@ class CommercesOwnFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private fun initViews() {
         recyclerCommerces.adapter = adapter
         buttonCreateCommerce.setOnClickListener {
-            if (adapter.itemCount <= 2) {
+            if (adapter.itemCount < 2) {
                 goToActivity(CreateCommerceActivity::class.java)
+            } else {
+                view?.apply {
+                    Snackbar.make(this, R.string.message_commerces_allowed, Snackbar.LENGTH_LONG).show()
+                }
             }
         }
     }

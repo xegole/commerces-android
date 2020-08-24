@@ -7,20 +7,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
-import com.webster.commerces.ui.categories.view.RESULT_CODE_GALLERY
 import com.webster.commerces.databinding.ActivityCreateCommerceBinding
 import com.webster.commerces.entity.Category
 import com.webster.commerces.entity.City
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.entity.CommerceLocation
+import com.webster.commerces.ui.categories.view.RESULT_CODE_GALLERY
 import com.webster.commerces.ui.commerces.adapter.PagerImagesAdapter
 import com.webster.commerces.ui.commerces.viewmodel.CreateCommerceVM
 import com.webster.commerces.ui.maps.EXTRA_COMMERCE_LOCATION
@@ -84,11 +84,7 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
         viewModel.commerceCreatedSuccess.observe(this) { resource ->
             if (resource != 0) {
-                Toast.makeText(
-                    this,
-                    getString(resource),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Snackbar.make(binding.pagerImages, resource, Snackbar.LENGTH_LONG).show()
                 onSupportNavigateUp()
             }
         }

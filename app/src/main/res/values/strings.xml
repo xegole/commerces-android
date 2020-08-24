@@ -19,36 +19,36 @@
     <string name="hint_input_web_page">Página web</string>
     <string name="hint_label_facebook">Facebook</string>
 
-    <string name="label_create_category">Crear categoria</string>
-    <string name="label_create_commerce">Crear comercio</string>
-    <string name="label_validate_commerces">Validar comercios</string>
+    <string name="label_create_category">Crear categoría</string>
+    <string name="label_create_commerce">Crear negocio</string>
+    <string name="label_validate_commerces">Validar negocios</string>
     <string name="label_create_emergency">Crear emergencia</string>
     <string name="label_location_commerce">Ubicacion</string>
     <string name="label_create_city">Crear ciudad</string>
-    <string name="label_edit_commerce">Editar comercio</string>
-    <string name="label_edit_deal">Editar promocion</string>
-    <string name="label_delete_deal">Eliminar promocion</string>
-    <string name="label_promo_commerce">Promocionar</string>
-    <string name="label_delete_commerce">Eliminar comercio</string>
+    <string name="label_edit_commerce">Editar negocio</string>
+    <string name="label_edit_deal">Editar promoción</string>
+    <string name="label_delete_deal">Eliminar promoción</string>
+    <string name="label_promo_commerce">promociónar</string>
+    <string name="label_delete_commerce">Eliminar negocio</string>
     <string name="label_delete">Eliminar</string>
     <string name="label_cancel">Cancelar</string>
-    <string name="label_edit_category">Editar categoria</string>
-    <string name="label_admin_commerce">Mis comercios</string>
-    <string name="label_admin_deals">Promociones</string>
+    <string name="label_edit_category">Editar categoría</string>
+    <string name="label_admin_commerce">Mis negocios</string>
+    <string name="label_admin_deals">promociónes</string>
     <string name="label_admin_rate">Calificar</string>
-    <string name="label_create_deal">Crear promocion</string>
-    <string name="label_update_deal">Actualizar promocion</string>
-    <string name="label_update_category">Actualizar categoria</string>
-    <string name="label_go_commerce">Ir al comercio -></string>
+    <string name="label_create_deal">Crear promoción</string>
+    <string name="label_update_deal">Actualizar promoción</string>
+    <string name="label_update_category">Actualizar categoría</string>
+    <string name="label_go_commerce">Ir al negocio -></string>
 
 
-    <string name="label_hint_commerce_name">Nombre del comercio</string>
+    <string name="label_hint_commerce_name">Nombre del negocio</string>
     <string name="label_hint_emergency_number">Numero de emergencia</string>
     <string name="label_hint_dial_number">Numero de cuadrante</string>
     <string name="label_hint_whatsapp">Numero de whatsapp</string>
     <string name="label_hint_city_name">Nombre de la ciudad</string>
-    <string name="label_hint_category_name">Nombre de la categoria</string>
-    <string name="label_hint_deal_name">Nombre de la promocion</string>
+    <string name="label_hint_category_name">Nombre de la categoría</string>
+    <string name="label_hint_deal_name">Nombre de la promoción</string>
     <string name="label_hint_deal_price">Precio del producto</string>
     <string name="label_hint_commerce_description">Descripción</string>
     <string name="label_hint_commerce_address">Dirección</string>
@@ -64,11 +64,11 @@
     <string name="action_settings">Settings</string>
 
     <!-- Side Menu Strings-->
-    <string name="side_menu_item_commerces_own">Mis comercios</string>
-    <string name="side_menu_item_commerces">Comercios</string>
+    <string name="side_menu_item_commerces_own">Mis negocios</string>
+    <string name="side_menu_item_commerces">Negocios</string>
     <string name="side_menu_item_menu">Menú</string>
     <string name="side_menu_item_category">Categorías</string>
-    <string name="side_menu_item_deal">Promociones</string>
+    <string name="side_menu_item_deal">promociónes</string>
     <string name="side_menu_item_emergency">Emergencias</string>
     <string name="side_menu_item_interesting_places">Sitios de interes</string>
     <string name="side_menu_item_about">Acerca</string>
@@ -100,41 +100,42 @@
 
     <string name="label_send">Enviar</string>
 
-    <string name="message_created_commerce_success">Se ha creado su comercio</string>
-    <string name="message_created_category_success">Se ha creado su categoria</string>
-    <string name="message_updated_commerce_success">Se ha actualizado su comercio</string>
-    <string name="message_updated_category_success">Se ha actualizado su categoria</string>
-    <string name="message_error_created_commerce_success">Error al crear su comercio</string>
-    <string name="message_error_created_category">Error al crear su categoria</string>
-    <string name="message_error_update_category">Error al actualizar su categoria</string>
-    <string name="message_error_updated_commerce_success">Error al actualizar su comercio</string>
+    <string name="message_created_commerce_success">Se ha creado su negocio, queda pendiente a verificación en un periodo no mayor a 24 horas.</string>
+    <string name="message_created_category_success">Se ha creado su categoría</string>
+    <string name="message_updated_commerce_success">Se ha actualizado su negocio</string>
+    <string name="message_updated_category_success">Se ha actualizado su categoría</string>
+    <string name="message_error_created_commerce_success">Error al crear su negocio</string>
+    <string name="message_error_created_category">Error al crear su categoría</string>
+    <string name="message_error_update_category">Error al actualizar su categoría</string>
+    <string name="message_error_updated_commerce_success">Error al actualizar su negocio</string>
     <string name="message_created_emergency_success">Se ha creado nueva emergencia</string>
-    <string name="message_created_deal_success">Se ha creado la promocion</string>
-    <string name="message_create_deal_error">Hubo un error al crear la promocion</string>
+    <string name="message_created_deal_success">Se ha creado la promoción</string>
+    <string name="message_create_deal_error">Hubo un error al crear la promoción</string>
 
     <!-- Commerces Fragment String -->
     <string name="transition_name_commerce">transition_commerce</string>
-    <string name="message_about">Lo buscas? Lo encuentras! El directorio comercial y de servicios Merka, es una aplicación que te ayuda a encontrar información de los establecimientos registrados en puerto salgar – Cundinamarca y la región. Diferentes tipos de categorías donde podrás encontrar cada uno de los comercios registrados. (Panaderías, hoteles, ferreterías, bares y discotecas, medios de comunicación, etc)\n\nDeseas registrar tu empresa y/o servicio?</string>
+    <string name="message_about">Lo buscas? Lo encuentras! El directorio comercial y de servicios Merka, es una aplicación que te ayuda a encontrar información de los establecimientos registrados en puerto salgar – Cundinamarca y la región. Diferentes tipos de categorías donde podrás encontrar cada uno de los negocios registrados. (Panaderías, hoteles, ferreterías, bares y discotecas, medios de comunicación, etc)\n\nDeseas registrar tu empresa y/o servicio?</string>
     <string name="messahe_about_contact">ESCRIBENOS\nWEBSTER – INC Desarrolladores Tecnológicos\nCarrera 11 # 10-26 B/centro\nPuerto Salgar, Cundinamarca 2019</string>
     <string name="default_notification_channel_id" translatable="false"> default_cahnel </string>
     <string name="send_notification">Send Notification</string>
     <string name="title">Title</string>
     <string name="actualizar">Actualizar</string>
     <string name="label_update_commerce">UPDATE COMMERCE</string>
-    <string name="label_create_commerce_banner_image">Imagen para banner de comercio</string>
-    <string name="label_create_deal_banner_image">Imagen para promocion</string>
-    <string name="label_create_commerce_internal_image">Imagenes representativas del comercio</string>
+    <string name="label_create_commerce_banner_image">Imagen para banner de negocio</string>
+    <string name="label_create_deal_banner_image">Imagen para promoción</string>
+    <string name="label_create_commerce_internal_image">Imagenes representativas del negocio</string>
     <string name="label_selected_city">Seleccione una ciudad</string>
     <string name="label_selected_emergency">Seleccione tipo de emergencia</string>
-    <string name="label_selected_category">Seleccione una categoria</string>
+    <string name="label_selected_category">Seleccione una categoría</string>
 
     <string name="message_city_created_success">La ciudad fue creada</string>
-    <string name="message_edit_commerce_dialog">¿Que desea hacer con su comercio?</string>
-    <string name="message_edit_deal_dialog">¿Que desea hacer con su promocion?</string>
-    <string name="message_delete_commerce_dialog">¿Desea eliminar su comercio?</string>
-    <string name="message_delete_deal_dialog">¿Desea eliminar su promocion?</string>
+    <string name="message_commerces_allowed">Solo se permite crear dos negocios</string>
+    <string name="message_edit_commerce_dialog">¿Que desea hacer con su negocio?</string>
+    <string name="message_edit_deal_dialog">¿Que desea hacer con su promoción?</string>
+    <string name="message_delete_commerce_dialog">¿Desea eliminar su negocio?</string>
+    <string name="message_delete_deal_dialog">¿Desea eliminar su promoción?</string>
     <string name="message_verify_email">Enviamos un enlace de verificacion al correo registrado</string>
-    <string name="buscar_categoria">Buscar categoria</string>
+    <string name="label_search_category">Buscar categoría</string>
     <string name="label_login">Iniciar sesión</string>
 
     <string name="error_input_name">Ingrese un nombre válido</string>
