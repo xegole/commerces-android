@@ -20,8 +20,8 @@
             android:id="@+id/imageEmergency"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:contentDescription="@null"
             android:layout_margin="@dimen/margin_small"
+            android:contentDescription="@null"
             android:src="@drawable/ic_emergency_0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +31,7 @@
             android:id="@+id/labelName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_small"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
@@ -41,6 +40,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageEmergency"
+            tools:text="Test Name" />
+
+        <TextView
+            android:id="@+id/labelDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelName"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Test Name" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,8 +65,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/buttonWhatsapp"

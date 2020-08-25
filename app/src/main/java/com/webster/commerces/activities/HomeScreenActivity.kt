@@ -52,6 +52,7 @@ class HomeScreenActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
         setSupportActionBar(toolbar)
+        toolbar.title = getString(R.string.side_menu_item_category)
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar,

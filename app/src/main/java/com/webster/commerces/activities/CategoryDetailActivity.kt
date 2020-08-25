@@ -1,7 +1,10 @@
 package com.webster.commerces.activities
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.R
 import com.webster.commerces.adapter.CommercesAdapter
@@ -21,7 +24,7 @@ const val EXTRA_CATEGORY_DEAL = "extra_category_deal"
 
 private const val CATEGORY_ID = "categoryId"
 
-class CategoryDetailActivity : BaseActivity() {
+class CategoryDetailActivity : BaseActivity(), SearchView.OnQueryTextListener {
 
     private val database = FirebaseDatabase.getInstance()
     private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
@@ -50,7 +53,7 @@ class CategoryDetailActivity : BaseActivity() {
             commercesReference.orderByChild(CATEGORY_ID).equalTo(category.categoryId)
                 .addListDataListener<Commerce> { list, success ->
                     if (success) {
-                        adapter.addItemList(list)
+                        adapter.addItemList(list.filter { it.verified })
                     }
                     dismissLoading()
                 }
@@ -70,5 +73,21 @@ class CategoryDetailActivity : BaseActivity() {
             bundle,
             if (openFromDeals) DealsActivity::class.java else DetailCommerceActivity::class.java
         )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.activity_search_view_menu, menu)
+        val searchItem = menu?.findItem(R.id.search_view)
+        val searchView = searchItem?.actionView as? SearchView
+        searchView?.setOnQueryTextListener(this)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onQueryTextSubmit(query: String?) = false
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        adapter.filter.filter(newText)
+        return true
     }
 }

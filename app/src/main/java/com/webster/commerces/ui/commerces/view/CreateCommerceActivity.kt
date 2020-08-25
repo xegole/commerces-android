@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.webster.commerces.R
 import com.webster.commerces.databinding.ActivityCreateCommerceBinding
@@ -84,8 +84,7 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
         viewModel.commerceCreatedSuccess.observe(this) { resource ->
             if (resource != 0) {
-                Snackbar.make(binding.pagerImages, resource, Snackbar.LENGTH_LONG).show()
-                onSupportNavigateUp()
+                showDialogValidate(resource)
             }
         }
 
@@ -102,6 +101,17 @@ class CreateCommerceActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                 }
             }
         }
+    }
+
+    private fun showDialogValidate(resource: Int) {
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setCanceledOnTouchOutside(false)
+        alertDialog.setTitle(getString(R.string.label_validate_commerces))
+        alertDialog.setMessage(getString(resource))
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.label_accept)) { _, _ ->
+            onSupportNavigateUp()
+        }
+        alertDialog.show()
     }
 
     private fun setSpinnerWithCategories(listCategories: List<Category>) {

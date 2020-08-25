@@ -9,10 +9,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.webster.commerces.AppCore
 import com.webster.commerces.R
 import com.webster.commerces.adapter.CommercesAdapter
 import com.webster.commerces.base.BaseFragment
 import com.webster.commerces.entity.Commerce
+import com.webster.commerces.entity.TypeUser
 import com.webster.commerces.extensions.goToActivity
 import com.webster.commerces.extensions.openActivityWithBundle
 import com.webster.commerces.ui.commerces.view.*
@@ -60,7 +62,7 @@ class CommercesOwnFragment : BaseFragment(), SearchView.OnQueryTextListener {
     private fun initViews() {
         recyclerCommerces.adapter = adapter
         buttonCreateCommerce.setOnClickListener {
-            if (adapter.itemCount < 2) {
+            if (adapter.itemCount < 2 || AppCore.prefs.user?.typeUser == TypeUser.ADMIN) {
                 goToActivity(CreateCommerceActivity::class.java)
             } else {
                 view?.apply {

@@ -19,11 +19,10 @@ class CreateEmergencyViewModel(application: Application) : AndroidViewModel(appl
 
     val emergencyNumberLiveData = MutableLiveData<String>()
     val emergencyWhatsappLiveData = MutableLiveData<String>()
-    val dialNumberLiveData = MutableLiveData<String>()
+    val descriptionLiveData = MutableLiveData<String>()
     val citiesLiveData = MutableLiveData<List<City>>()
     val typeLiveData = MutableLiveData<Int>()
-    val loadingLiveData = MutableLiveData<Boolean>(false)
-    val showDialNumber = MutableLiveData<Boolean>(false)
+    val loadingLiveData = MutableLiveData(false)
     val successLiveData = MutableLiveData<String>()
 
     var city: City? = null
@@ -33,9 +32,9 @@ class CreateEmergencyViewModel(application: Application) : AndroidViewModel(appl
         if (city != null && type != -1) {
             val emergencyNumber = emergencyNumberLiveData.value ?: ""
             val whatsapp = emergencyWhatsappLiveData.value ?: ""
-            val dialNumber = dialNumberLiveData.value ?: "0"
+            val description = descriptionLiveData.value ?: ""
             val emergency =
-                Emergency(type, emergencyNumber, whatsapp, dialNumber.toInt(), city?.cityId ?: "")
+                Emergency(type, emergencyNumber, whatsapp, description, city?.cityId ?: "")
             saveEmergencyToFirebase(emergency)
         }
     }
@@ -58,5 +57,11 @@ class CreateEmergencyViewModel(application: Application) : AndroidViewModel(appl
             loadingLiveData.value = false
             successLiveData.value = it.localizedMessage
         }
+    }
+
+    fun clearFields(){
+        emergencyNumberLiveData.value = ""
+        emergencyWhatsappLiveData.value = ""
+        descriptionLiveData.value = ""
     }
 }

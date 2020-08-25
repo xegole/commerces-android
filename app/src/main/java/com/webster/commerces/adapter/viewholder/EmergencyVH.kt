@@ -13,6 +13,7 @@ class EmergencyVH(itemView: View) : BaseViewHolder<Emergency>(itemView) {
     override fun setData(item: Emergency) {
         val typeArray = itemView.context.resources.getStringArray(R.array.emergency_types)
         itemView.labelName.text = typeArray[item.type]
+        itemView.labelDescription.text = item.description
 
         itemView.buttonDial.visibility = if (item.number.isEmpty()) View.GONE else View.VISIBLE
         itemView.buttonWhatsapp.visibility =

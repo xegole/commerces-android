@@ -37,9 +37,6 @@ class CreateEmergencyActivity : BaseSpinnerActivity<City>() {
         viewModel.citiesLiveData.observe(this, Observer {
             setSpinnerWithCities(it)
         })
-        viewModel.typeLiveData.observe(this, Observer {
-            viewModel.showDialNumber.value = it == 5
-        })
 
         viewModel.successLiveData.observe(this, Observer {
             binding.buttonCreate.hideKeyboard()
@@ -49,9 +46,7 @@ class CreateEmergencyActivity : BaseSpinnerActivity<City>() {
                     R.string.message_created_emergency_success,
                     Snackbar.LENGTH_LONG
                 ).show()
-                viewModel.emergencyNumberLiveData.value = ""
-                viewModel.emergencyWhatsappLiveData.value = ""
-                viewModel.dialNumberLiveData.value = ""
+                viewModel.clearFields()
             } else {
                 Snackbar.make(binding.buttonCreate, it, Snackbar.LENGTH_LONG).show()
             }

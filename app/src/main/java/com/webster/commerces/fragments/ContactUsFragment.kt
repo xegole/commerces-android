@@ -9,10 +9,6 @@ class ContactUsFragment : BaseFragment() {
 
     override fun resourceLayout() = R.layout.fragment_contact_us
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     companion object {
         fun instance() = ContactUsFragment()
     }
