@@ -59,7 +59,7 @@ class CreateEmergencyViewModel(application: Application) : AndroidViewModel(appl
         }
     }
 
-    fun clearFields(){
+    fun clearFields() {
         emergencyNumberLiveData.value = ""
         emergencyWhatsappLiveData.value = ""
         descriptionLiveData.value = ""

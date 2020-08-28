@@ -6,9 +6,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.internal.NavigationMenu
@@ -18,7 +18,6 @@ import com.webster.commerces.R
 import com.webster.commerces.adapter.ImagePagerAdapter
 import com.webster.commerces.databinding.ActivityDetailCommerceBinding
 import com.webster.commerces.entity.Commerce
-import com.webster.commerces.extensions.expand
 import com.webster.commerces.extensions.hide
 import com.webster.commerces.extensions.loadUrl
 import com.webster.commerces.extensions.show
@@ -26,10 +25,10 @@ import com.webster.commerces.listener.AppBarStateChangeListener
 import com.webster.commerces.ui.commerces.viewmodel.DetailCommerceViewModel
 import com.webster.commerces.ui.rate.RateDialog
 import com.webster.commerces.utils.Constants.EMPTY_STRING
-import io.fabric.sdk.android.InitializationCallback
 import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter
 import kotlinx.android.synthetic.main.activity_detail_commerce.*
 
+const val EXTRA_VALIDATE_COMMERCE = "extra_validate_commerce"
 
 class DetailCommerceActivity : AppCompatActivity() {
 
@@ -45,6 +44,10 @@ class DetailCommerceActivity : AppCompatActivity() {
         AppCore.prefs
     }
 
+    private val validateMode by lazy {
+        intent.getBooleanExtra(EXTRA_VALIDATE_COMMERCE, false)
+    }
+
     private lateinit var binding: ActivityDetailCommerceBinding
 
     private lateinit var commerce: Commerce
@@ -53,6 +56,7 @@ class DetailCommerceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_commerce)
         binding.viewModel = viewModel
+        binding.validate = validateMode
         binding.lifecycleOwner = this
         setSupportActionBar(toolbar)
         supportPostponeEnterTransition()
@@ -118,17 +122,17 @@ class DetailCommerceActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        viewModel.liveDataSocialAction.observe(this, Observer {
+        viewModel.liveDataSocialAction.observe(this) {
             if (it.resolveActivity(packageManager) != null) {
                 startActivity(it)
             } else {
                 showError(R.string.no_result_found)
             }
-        })
+        }
 
-        viewModel.liveDataErrorMessage.observe(this, Observer {
+        viewModel.liveDataErrorMessage.observe(this) {
             showError(it)
-        })
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -139,14 +143,15 @@ class DetailCommerceActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         prefs.user?.let {
             val inflater: MenuInflater = menuInflater
-            inflater.inflate(R.menu.menu_detail_commerce, menu)
+            val menuRes = if (validateMode) R.menu.menu_validate_commerce else R.menu.menu_detail_commerce
+            inflater.inflate(menuRes, menu)
         }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.rateCommerce -> showDialog()
+            R.id.rateCommerce -> if (validateMode) showValidateDialog() else showDialog()
             android.R.id.home -> supportFinishAfterTransition()
         }
         return true
@@ -174,6 +179,18 @@ class DetailCommerceActivity : AppCompatActivity() {
     private fun showDialog() {
         val rateDialog = RateDialog(this, commerce.commerceId)
         rateDialog.show()
+    }
+
+    private fun showValidateDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle(getString(R.string.label_confirm_validate_commerces))
+        alertDialog.setPositiveButton(getString(R.string.label_validate)) { _, _ ->
+            viewModel.verifyCommerce(commerce.commerceId) {
+                finish()
+            }
+        }
+        alertDialog.show()
+        alertDialog.create()
     }
 
     private fun rating(): Float {

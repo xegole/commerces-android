@@ -28,11 +28,4 @@ class ListCommercesViewModel(application: Application) : AndroidViewModel(applic
                 commercesData.value = if (success) list else emptyList()
             }
     }
-
-    fun verifyCommerce(commerceId: String) {
-        val map = HashMap<String, Any>()
-        map["verified"] = true
-        commercesReference.child(commerceId).updateChildren(map).addOnSuccessListener {
-        }
-    }
 }

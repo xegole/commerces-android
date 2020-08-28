@@ -8,13 +8,18 @@ import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.FirebaseDatabase
 import com.webster.commerces.AppCore
 import com.webster.commerces.R
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.entity.CommerceLocation
+import com.webster.commerces.utils.FirebaseReferences
 
 
 class DetailCommerceViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val database = FirebaseDatabase.getInstance()
+    private val commercesReference = database.getReference(FirebaseReferences.COMMERCES)
 
     val liveDataSocialAction = MutableLiveData<Intent>()
     val liveDataErrorMessage = MutableLiveData<Int>()
@@ -114,5 +119,13 @@ class DetailCommerceViewModel(application: Application) : AndroidViewModel(appli
         intent.type = "text/plain"
         intent.putExtra(Intent.EXTRA_EMAIL, email)
         liveDataSocialAction.value = Intent.createChooser(intent, "Enviar correo")
+    }
+
+    fun verifyCommerce(commerceId: String, success: () -> Unit) {
+        val map = HashMap<String, Any>()
+        map["verified"] = true
+        commercesReference.child(commerceId).updateChildren(map).addOnSuccessListener {
+            success.invoke()
+        }
     }
 }

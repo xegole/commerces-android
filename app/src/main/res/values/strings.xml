@@ -22,6 +22,8 @@
     <string name="label_create_category">Crear categoría</string>
     <string name="label_create_commerce">Crear negocio</string>
     <string name="label_validate_commerces">Validar negocios</string>
+    <string name="label_confirm_validate_commerces">¿Desea validar el comercio?</string>
+    <string name="label_validate">Validar</string>
     <string name="label_create_emergency">Crear emergencia</string>
     <string name="label_location_commerce">Ubicacion</string>
     <string name="label_create_city">Crear ciudad</string>
@@ -115,8 +117,26 @@
 
     <!-- Commerces Fragment String -->
     <string name="transition_name_commerce">transition_commerce</string>
-    <string name="message_about">Lo buscas? Lo encuentras! El directorio comercial y de servicios Merka, es una aplicación que te ayuda a encontrar información de los establecimientos registrados en puerto salgar – Cundinamarca y la región. Diferentes tipos de categorías donde podrás encontrar cada uno de los negocios registrados. (Panaderías, hoteles, ferreterías, bares y discotecas, medios de comunicación, etc)\n\nDeseas registrar tu empresa y/o servicio?</string>
-    <string name="messahe_about_contact">ESCRIBENOS\nWEBSTER – INC Desarrolladores Tecnológicos\nCarrera 11 # 10-26 B/centro\nPuerto Salgar, Cundinamarca 2019</string>
+    <string name="message_about">Merka es una App que busca acercar al usuario e interactuar en tiempo
+real con los Negocios, entorno a novedades de tipo ofertas, descuentos y cualquier actividad comercial por parte de los negocios de la región.\n\nCuenta con características sencillas y funcionales a nivel de usuario y negocio registrado:</string>
+    <string name="message_about_list">
+        <b>Usuario:</b>\n\n
+        \t\t-\t\tVisualiza cada uno de los establecimientos\n\t\t\t\tcomerciales registrados.\n
+        \t\t-\t\tVisualiza promociones y ofertas.\n
+        \t\t-\t\tRecibe notificaciones.\n
+        \t\t-\t\tVisualiza y contacta entidades de emergencias.\n
+        \t\t-\t\tCambia lugar de búsqueda (ciudad).\n
+        \t\t-\t\tRegistra negocio.\n\n
+        <b>Negocio:</b>\n\n
+        \t\t-\t\tVisualiza cada uno de los negocios registrados.\n
+        \t\t-\t\tEdita negocio propio sin ayuda de tercero.\n
+        \t\t-\t\tVisualiza y edita promociones y ofertas.\n
+        \t\t-\t\tCrea, edita, publica promociones y notificaciones.\n
+        \t\t-\t\tVisualiza y contacta entidades de emergencias.\n
+        \t\t-\t\tCambia lugar de búsqueda (ciudad).\n
+    </string>
+    <string name="message_about_follow">Sencillo, en Merka \"lo buscas, lo encuentras\"\n\nSíguenos</string>
+    <string name="message_about_copyright">Copyrigth © Webster Inc. 2020 | Todos los derechos reservados.</string>
     <string name="default_notification_channel_id" translatable="false"> default_cahnel </string>
     <string name="send_notification">Send Notification</string>
     <string name="title">Title</string>

@@ -9,7 +9,9 @@
         android:id="@+id/labelContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_large"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_large"
         android:justificationMode="inter_word"
         android:text="@string/message_about"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,26 +19,85 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UnusedAttribute" />
 
-
-    <ImageView
-        android:id="@+id/imageWhatsapp"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="@dimen/margin_xx_large"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_whatsapp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelContent" />
+    <TextView
+        android:id="@+id/labelAboutList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:text="@string/message_about_list"
+        app:layout_constraintTop_toBottomOf="@id/labelContent" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/labelAboutFollow"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
         android:gravity="center"
-        android:text="@string/messahe_about_contact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageWhatsapp" />
+        android:text="@string/message_about_follow"
+        app:layout_constraintTop_toBottomOf="@id/labelAboutList" />
 
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/labelAboutFollow">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:src="@drawable/ic_facebook"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonInstagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:src="@drawable/ic_instagram"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonYoutube"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:src="@drawable/ic_youtube"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonWebPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:src="@drawable/ic_webpage"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:gravity="center"
+        android:text="@string/message_about_copyright"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container" />
 </androidx.constraintlayout.widget.ConstraintLayout>

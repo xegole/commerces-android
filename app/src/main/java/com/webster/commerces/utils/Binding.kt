@@ -10,11 +10,22 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.textfield.TextInputEditText
 import com.webster.commerces.extensions.afterTextChanged
 
+
 @BindingAdapter("liveText")
 fun setLiveText(editText: EditText, textLive: MutableLiveData<String>?) {
     editText.afterTextChanged { textChanged ->
         textLive?.apply {
             value = textChanged
+        }
+    }
+}
+
+@BindingAdapter("maxInputText")
+fun setMaxInputText(editText: EditText, textLive: MutableLiveData<String>?) {
+    editText.afterTextChanged {
+        if (editText.lineCount > 2) {
+            val size = editText.text.length
+            editText.text.delete(size - 1, size)
         }
     }
 }

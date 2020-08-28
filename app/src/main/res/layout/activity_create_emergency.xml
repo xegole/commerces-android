@@ -71,10 +71,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
                     android:text="@{viewModel.descriptionLiveData}"
-                    app:liveText="@{viewModel.descriptionLiveData}" />
-
+                    app:liveText="@{viewModel.descriptionLiveData}"
+                    app:maxInputText="@{viewModel.descriptionLiveData}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

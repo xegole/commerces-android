@@ -2,6 +2,7 @@ package com.webster.commerces.extensions
 
 import android.annotation.TargetApi
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,16 @@ fun AppCompatActivity.goToActivity(clazz: Class<*>, isFinish: Boolean = true) {
     startActivity(intent)
     if (isFinish) {
         finish()
+    }
+}
+
+fun AppCompatActivity.appInstalledOrNot(uri: String): Boolean {
+    val pm = packageManager
+    return try {
+        pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
+        true
+    } catch (e: PackageManager.NameNotFoundException) {
+        false
     }
 }
 
