@@ -35,10 +35,12 @@ class AboutFragment : BaseFragment() {
     }
 
     private fun goToFacebook() {
-        val isAppInstalled = appInstalledOrNot("com.facebook.katana")
-        if (isAppInstalled) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/$PROFILE"))
-            startActivity(intent)
+        try {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://www.facebook.com/lobuscaloencuentras")
+            startActivity(Intent.createChooser(intent, "Abrir pagina web"))
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
