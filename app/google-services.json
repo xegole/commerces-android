@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "762561065396-kkfeqnk5e1dfed7bjvtfkgete01u5a4a.apps.googleusercontent.com",
+          "client_id": "762561065396-ia6sfp8hp77ritsd398nsmkocvj32tvr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.webster.commerces",
@@ -28,14 +28,6 @@
           "android_info": {
             "package_name": "com.webster.commerces",
             "certificate_hash": "7d7dc611ad12b8e94a142eb45d53f88c2bec5e03"
-          }
-        },
-        {
-          "client_id": "762561065396-djik9j18t48s3pdrc98h5h8g7ehf8tk9.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.webster.commerces",
-            "certificate_hash": "3b07a990ccee1cc30ddc2a810c313e337f0d95d3"
           }
         },
         {

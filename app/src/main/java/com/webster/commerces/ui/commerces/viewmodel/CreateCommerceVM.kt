@@ -1,9 +1,11 @@
 package com.webster.commerces.ui.commerces.viewmodel
 
 import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.FirebaseDatabase
@@ -117,8 +119,22 @@ class CreateCommerceVM(application: Application) : AndroidViewModel(application)
     }
 
     fun onMapsActivity() = View.OnClickListener {
-        val intent = Intent(it.context, MapsActivity::class.java)
-        liveDataIntent.value = intent
+        showWarning(it.context)
+    }
+
+    private fun showWarning(context: Context) {
+        val alertDialog = AlertDialog.Builder(context)
+        alertDialog.setTitle(R.string.label_location_commerce)
+        alertDialog.setMessage(R.string.label_location_message)
+        alertDialog.setPositiveButton(R.string.button_text_done) { _, _ ->
+            val intent = Intent(context, MapsActivity::class.java)
+            liveDataIntent.value = intent
+        }
+        alertDialog.setNegativeButton(R.string.label_cancel) { _, _ ->
+
+        }
+        alertDialog.show()
+        alertDialog.create()
     }
 
     fun getCategories() {

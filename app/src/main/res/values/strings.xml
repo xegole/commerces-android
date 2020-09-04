@@ -25,7 +25,8 @@
     <string name="label_confirm_validate_commerces">¿Desea validar el comercio?</string>
     <string name="label_validate">Validar</string>
     <string name="label_create_emergency">Crear emergencia</string>
-    <string name="label_location_commerce">Ubicacion</string>
+    <string name="label_location_commerce">Ubicación</string>
+    <string name="label_location_message">Para registrar el negocio se requiere estar en la ubicación exacta, es importante para la búsqueda del mismo. ¿Actualmente se encuentra ubicado en el negocio?</string>
     <string name="label_create_city">Crear ciudad</string>
     <string name="label_edit_commerce">Editar negocio</string>
     <string name="label_edit_deal">Editar promoción</string>
