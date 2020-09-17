@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.FirebaseDatabase
@@ -14,6 +16,7 @@ import com.webster.commerces.R
 import com.webster.commerces.entity.Commerce
 import com.webster.commerces.entity.CommerceLocation
 import com.webster.commerces.utils.FirebaseReferences
+import kotlinx.android.synthetic.main.deal_item_adapter.view.*
 
 
 class DetailCommerceViewModel(application: Application) : AndroidViewModel(application) {
@@ -43,6 +46,17 @@ class DetailCommerceViewModel(application: Application) : AndroidViewModel(appli
         }
     }
 
+    fun onClickSeeMore(labelDescription: TextView) = View.OnClickListener {
+        val labelSeeMore = it as TextView
+        if (labelDescription.maxLines == 3) {
+            labelDescription.maxLines = 200
+            labelSeeMore.setText(R.string.label_see_less)
+        } else {
+            labelDescription.maxLines = 3
+            labelSeeMore.setText(R.string.label_see_more)
+        }
+    }
+
     fun goToContact(phone: Long) = View.OnClickListener {
         val intent = Intent(Intent.ACTION_DIAL)
         intent.data = Uri.parse("tel:$phone")
@@ -51,9 +65,10 @@ class DetailCommerceViewModel(application: Application) : AndroidViewModel(appli
 
     fun goToGoogleMap(commerceLocation: CommerceLocation?) = View.OnClickListener {
         commerceLocation?.run {
-            val uriLocation = Uri.parse("geo:0,0?q=$latitude,$longitude")
-            val intent = Intent(Intent.ACTION_VIEW, uriLocation)
-            intent.setPackage("com.google.android.apps.maps")
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("http://maps.google.com/maps?&daddr=${commerceLocation.latitude},${commerceLocation.longitude}")
+            )
             liveDataSocialAction.value = intent
         }
     }
@@ -72,7 +87,8 @@ class DetailCommerceViewModel(application: Application) : AndroidViewModel(appli
     private fun goToInstagram(profile: String) {
         val isAppInstalled = appInstalledOrNot("com.instagram.android")
         if (isAppInstalled) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/$profile"))
+            val profileIg = profile.replace("http://instagram.com/","").replace("@","")
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/$profileIg"))
             liveDataSocialAction.value = intent
         } else {
             liveDataErrorMessage.value = R.string.error_action_no_instagram
@@ -92,7 +108,7 @@ class DetailCommerceViewModel(application: Application) : AndroidViewModel(appli
     private fun goToFacebook(facebook: String) {
         val isAppInstalled = appInstalledOrNot("com.facebook.katana")
         if (isAppInstalled) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/$facebook"))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=$facebook"))
             liveDataSocialAction.value = intent
         } else {
             liveDataErrorMessage.value = R.string.error_action_no_facebook
@@ -115,9 +131,10 @@ class DetailCommerceViewModel(application: Application) : AndroidViewModel(appli
     }
 
     private fun goSendEmail(email: String) {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_EMAIL, email)
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:$email")
+            putExtra(Intent.EXTRA_EMAIL, email)
+        }
         liveDataSocialAction.value = Intent.createChooser(intent, "Enviar correo")
     }
 

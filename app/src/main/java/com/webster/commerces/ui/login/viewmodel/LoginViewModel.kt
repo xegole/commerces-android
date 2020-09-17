@@ -121,8 +121,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 val email = firebaseUser.email
                 val user = User(uid, name ?: "", email ?: "", TypeUser.USER_COMMERCE)
                 if (isNewUser == true) {
+                    prefs.user = user
                     databaseReference.child(uid).setValue(user).addOnCompleteListener {
-                        prefs.user = user
                         registerSuccess.value = HomeScreenActivity::class.java
                         liveDataLoading.value = false
                     }

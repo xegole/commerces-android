@@ -52,7 +52,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@null"
                     android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:transitionName="@string/transition_name_commerce"
                     app:layout_collapseMode="parallax"
                     tools:targetApi="lollipop" />
@@ -124,9 +124,25 @@
                             android:layout_marginTop="@dimen/margin_medium"
                             android:layout_marginEnd="@dimen/margin_medium"
                             android:linksClickable="true"
+                            android:maxLines="3"
                             android:text="@{viewModel.liveDataDescription}"
                             tools:text="This is a large description for test when a commerce
                     contains a good description " />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end">
+
+                            <TextView
+                                android:id="@+id/labelSeeMore"
+                                android:onClick="@{viewModel.onClickSeeMore(labelDescription)}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/margin_small"
+                                android:text="@string/label_see_more"
+                                android:textStyle="bold" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <androidx.cardview.widget.CardView

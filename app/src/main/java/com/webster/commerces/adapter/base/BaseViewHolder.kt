@@ -9,6 +9,10 @@ abstract class BaseViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemV
 
     abstract fun setData(item: T)
 
+    open fun setData(item: T, onClickItemView: ((T) -> Unit)?) {
+
+    }
+
     fun appInstalledOrNot(context: Context, uri: String): Boolean {
         val pm = context.packageManager
         return try {

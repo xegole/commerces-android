@@ -3,6 +3,7 @@ package com.webster.commerces.activities
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import com.webster.commerces.AppCore
 import com.webster.commerces.R
 import com.webster.commerces.base.BaseActivity
 import com.webster.commerces.extensions.goToActivity
@@ -15,16 +16,12 @@ import kotlinx.android.synthetic.main.activity_pre_login.*
 
 class SplashScreenActivity : BaseActivity() {
 
-    private val prefs by lazy {
-        Prefs(this)
-    }
-
     private val handler = Handler()
     private val runnable = Runnable {
-        if (prefs.firstTime) {
+        if (AppCore.prefs.firstTime) {
             goToActivity(TutorialActivity::class.java)
         } else {
-            if (prefs.user == null) {
+            if (AppCore.prefs.user == null) {
                 containerFlowLogin.visibility = View.VISIBLE
             } else {
                 goToActivity(HomeScreenActivity::class.java)

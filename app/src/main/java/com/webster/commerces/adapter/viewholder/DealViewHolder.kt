@@ -20,7 +20,7 @@ class DealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             if (deal.image.isNotBlank()) {
                 Picasso.get().load(deal.image).into(itemView.imageCommerce)
             }
-            labelGoToCommerce.setOnClickListener { clickListener(deal, showLabel) }
+            setOnClickListener { clickListener(deal, showLabel) }
             labelGoToCommerce.visibility = if (showLabel) View.VISIBLE else View.GONE
 
             labelSeeMore.setOnClickListener {

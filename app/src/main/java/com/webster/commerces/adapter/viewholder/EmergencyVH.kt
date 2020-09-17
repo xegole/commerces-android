@@ -11,6 +11,9 @@ import kotlinx.android.synthetic.main.emergency_item_adapter.view.*
 class EmergencyVH(itemView: View) : BaseViewHolder<Emergency>(itemView) {
 
     override fun setData(item: Emergency) {
+    }
+
+    override fun setData(item: Emergency, onClickItemView: ((Emergency) -> Unit)?) {
         val typeArray = itemView.context.resources.getStringArray(R.array.emergency_types)
         itemView.labelName.text = typeArray[item.type]
         itemView.labelDescription.text = item.description
@@ -19,20 +22,26 @@ class EmergencyVH(itemView: View) : BaseViewHolder<Emergency>(itemView) {
         itemView.buttonWhatsapp.visibility =
             if (item.whatsapp.isEmpty()) View.GONE else View.VISIBLE
 
-        itemView.setOnClickListener {
-            itemView.containerDial.visibility = View.VISIBLE
-        }
+        if (onClickItemView != null) {
+            itemView.setOnClickListener {
+                onClickItemView.invoke(item)
+            }
+        } else {
+            itemView.setOnClickListener {
+                itemView.containerDial.visibility = View.VISIBLE
+            }
 
-        itemView.containerDial.setOnClickListener {
-            itemView.containerDial.visibility = View.GONE
-        }
+            itemView.containerDial.setOnClickListener {
+                itemView.containerDial.visibility = View.GONE
+            }
 
-        itemView.buttonWhatsapp.setOnClickListener {
-            goToChatWhatsapp(item.whatsapp)
-        }
+            itemView.buttonWhatsapp.setOnClickListener {
+                goToChatWhatsapp(item.whatsapp)
+            }
 
-        itemView.buttonDial.setOnClickListener {
-            goToContact(item.number)
+            itemView.buttonDial.setOnClickListener {
+                goToContact(item.number)
+            }
         }
 
         itemView.imageEmergency.setImageResource(getImage(item.type))

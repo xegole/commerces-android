@@ -7,7 +7,10 @@ import com.webster.commerces.R
 import com.webster.commerces.adapter.viewholder.EmergencyVH
 import com.webster.commerces.entity.Emergency
 
-class EmergencyAdapter(private val items: ArrayList<Emergency> = arrayListOf()) :
+class EmergencyAdapter(
+    private val items: ArrayList<Emergency> = arrayListOf(),
+    private val onClickItem: ((Emergency) -> Unit)? = null
+) :
     RecyclerView.Adapter<EmergencyVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): EmergencyVH {
@@ -21,7 +24,7 @@ class EmergencyAdapter(private val items: ArrayList<Emergency> = arrayListOf()) 
     }
 
     override fun onBindViewHolder(viewHolder: EmergencyVH, position: Int) {
-        viewHolder.setData(items[position])
+        viewHolder.setData(items[position], onClickItem)
     }
 
     fun addItemList(list: List<Emergency>) {

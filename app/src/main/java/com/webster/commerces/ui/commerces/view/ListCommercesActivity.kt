@@ -33,11 +33,11 @@ class ListCommercesActivity : BaseActivity() {
     private val adapter by lazy {
         CommercesAdapter(ArrayList()) { commerce, _ ->
             val alertDialog = AlertDialog.Builder(this)
-            alertDialog.setTitle("¿DO YOU WANT DELETE A COMMERCE OR EDIT?")
-            alertDialog.setPositiveButton("DELETE") { _, _ ->
+            alertDialog.setTitle("¿Desea eliminar el negocio o editarlo?")
+            alertDialog.setPositiveButton("Eliminar") { _, _ ->
                 deleteCommerce(commerce.commerceId)
             }
-            alertDialog.setNegativeButton("EDIT") { _, _ ->
+            alertDialog.setNegativeButton("Editar") { _, _ ->
                 goToActivity(UpdateCommerceActivity::class.java)
             }
             alertDialog.show()
