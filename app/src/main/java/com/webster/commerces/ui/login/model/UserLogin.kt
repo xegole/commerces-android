@@ -1,7 +1,7 @@
 package com.webster.commerces.ui.login.model
 
 import android.util.Patterns
-import io.fabric.sdk.android.services.common.CommonUtils
+import com.google.firebase.crashlytics.internal.common.CommonUtils
 
 class UserLoginData(val email: String, val password: String) {
     private fun isValidEmail() =

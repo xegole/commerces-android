@@ -3,6 +3,7 @@ package com.webster.commerces.ui.login.viewmodel
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel

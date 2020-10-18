@@ -1,7 +1,7 @@
 package com.webster.commerces.ui.register.model
 
 import android.util.Patterns
-import io.fabric.sdk.android.services.common.CommonUtils.isNullOrEmpty
+import com.google.firebase.crashlytics.internal.common.CommonUtils.isNullOrEmpty
 
 data class UserRegister(
     val name: String,
